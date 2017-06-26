@@ -5,7 +5,7 @@ import xml.etree.ElementTree as et
 
 if __name__ == '__main__':
     filename = 'HIGHLNDX.xml'
-    file_dir = os.path.expanduser(os.path.join('~', 'Desktop', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MX'))
+    file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MX'))
     tree = et.parse(os.path.join(file_dir, filename))
     root = tree.getroot()
 
