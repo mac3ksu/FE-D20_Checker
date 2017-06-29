@@ -15,7 +15,7 @@ def d20mpp_check(xml_filename, directory):
         if app.get('Application_Identifier') == 'B023':
            # print(app.get('Application_Name'))
            b023_check(app)
-        if app.get('Application_Identifier') == 'B014-1N':
+        if app.get('Application_Identifier') == 'B014':
             # print(app.get('Application_Name'))
             b014_check(app)
         if app.get('Application_Identifier') == 'A083-0':
@@ -116,11 +116,19 @@ def b014_check(app):
 
     print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
-    print('\t', app[3][0][0].get('Field_Name'), ':', app[3][0][0].get('Field_Value'))
-    print('\t', app[3][0][4][0][0][0].get('Field_Name'), ':', app[3][0][4][0][0][0].get('Field_Value'))
-    print('\t', app[9][0][6].get('Field_Name'), ':', app[9][0][6].get('Field_Value'))
-    print('\t', app[9][0][7].get('Field_Name'), ':', app[9][0][7].get('Field_Value'))
-    print('\t', app[9][0][8].get('Field_Name'), ':', app[9][0][8].get('Field_Value'))
+    print('\t', app[1][0][0].get('Field_Name'), ':', app[1][0][0].get('Field_Value'))
+    print('\t', app[1][0][4][0][0][0].get('Field_Name'), ':', app[1][0][4][0][0][0].get('Field_Value'))
+    print('\t', app[2][0][5].get('Field_Name'), ':', app[2][0][5].get('Field_Value'))
+    print('\t', app[2][0][6].get('Field_Name'), ':', app[2][0][6].get('Field_Value'))
+    print('\t', app[2][0][7].get('Field_Name'), ':', app[2][0][7].get('Field_Value'))
+
+    # Check the Standard UTC Offset
+    # Check the DST Offset
+
+    print('\t', app[4].get('Table_Identifier'), ':', app[4].get('Table_Name'))
+
+    print('\t\t', app[4][0][11].get('Field_Name'), ':', app[4][0][11].get('Field_Value'))
+    print('\t\t', app[4][0][12].get('Field_Name'), ':', app[4][0][12].get('Field_Value'))
 
 def a083_check(app):
     # Check all calc points have Event Types = Both
