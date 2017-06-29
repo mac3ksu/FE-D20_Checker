@@ -24,6 +24,9 @@ def d20mpp_check(xml_filename, directory):
         if app.get('Application_Identifier') == 'B015':
             # print(app.get('Application_Name'))
             b015_check(app)
+        if app.get('Application_Identifier') == 'A020':
+            # print(app.get('Application_Name'))
+            a020_check(app)
 
 def b003_check(app):
     # The XML export does not contain the report deadband.
@@ -130,6 +133,12 @@ def b014_check(app):
     print('\t\t', app[4][0][11].get('Field_Name'), ':', app[4][0][11].get('Field_Value'))
     print('\t\t', app[4][0][12].get('Field_Name'), ':', app[4][0][12].get('Field_Value'))
 
+    # Check Welcome Message for Field Value 15
+
+    print('\t', app[5].get('Table_Identifier'), ':', app[5].get('Table_Name'))
+
+    print('\t\t', app[5][8][3].get('Field_Name'), ':', app[5][8][3].get('Field_Value'))
+
 def a083_check(app):
     # Check all calc points have Event Types = Both
 
@@ -160,3 +169,14 @@ def b015_check(app):
     for record in app[3]:
         print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
               record[2].get('Field_Value'))
+
+def a020_check(app):
+    # Check RE-INIT Interval
+
+    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+    print('\t', app[1][0][4].get('Field_Name'), ':', app[1][0][4].get('Field_Value'))
+
+
+
+
