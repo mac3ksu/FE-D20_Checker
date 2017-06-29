@@ -36,7 +36,6 @@ def b023_check(app):
     #   <table "B023_CFG">
     #   <table "B023_DEV">
     #   <table "B023_PNT">
-    #   <table "B023_POL">
 
     print('B023 - DNP DCA')
     print('\t', 'B023_PNT')
@@ -48,23 +47,30 @@ def b023_check(app):
 
     print('\t', 'B023_POL')
     b023_pol_list = []
-    for i, record in enumerate(app[3]):
-        print('\t\t', 'Record', ':', i)
-        print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-        print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-        print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
-        print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))
-        print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
-        print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
-        print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))
-        b023_pol_list.append((i, record[0].get('Field_Value')))
+    print('\t\t D20 DNP DCA does not have a POL list')
+    # for i, record in enumerate(app[3]):
+    #     print('\t\t', 'Record', ':', i)
+    #     print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+    #     print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+    #     print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+    #     print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))
+    #     print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+    #     print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
+    #     print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))
+    #     b023_pol_list.append((i, record[0].get('Field_Value')))
 
-    print('\t' 'B023_DEV')
+    print('\t', 'B023_DEV')
     b023_dev_list = []
     for i, record in enumerate(app[1]):
         print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-        print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
+        #Offline After Fail
         print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
+        #Failures For Bad Channel
+        print('\t\t\t', record[3][0][0][4].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
+        #Time Syncing
+        print('\t\t\t', record[3][0][0][4].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
+        #Data Link CFM Required
+        print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
         print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
         print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
         print('\t\t\t', record[8][0][0][2].get('Field_Name'), ':', record[8][0][0][2].get('Field_Value'))
@@ -112,9 +118,10 @@ def a083_check(app):
     # Check all calc points have Event Types = Both
 
     print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
-    for record in app[2][2]:
-        print('\t Calc', record.get('Record_Number'))
-        print('\t Calc', record.get('Record_Number'), '-', record[0][1].get('Field_Name'), ':', record[0][1].get('Field_Value'))
+    print('\t D20 Calculator does not have event types')
+    # for record in app[2][0]:
+    #     print('\t Calc', record.get('Record_Number'))
+    #     print('\t Calc', record.get('Record_Number'), '-', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
 
 def b015_check(app):
     # Check Bridgeman app
@@ -123,17 +130,17 @@ def b015_check(app):
 
     # Count the number of remote DNP devices
     num_dnp_dev = 0
-    for record in app[5]:
+    for record in app[2][0]:
         num_dnp_dev += 1
     print('\t', num_dnp_dev, 'remote DNP devices')
     print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))
 
     print('\t', 'Local Application Table [DNP Address(Hex), Data Link channel]')
-    for record in app[3]:
+    for record in app[2]:
         print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
               record[2].get('Field_Value'))
 
     print('\t', 'Remote Application Table [DNP Address(Hex), Data Link channel]')
-    for record in app[5]:
+    for record in app[3]:
         print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
               record[2].get('Field_Value'))
