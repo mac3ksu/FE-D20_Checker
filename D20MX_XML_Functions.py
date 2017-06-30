@@ -41,54 +41,57 @@ def b023_check(app):
     #   <table "B023_PNT">
     #   <table "B023_POL">
 
-    print('B023 - DNP DCA')
-    print('\t', 'B023_PNT')
-    b023_pnt_list = []
+    if app.get('Enabled') == 'True':
+        print('B023 - DNP DCA')
+        print('\t', 'B023_PNT')
+        b023_pnt_list = []
 
-    for i, record in enumerate(app[2]):
-        print('\t\t', i, '-', record[0].get('Field_Value'),':', record[1].get('Field_Value'))
-        b023_pnt_list.append((record[0].get('Field_Value'), record[1].get('Field_Value')))
+        for i, record in enumerate(app[2]):
+            print('\t\t', i, '-', record[0].get('Field_Value'),':', record[1].get('Field_Value'))
+            b023_pnt_list.append((record[0].get('Field_Value'), record[1].get('Field_Value')))
 
-    print('\t', 'B023_POL')
-    b023_pol_list = []
-    for i, record in enumerate(app[3]):
-        print('\t\t', 'Record',':', i)
-        print('\t\t\t', record[0].get('Field_Name'),':', record[0].get('Field_Value'))
-        print('\t\t\t', record[1].get('Field_Name'),':', record[1].get('Field_Value'))
-        print('\t\t\t', record[4].get('Field_Name'),':', record[4].get('Field_Value'))
-        print('\t\t\t', record[5].get('Field_Name'),':', record[5].get('Field_Value'))
-        print('\t\t\t', record[6].get('Field_Name'),':', record[6].get('Field_Value'))
-        print('\t\t\t', record[7].get('Field_Name'),':', record[7].get('Field_Value'))
-        print('\t\t\t', record[8].get('Field_Name'),':', record[8].get('Field_Value'))
-        b023_pol_list.append((i, record[0].get('Field_Value')))
+        print('\t', 'B023_POL')
+        b023_pol_list = []
+        for i, record in enumerate(app[3]):
+            print('\t\t', 'Record',':', i)
+            print('\t\t\t', record[0].get('Field_Name'),':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'),':', record[1].get('Field_Value'))
+            print('\t\t\t', record[4].get('Field_Name'),':', record[4].get('Field_Value'))
+            print('\t\t\t', record[5].get('Field_Name'),':', record[5].get('Field_Value'))
+            print('\t\t\t', record[6].get('Field_Name'),':', record[6].get('Field_Value'))
+            print('\t\t\t', record[7].get('Field_Name'),':', record[7].get('Field_Value'))
+            print('\t\t\t', record[8].get('Field_Name'),':', record[8].get('Field_Value'))
+            b023_pol_list.append((i, record[0].get('Field_Value')))
 
-    print('\t' 'B023_DEV')
-    b023_dev_list = []
-    for i, record in enumerate(app[1]):
-        print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-        print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
-        print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
-        print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
-        print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
-        print('\t\t\t', record[8][0][0][2].get('Field_Name'), ':', record[8][0][0][2].get('Field_Value'))
-        print('\t\t\t', record[8][0][0][3].get('Field_Name'), ':', record[8][0][0][3].get('Field_Value'))
-        for index in range(int(record[8][0][0][2].get('Field_Value')), int(record[8][0][0][2].get('Field_Value')) + int(record[8][0][0][3].get('Field_Value'))):
-            print('\t\t\t\t', b023_pnt_list[index])
-        print('\t\t\t', record[8][0][0][4].get('Field_Name'), ':', record[8][0][0][4].get('Field_Value'))
-        print('\t\t\t', record[8][0][0][5].get('Field_Name'), ':', record[8][0][0][5].get('Field_Value'))
-        for index in range(int(record[8][0][0][4].get('Field_Value')), int(record[8][0][0][4].get('Field_Value')) + int(record[8][0][0][5].get('Field_Value'))):
-            print('\t\t\t\t', b023_pol_list[index])
-        print('\t\t\t', record[9][0][0][5].get('Field_Name'), ':', record[9][0][0][5].get('Field_Value'))
-        b023_dev_list.append(record[0].get('Field_Value'))
+        print('\t' 'B023_DEV')
+        b023_dev_list = []
+        for i, record in enumerate(app[1]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
+            print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
+            print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+            print('\t\t\t', record[8][0][0][2].get('Field_Name'), ':', record[8][0][0][2].get('Field_Value'))
+            print('\t\t\t', record[8][0][0][3].get('Field_Name'), ':', record[8][0][0][3].get('Field_Value'))
+            for index in range(int(record[8][0][0][2].get('Field_Value')), int(record[8][0][0][2].get('Field_Value')) + int(record[8][0][0][3].get('Field_Value'))):
+                print('\t\t\t\t', b023_pnt_list[index])
+            print('\t\t\t', record[8][0][0][4].get('Field_Name'), ':', record[8][0][0][4].get('Field_Value'))
+            print('\t\t\t', record[8][0][0][5].get('Field_Name'), ':', record[8][0][0][5].get('Field_Value'))
+            for index in range(int(record[8][0][0][4].get('Field_Value')), int(record[8][0][0][4].get('Field_Value')) + int(record[8][0][0][5].get('Field_Value'))):
+                print('\t\t\t\t', b023_pol_list[index])
+            print('\t\t\t', record[9][0][0][5].get('Field_Name'), ':', record[9][0][0][5].get('Field_Value'))
+            b023_dev_list.append(record[0].get('Field_Value'))
 
-    print('\t' 'B023_CFG')
-    for i, record in enumerate(app[0]):
-        print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-        print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
-        print('\t\t\t', record[2][0][0][0].get('Field_Name'), ':', record[2][0][0][0].get('Field_Value'))
-        print('\t\t\t', 'Devices in DCA:')
-        for index in range(int(record[10].get('Field_Value')), int(record[10].get('Field_Value')) + int(record[11].get('Field_Value'))):
-            print('\t\t\t\t', b023_dev_list[index])
+        print('\t' 'B023_CFG')
+        for i, record in enumerate(app[0]):
+            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+            print('\t\t\t', record[2][0][0][0].get('Field_Name'), ':', record[2][0][0][0].get('Field_Value'))
+            print('\t\t\t', 'Devices in DCA:')
+            for index in range(int(record[10].get('Field_Value')), int(record[10].get('Field_Value')) + int(record[11].get('Field_Value'))):
+                print('\t\t\t\t', b023_dev_list[index])
+    else:
+        print('B023 - DNP DCA is disabled')
     return
 
 
