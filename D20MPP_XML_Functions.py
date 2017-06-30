@@ -119,7 +119,7 @@ def a030_check(app):
         print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
 
 def a083_check(app):
-    # Check all calc points have Event Types = Both
+    # Check That All Points Have Event Types = Both
 
     print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
     print('\t D20 Calculator does not have event types')
@@ -166,17 +166,11 @@ def b013_check(app):
 def b014_check(app):
     # Check SOE BUFFER SIZE = 500
     # Check SOE LOCATION = NVRAM
-    # Check User Name = something
-    # Check Password = something
-    # Check Control Password = something
 
     print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
     print('\t', app[1][0][0].get('Field_Name'), ':', app[1][0][0].get('Field_Value'))
     print('\t', app[1][0][4][0][0][0].get('Field_Name'), ':', app[1][0][4][0][0][0].get('Field_Value'))
-    print('\t', app[2][0][5].get('Field_Name'), ':', app[2][0][5].get('Field_Value'))
-    print('\t', app[2][0][6].get('Field_Name'), ':', app[2][0][6].get('Field_Value'))
-    print('\t', app[2][0][7].get('Field_Name'), ':', app[2][0][7].get('Field_Value'))
 
     # Check the Standard UTC Offset
     # Check the DST Offset
@@ -185,6 +179,14 @@ def b014_check(app):
 
     print('\t\t', app[4][0][11].get('Field_Name'), ':', app[4][0][11].get('Field_Value'))
     print('\t\t', app[4][0][12].get('Field_Name'), ':', app[4][0][12].get('Field_Value'))
+
+    # Check User Name = something
+    # Check Password = something
+    # Check Control Password = something
+
+    print('\t', app[2][0][5].get('Field_Name'), ':', app[2][0][5].get('Field_Value'))
+    print('\t', app[2][0][6].get('Field_Name'), ':', app[2][0][6].get('Field_Value'))
+    print('\t', app[2][0][7].get('Field_Name'), ':', app[2][0][7].get('Field_Value'))
 
     # Check Welcome Message for Field Value 15
 
@@ -204,15 +206,18 @@ def b015_check(app):
     print('\t', num_dnp_dev, 'remote DNP devices')
     print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))
 
-    print('\t', 'Local Application Table [DNP Address(Hex), Data Link channel]')
+    print('\t', 'Local Application Table [LAN Address(Hex), Data Link Channel]')
     for record in app[2]:
         print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
               record[2].get('Field_Value'))
 
-    print('\t', 'Remote Application Table [DNP Address(Hex), Data Link channel]')
+    print('\t', 'Remote Application Table [LAN Address(Hex), Data Link Channel]')
     for record in app[3]:
         print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
               record[2].get('Field_Value'))
+
+    # Check TXT Delay to Appl.
+    print('\t', app[3][1][4].get('Field_Name'), ':', app[3][1][4].get('Field_Value'))
 
 def b021_check(app):
     # Check Datalink Confirm
