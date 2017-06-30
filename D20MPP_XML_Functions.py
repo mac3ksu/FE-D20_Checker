@@ -36,6 +36,12 @@ def d20mpp_check(xml_filename, directory):
         if app.get('Application_Identifier') == 'A003':
             # print(app.get('Application_Name'))
             a003_check(app)
+        if app.get('Application_Identifier') == 'B013':
+            # print(app.get('Application_Name'))
+            b013_check(app)
+        if app.get('Application_Identifier') == 'B021':
+            # print(app.get('Application_Name'))
+            b021_check(app)
 
 def b003_check(app):
     # The XML export does not contain the report deadband.
@@ -254,5 +260,43 @@ def a003_check(app):
     print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')
     print('\t\t', app[7][0][1].get('Field_Name'), ':', app[7][0][1].get('Field_Value'))
 
+def b013_check(app):
+    # Check Baud Rate
+    # Check DCD, RTS, & CTS
+    # Check DCD to RX Enable Time
+    # Check RTS Preamble
+    # Check RTS Postamble
+    # Check Max Frame Size
+    # Check Transmit Retries
+    # Check Transmit Buffers
+    # Check Receive Buffers
+    # Check Confirm Timeout
+    # Check Response Timeout
 
+    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
+    print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+    print('\t\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))
+    print('\t\t', app[0][0][3].get('Field_Name'), ':', app[0][0][3].get('Field_Value'))
+    print('\t\t', app[0][0][4].get('Field_Name'), ':', app[0][0][4].get('Field_Value'))
+    print('\t\t', app[0][0][5].get('Field_Name'), ':', app[0][0][5].get('Field_Value'))
+    print('\t\t', app[0][0][6].get('Field_Name'), ':', app[0][0][6].get('Field_Value'))
+    print('\t\t', app[0][0][7].get('Field_Name'), ':', app[0][0][7].get('Field_Value'))
+    print('\t\t', app[0][0][8].get('Field_Name'), ':', app[0][0][8].get('Field_Value'))
+    print('\t\t', app[0][0][9].get('Field_Name'), ':', app[0][0][9].get('Field_Value'))
+    print('\t\t', app[0][0][10].get('Field_Name'), ':', app[0][0][10].get('Field_Value'))
+    print('\t\t', app[0][0][11].get('Field_Name'), ':', app[0][0][11].get('Field_Value'))
+    print('\t\t', app[0][0][12].get('Field_Name'), ':', app[0][0][12].get('Field_Value'))
+    print('\t\t', app[0][0][13].get('Field_Name'), ':', app[0][0][13].get('Field_Value'))
+    print('\t\t', app[0][0][14].get('Field_Name'), ':', app[0][0][14].get('Field_Value'))
+
+def b021_check(app):
+    # Check Datalink Confirm
+    # Check Idle Report Period
+
+    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+    print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+    print('\t\t', app[0][0][14].get('Field_Name'), ':', app[0][0][14].get('Field_Value'))
+    print('\t\t', app[0][0][11].get('Field_Name'), ':', app[0][0][11][0].get('Table_Identifier'))
+    print('\t\t\t', app[0][0][11][0][0][5].get('Field_Name'), ':', app[0][0][11][0][0][5].get('Field_Value'))
