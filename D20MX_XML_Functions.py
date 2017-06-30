@@ -7,7 +7,7 @@ def d20mx_check(xml_filename, directory):
     root = tree.getroot()
 
     #with open(os.path.join(directory, xml_filename[:-4]+'_Check.txt')) as of:
-    print(root[0][0].get('Device_Type'))
+    print(root[0][0][1][0].get('Part_Number'))
     for app in root[0][0][1][0]:
         #print(app.get('Application_Name'), app.get('Application_Identifier'))
         if app.get('Application_Identifier') == 'B003':
