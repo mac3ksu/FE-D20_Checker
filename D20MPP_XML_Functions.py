@@ -27,6 +27,9 @@ def d20mpp_check(xml_filename, directory):
         if app.get('Application_Identifier') == 'A020':
             # print(app.get('Application_Name'))
             a020_check(app)
+        if app.get('Application_Identifier') == 'A026':
+            # print(app.get('Application_Name'))
+            a026_check(app)
 
 def b003_check(app):
     # The XML export does not contain the report deadband.
@@ -176,6 +179,34 @@ def a020_check(app):
     print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
     print('\t', app[1][0][4].get('Field_Name'), ':', app[1][0][4].get('Field_Value'))
+
+def a026_check(app):
+    # Check Point Type
+    # Check System Point
+    # Check Comm Event Point
+    # Check Normal State
+
+    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+    print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+
+    for i, record in enumerate(app[0]):
+        print('\t\t', i+1, ':')
+        print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+        print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+        print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+        print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+
+    # Check SOE Enable
+    # Check COS Enable
+
+    print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
+
+    print('\t\t', app[2][0][1].get('Field_Name'), ':', app[2][0][1].get('Field_Value'))
+    print('\t\t', app[2][0][2].get('Field_Name'), ':', app[2][0][2].get('Field_Value'))
+
+
+
 
 
 
