@@ -30,6 +30,9 @@ def d20mpp_check(xml_filename, directory):
         if app.get('Application_Identifier') == 'A026':
             # print(app.get('Application_Name'))
             a026_check(app)
+        if app.get('Application_Identifier') == 'A030':
+            # print(app.get('Application_Name'))
+            a030_check(app)
 
 def b003_check(app):
     # The XML export does not contain the report deadband.
@@ -204,6 +207,32 @@ def a026_check(app):
 
     print('\t\t', app[2][0][1].get('Field_Name'), ':', app[2][0][1].get('Field_Value'))
     print('\t\t', app[2][0][2].get('Field_Name'), ':', app[2][0][2].get('Field_Value'))
+
+def a030_check(app):
+    # Check Time Sync Wait
+    # Check Status/ACC Freeze
+    # Check ACC Freeze/ Controls
+
+    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+    print('\t', app[1].get('Table_Identifier'), ':', app[1].get('Table_Name'), 'Table')
+
+    for i, record in enumerate(app[1]):
+        print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+        print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+
+    print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
+
+    for i, record in enumerate(app[2]):
+        print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+        print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+
+    print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
+
+    for i, record in enumerate(app[3]):
+        print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+        print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+
 
 
 
