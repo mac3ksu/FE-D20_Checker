@@ -28,11 +28,15 @@ def d20mx_check(xml_filename, directory):
 
 
 def b003_check(app):
-    #The XML export does not contain the report deadband.
-    print('B003 - D.20 Peripheral Link')
-    print('\t', 'Report Deadband not in XML')
-    return
 
+    # Check if Application is Enabled
+    if app.get('Enabled') == 'True':
+        #The XML export does not contain the report deadband.
+        print('B003 - D.20 Peripheral Link')
+        print('\t', 'Report Deadband not in XML')
+        return
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
 
 def b023_check(app):
     #<app>
@@ -41,6 +45,7 @@ def b023_check(app):
     #   <table "B023_PNT">
     #   <table "B023_POL">
 
+    # Check if Application is Enabled
     if app.get('Enabled') == 'True':
         print('B023 - DNP DCA')
         print('\t', 'B023_PNT')
@@ -91,9 +96,8 @@ def b023_check(app):
             for index in range(int(record[10].get('Field_Value')), int(record[10].get('Field_Value')) + int(record[11].get('Field_Value'))):
                 print('\t\t\t\t', b023_dev_list[index])
     else:
-        print('B023 - DNP DCA is disabled')
+        print(app.get('Application_Identifier'), '-', 'is disabled')
     return
-
 
 def b014_check(app):
     # Check SOE BUFFER SIZE = 500
@@ -102,40 +106,50 @@ def b014_check(app):
     # Check Password = something
     # Check Control Password = something
 
-    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+    # Check if Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
-    print('\t', app[3][0][0].get('Field_Name'), ':', app[3][0][0].get('Field_Value'))
-    print('\t', app[3][0][4][0][0][0].get('Field_Name'), ':', app[3][0][4][0][0][0].get('Field_Value'))
-    print('\t', app[9][0][6].get('Field_Name'),':', app[9][0][6].get('Field_Value'))
-    print('\t', app[9][0][7].get('Field_Name'), ':', app[9][0][7].get('Field_Value'))
-    print('\t', app[9][0][8].get('Field_Name'), ':', app[9][0][8].get('Field_Value'))
-
+        print('\t', app[3][0][0].get('Field_Name'), ':', app[3][0][0].get('Field_Value'))
+        print('\t', app[3][0][4][0][0][0].get('Field_Name'), ':', app[3][0][4][0][0][0].get('Field_Value'))
+        print('\t', app[9][0][6].get('Field_Name'),':', app[9][0][6].get('Field_Value'))
+        print('\t', app[9][0][7].get('Field_Name'), ':', app[9][0][7].get('Field_Value'))
+        print('\t', app[9][0][8].get('Field_Name'), ':', app[9][0][8].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
 
 def a083_check(app):
     # Check all calc points have Event Types = Both
 
-    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
-    for record in app[5]:
-        print('\t Calc', record.get('Record_Number'),'-', record[2].get('Field_Name'),':', record[2].get('Field_Value'))
-
+    # Check if Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+        for record in app[5]:
+            print('\t Calc', record.get('Record_Number'),'-', record[2].get('Field_Name'),':', record[2].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
 
 def b015_check(app):
     # Check Bridgeman app
 
-    print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+    # Check if Application in Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
-    # Count the number of remote DNP devices
-    num_dnp_dev = 0
-    for record in app[5]:
-        num_dnp_dev += 1
-    print('\t', num_dnp_dev, 'remote DNP devices')
-    print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))
+        # Count the number of remote DNP devices
+        num_dnp_dev = 0
+        for record in app[5]:
+            num_dnp_dev += 1
+        print('\t', num_dnp_dev, 'remote DNP devices')
+        print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))
 
-    print('\t', 'Local Application Table [DNP Address(Hex), Data Link channel]')
-    for record in app[3]:
-        print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')', record[2].get('Field_Value'))
+        print('\t', 'Local Application Table [DNP Address(Hex), Data Link channel]')
+        for record in app[3]:
+            print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')', record[2].get('Field_Value'))
 
-    print('\t', 'Remote Application Table [DNP Address(Hex), Data Link channel]')
-    for record in app[5]:
-        print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
-              record[2].get('Field_Value'))
+        print('\t', 'Remote Application Table [DNP Address(Hex), Data Link channel]')
+        for record in app[5]:
+            print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
+                  record[2].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
