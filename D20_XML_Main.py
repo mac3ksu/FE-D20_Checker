@@ -6,20 +6,20 @@ import xml.etree.ElementTree as et
 
 
 if __name__ == '__main__':
-    filename = 'OAKDAL2G D20ME.xml'
-    file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
-    tree = et.parse(os.path.join(file_dir, filename))
-    root = tree.getroot()
+    # filename = 'OAKDAL2G D20ME.xml'
+    # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
+    # tree = et.parse(os.path.join(file_dir, filename))
+    # root = tree.getroot()
 
     # filename = 'MAYFIEAO D20ME.xml'
     # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
     # tree = et.parse(os.path.join(file_dir, filename))
     # root = tree.getroot()
 
-    # filename = 'PLVLY_Q D20M++.xml'
-    # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20M++'))
-    # tree = et.parse(os.path.join(file_dir, filename))
-    # root = tree.getroot()
+    filename = 'PLVLY_Q D20M++.xml'
+    file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20M++'))
+    tree = et.parse(os.path.join(file_dir, filename))
+    root = tree.getroot()
 
     # filename = 'LORAIN_H.xml'
     # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MX'))

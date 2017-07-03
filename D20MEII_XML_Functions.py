@@ -1,6 +1,9 @@
 import xml.etree.ElementTree as ET
 import os
 
+def set_comlist():
+  global b013_com_list # Needed to modify global copy of globvar
+  b013_com_list = []
 
 def d20meII_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
@@ -116,12 +119,12 @@ def a026_check(app):
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
         # Loop Through the Table
         for i, record in enumerate(app[0]):
-            print('\t\t', record.get('Record_Number'), ':')
-            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-            print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
-            print('\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
-            print('\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            print('\t\t', i, ':')
+            print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+            print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+            print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
 
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
@@ -196,23 +199,29 @@ def b013_check(app):
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+        # Port Com Global Variable
+        set_comlist()
         # Loop Through the Table
         for i, record in enumerate(app[0]):
-            print('\t\t', record.get('Record_Number'), ':')
-            print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
-            print('\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
-            print('\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
-            print('\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))
-            print('\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
-            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-            print('\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
-            print('\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))
-            print('\t\t', record[9].get('Field_Name'), ':', record[9].get('Field_Value'))
-            print('\t\t', record[10].get('Field_Name'), ':', record[10].get('Field_Value'))
-            print('\t\t', record[11].get('Field_Name'), ':', record[11].get('Field_Value'))
-            print('\t\t', record[12].get('Field_Name'), ':', record[12].get('Field_Value'))
-            print('\t\t', record[13].get('Field_Name'), ':', record[13].get('Field_Value'))
-            print('\t\t', record[14].get('Field_Name'), ':', record[14].get('Field_Value'))
+            print('\t\t', i, ':')
+            print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+            print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))
+            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+            print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
+            print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))
+            print('\t\t\t', record[9].get('Field_Name'), ':', record[9].get('Field_Value'))
+            print('\t\t\t', record[10].get('Field_Name'), ':', record[10].get('Field_Value'))
+            print('\t\t\t', record[11].get('Field_Name'), ':', record[11].get('Field_Value'))
+            print('\t\t\t', record[12].get('Field_Name'), ':', record[12].get('Field_Value'))
+            print('\t\t\t', record[13].get('Field_Name'), ':', record[13].get('Field_Value'))
+            print('\t\t\t', record[14].get('Field_Name'), ':', record[14].get('Field_Value'))
+
+            # Append Port Com to list
+            b013_com_list.append((record[0].get('Field_Value')))
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
@@ -258,12 +267,12 @@ def b015_check(app):
         print('\t', num_dnp_dev, 'remote DNP devices')
         print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))
 
-        print('\t', 'Local Application Table [DNP Address(Hex), Data Link channel]')
-        for record in app[3]:
+        print('\t', 'Local Application Table [LAN Address(Hex), Data Link channel]')
+        for i, record in enumerate(app[3]):
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
-                  record[2].get('Field_Value'))
+                  record[2].get('Field_Value'), ':', b013_com_list[i])
 
-        print('\t', 'Remote Application Table [DNP Address(Hex), Data Link channel]')
+        print('\t', 'Remote Application Table [LAN Address(Hex), Data Link channel]')
         for record in app[5]:
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), '   -   ', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
@@ -284,11 +293,11 @@ def b021_check(app):
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
         # Loop Through the Table
         for i, record in enumerate(app[0]):
-            print('\t\t', record.get('Record_Number'), ':')
-            print('\t\t', record[15].get('Field_Name'), ':', record[15].get('Field_Value'))
-            print('\t\t', record[40].get('Field_Name'), ':', record[40].get('Field_Value'))
-            print('\t\t', record[25][0][0][3].get('Field_Name'), ':', record[25][0][0][3].get('Field_Value'))
-            print('\t\t', record[12][0][0][5].get('Field_Name'), ':', record[12][0][0][5].get('Field_Value'))
+            print('\t\t', i, ':')
+            print('\t\t\t', record[15].get('Field_Name'), ':', record[15].get('Field_Value'))
+            print('\t\t\t', record[40].get('Field_Name'), ':', record[40].get('Field_Value'))
+            print('\t\t\t', record[25][0][0][3].get('Field_Name'), ':', record[25][0][0][3].get('Field_Value'))
+            print('\t\t\t', record[12][0][0][5].get('Field_Name'), ':', record[12][0][0][5].get('Field_Value'))
 
         print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
         counter = 0
@@ -325,7 +334,7 @@ def b023_check(app):
         print('\t', 'B023_POL')
         b023_pol_list = []
         for i, record in enumerate(app[3]):
-            print('\t\t', 'Record', ':', i)
+            print('\t\t', i, ':')
             print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
             print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
             print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
