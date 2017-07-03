@@ -10,21 +10,150 @@ def d20meII_check(xml_filename, directory):
     print(root[0][0][1][0].get('Part_Number'))
     for app in root[0][0][1][0]:
         # print(app.get('Application_Name'), app.get('Application_Identifier'))
+        if app.get('Application_Identifier') == 'A003':
+            # print(app.get('Application_Name'))
+            a003_check(app)
+        if app.get('Application_Identifier') == 'A020':
+            # print(app.get('Application_Name'))
+            a020_check(app)
+        if app.get('Application_Identifier') == 'A026-1':
+            # print(app.get('Application_Name'))
+            a026_check(app)
+        if app.get('Application_Identifier') == 'A030':
+            # print(app.get('Application_Name'))
+            a030_check(app)
         if app.get('Application_Identifier') == 'A083-0':
             # print(app.get('Application_Name'))
             a083_check(app)
         if app.get('Application_Identifier') == 'B003':
             # print(app.get('Application_Name'))
             b003_check(app)
+        if app.get('Application_Identifier') == 'B013':
+            # print(app.get('Application_Name'))
+            b013_check(app)
         if app.get('Application_Identifier') == 'B014-1':
             # print(app.get('Application_Name'))
             b014_check(app)
         if app.get('Application_Identifier') == 'B015':
             # print(app.get('Application_Name'))
             b015_check(app)
+        if app.get('Application_Identifier') == 'B021':
+            # print(app.get('Application_Name'))
+            b021_check(app)
         if app.get('Application_Identifier') == 'B023':
             # print(app.get('Application_Name'))
             b023_check(app)
+
+# Application A003 is NOT in the D20MEII XML File
+def a003_check(app):
+    # Check SOE
+    # Check Offline Condition
+    # Check Contact BUR/BASE Time
+
+    # Check if the Application is Enabled
+    if app.get('Enabled')=='True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        print('\t', app[6].get('Table_Identifier'), ':', app[6].get('Table_Name'), 'Table')
+        # Tracker Variable
+        count = 0
+        # Loop Through the Table
+        for i, record in enumerate(app[6]):
+            if app[6][0][2].get('Field_Value') == 'No':
+                count
+            else:
+                count = count + 1
+        # Print Statement if an SOE Variable Differs
+        if count == 0:
+            print('\t\t', app[6][0][2].get('Field_Name'), ':', app[6][0][2].get('Field_Value'))
+        else:
+            print('An SOE value differs from the rest. Please check the SGConfig.')
+
+        print('\t', app[1].get('Table_Identifier'), ':', app[1].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[1]):
+            print('\t\t', record[16].get('Field_Name'), ':', record[16].get('Field_Value'))
+
+        print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')
+        # Tracker Variable
+        count2 = 0
+        # Loop Through the Table
+        for i, record in enumerate(app[7]):
+            if app[7][0][1].get('Field_Value') == '500':
+                count2
+            else:
+                count2 = count2 + 1
+        if count2 == 0:
+            print('\t\t', app[7][0][1].get('Field_Name'), ':', app[7][0][1].get('Field_Value'))
+        else:
+            print('A Contact Dur/Base Time value differs from the rest. Please check the SGConfig.')
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
+
+def a020_check(app):
+    # Check RE-INIT Interval
+
+    # Check if the Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+        # Loop Through the Table
+        for i, record in enumerate(app[1]):
+            print('\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
+
+def a026_check(app):
+    # Check Operating Condition
+    # Check Channel Type/Specifier
+    # Check Status Point
+    # Check Normal State
+    # Check Start Point
+
+    # Check if the Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[0]):
+            print('\t\t', record.get('Record_Number'), ':')
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+            print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            print('\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+            print('\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
+
+def a030_check(app):
+    # Check Time Sync Wait
+    # Check Status/ACC Freeze
+    # Check ACC Freeze/ Controls
+
+    # Check if the Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        print('\t', app[1].get('Table_Identifier'), ':', app[1].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[1]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+
+        print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[2]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+
+        print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[3]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
 
 def a083_check(app):
     # Check all calc points have Event Types = Both
@@ -48,6 +177,45 @@ def b003_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
+def b013_check(app):
+    # Check Reset Link on Rx NACK
+    # Check DCD, RTS, & CTS
+    # Check DCD to RX Enable Time
+    # Check Baud Rate
+    # Check RTS Preamble
+    # Check RTS Postamble
+    # Check Max Frame Size
+    # Check Transmit Retries
+    # Check Transmit Buffers
+    # Check Receive Buffers
+    # Check Confirm Timeout
+    # Check Response Timeout
+
+    # Check if the Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[0]):
+            print('\t\t', record.get('Record_Number'), ':')
+            print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            print('\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+            print('\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            print('\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))
+            print('\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
+            print('\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
+            print('\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))
+            print('\t\t', record[9].get('Field_Name'), ':', record[9].get('Field_Value'))
+            print('\t\t', record[10].get('Field_Name'), ':', record[10].get('Field_Value'))
+            print('\t\t', record[11].get('Field_Name'), ':', record[11].get('Field_Value'))
+            print('\t\t', record[12].get('Field_Name'), ':', record[12].get('Field_Value'))
+            print('\t\t', record[13].get('Field_Name'), ':', record[13].get('Field_Value'))
+            print('\t\t', record[14].get('Field_Name'), ':', record[14].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
+
 def b014_check(app):
     # Check SOE BUFFER SIZE = 500
     # Check SOE LOCATION = NVRAM
@@ -59,11 +227,20 @@ def b014_check(app):
     if app.get('Enabled') == 'True':
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
-        print('\t', app[3][0][0].get('Field_Name'), ':', app[3][0][0].get('Field_Value'))
-        print('\t', app[3][0][4][0][0][0].get('Field_Name'), ':', app[3][0][4][0][0][0].get('Field_Value'))
-        print('\t', app[9][0][6].get('Field_Name'), ':', app[9][0][6].get('Field_Value'))
-        print('\t', app[9][0][7].get('Field_Name'), ':', app[9][0][7].get('Field_Value'))
-        print('\t', app[9][0][8].get('Field_Name'), ':', app[9][0][8].get('Field_Value'))
+        print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
+        for i, record in enumerate(app[3]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t', record[4][0][0][0].get('Field_Name'), ':', record[4][0][0][0].get('Field_Value'))
+
+        print('\t', app[4].get('Table_Identifier'), ':', app[4].get('Table_Name'), 'Table')
+        for i, record in enumerate(app[4]):
+            print('\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))
+            print('\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+            print('\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
+
+        print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')
+        for i, record in enumerate(app[7]):
+            print('\t\t', '(', record.get('Record_Number'), ')', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
@@ -90,6 +267,41 @@ def b015_check(app):
         for record in app[5]:
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), '   -   ', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
+
+def b021_check(app):
+    # Check Datalink Confirm
+    # Check Time Sync Enable State
+    # Check Offline Local IIN
+    # Check Idle Report Period
+    # Check SOE
+
+    # Check if the Application is Enabled
+    if app.get('Enabled') == 'True':
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+        # Loop Through the Table
+        for i, record in enumerate(app[0]):
+            print('\t\t', record.get('Record_Number'), ':')
+            print('\t\t', record[15].get('Field_Name'), ':', record[15].get('Field_Value'))
+            print('\t\t', record[40].get('Field_Name'), ':', record[40].get('Field_Value'))
+            print('\t\t', record[25][0][0][3].get('Field_Name'), ':', record[25][0][0][3].get('Field_Value'))
+            print('\t\t', record[12][0][0][5].get('Field_Name'), ':', record[12][0][0][5].get('Field_Value'))
+
+        print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
+        counter = 0
+        for i, record in enumerate(app[3]):
+            if record[3].get('Field_Value') == 'Enabled':
+                counter
+            else:
+                counter = counter + 1
+        if counter == 0:
+            print('\t\t', app[3][0][3].get('Field_Name'), ':', app[3][0][3].get('Field_Value'))
+        else:
+            print('\t\t', 'An', app[3][0][3].get('Field_Name'), 'value is not enabled. Please check the SGConfig.')
+
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
