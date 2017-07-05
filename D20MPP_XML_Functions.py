@@ -1,8 +1,9 @@
 import xml.etree.ElementTree as ET
 import os
 
+
 def set_comlist():
-  global b013_com_list # Needed to modify global copy of globvar
+  global b013_com_list # Needed to modify global copy of b013_comlist
   b013_com_list = []
 
 def d20mpp_check(xml_filename, directory):
@@ -131,6 +132,8 @@ def a026_check(app):
         for i, record in enumerate(app[2]):
             print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
             print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            if record[1].get('Field_Value') == record[2].get('Field_Value'):
+                print('\t\t', '** These values are not supposed to be the same. See the SGConfig. **')
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
@@ -409,3 +412,5 @@ def b023_check(app):
         return
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
+
+

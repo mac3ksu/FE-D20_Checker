@@ -1,4 +1,5 @@
 import os
+import sys
 from D20MX_XML_Functions import d20mx_check
 from D20MPP_XML_Functions import d20mpp_check
 from D20MEII_XML_Functions import d20meII_check
@@ -26,6 +27,10 @@ if __name__ == '__main__':
     # tree = et.parse(os.path.join(file_dir, filename))
     # root = tree.getroot()
 
+    # orig_stdout = sys.stdout
+    # f = open('Output', 'w')
+    # sys.stdout = f
+
     print(filename)
 
     if root[0][0][1][0].get('Part_Number') == '526-1006':
@@ -41,4 +46,5 @@ if __name__ == '__main__':
     #if root[0][0].get('Device_Type') == 'D20MX':
     #    d20mx_check(filename, file_dir)
 
-
+    # sys.stdout = orig_stdout
+    # f.close()
