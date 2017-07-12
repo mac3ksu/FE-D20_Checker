@@ -340,34 +340,93 @@ def b021_check(app):
             elif cell.value == 'CONTROL':
                 control_index = i
 
+        # Status Point Check
+        print('\t\t', 'Status Points Check')
         for i, record in enumerate(app[3]):
+            xl_status = str(wsheet.cell_value(i + 2, status_index))
             check_value = record[0].get('Field_Value')
-            print('\t\t', 'DNP Point', i, ':')
             if check_value[4] == '0':
                 if check_value[5] == '0':
-                    xl_value = str(wsheet.cell_value(i + 2, status_index))
-                    # Print for testing purposes only
-                    print('\t\t\t', check_value[6], ':', xl_value[0])
-                    if xl_value[0] == (check_value[6]):
-                        print('\t\t\t', '<status> WinPts match')
+                    if xl_status[0] == (check_value[6]):
+                        pass
+                        # print('\t\t\t\t', check_value[6], ':', xl_status[0], '<status> WinPts match')
                     else:
-                        print('\t\t\t', '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                        print('\t\t\t', 'DNP Point (', i, ')', check_value[6], ':', xl_status[0], '<status> WinPt does not match the points list. Please refer to the SGConfig.')
                 else:
-                    xl_value = str(wsheet.cell_value(i + 2, status_index))
-                    # Print for testing purposes only
-                    print('\t\t\t', check_value[5] + check_value[6], ':', xl_value[0] + xl_value[1])
-                    if xl_value[0]+xl_value[1] == (check_value[5] + check_value[6]):
-                        print('\t\t\t', '<status> WinPts match')
+                    if xl_status[0]+xl_status[1] == (check_value[5] + check_value[6]):
+                        pass
+                        # print('\t\t\t\t', check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1], '<status> WinPts match')
                     else:
-                        print('\t\t\t', '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                        print('\t\t\t', 'DNP Point (', i, ')', check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1], '<status> WinPt does not match the points list. Please refer to the SGConfig.')
             else:
-                xl_value = str(wsheet.cell_value(i + 2, status_index))
-                # Print for testing purposes only
-                print('\t\t\t', check_value[4] + check_value[5] + check_value[6], ':', xl_value[0] + xl_value[1] + xl_value[2])
-                if wsheet.cell_value(i + 2, status_index) == (check_value[4] + check_value[5] + check_value[6]):
-                    print('\t\t\t', '<status> WinPts match')
+                if xl_status[0] + xl_status[1] + xl_status[2] == (check_value[4] + check_value[5] + check_value[6]):
+                    pass
+                    # print('\t\t\t\t', check_value[4] + check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1] + xl_status[2], '<status> WinPts match')
                 else:
-                    print('\t\t\t', '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                    print('\t\t\t', 'DNP Point (', i, ')', check_value[4] + check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1] + xl_status[2], '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+
+        # Analog Point Check
+        print('\t\t', 'Analog Points Check')
+        for i, record in enumerate(app[6]):
+            xl_analog = str(wsheet.cell_value(i + 2, analog_index))
+            check_value = record[0].get('Field_Value')
+            if check_value[4] == '0':
+                if check_value[5] == '0':
+                    if xl_analog[0] == (check_value[6]):
+                        pass
+                        # print('\t\t\t', check_value[6], ':', xl_analog[0], '<analog> WinPts match')
+                    else:
+                        print('\t\t\t', 'DNP Point (', i, ')',
+                              '<analog> WinPt does not match the points list. Please refer to the SGConfig.')
+                else:
+                    if xl_analog[0] + xl_analog[1] == (check_value[5] + check_value[6]):
+                        pass
+                        # print('\t\t\t', check_value[5] + check_value[6], ':', xl_analog[0] + xl_analog[1],
+                        #       '<analog> WinPts match')
+                    else:
+                        print('\t\t\t', 'DNP Point (', i, ')',
+                              '<analog> WinPt does not match the points list. Please refer to the SGConfig.')
+            else:
+                if xl_analog[0] + xl_analog[1] + xl_analog[2] == (
+                        check_value[4] + check_value[5] + check_value[6]):
+                    pass
+                    # print('\t\t\t', check_value[4] + check_value[5] + check_value[6], ':',
+                    #       xl_analog[0] + xl_analog[1] + xl_analog[2], '<analog> WinPts match')
+                else:
+                    print('\t\t\t', 'DNP Point (', i, ')',
+                          '<analog> WinPt does not match the points list. Please refer to the SGConfig.')
+
+        # Control Point Check
+        print('\t\t', 'Control Points Check')
+        for i, record in enumerate(app[4]):
+            xl_control = str(wsheet.cell_value(i + 2, control_index))
+            check_value = record[0].get('Field_Value')
+            if check_value[4] == '0':
+                if check_value[5] == '0':
+                    if xl_control[0] == (check_value[6]):
+                        print('\t\t\t\t', check_value[6], ':', xl_control[0], '<control> WinPts match')
+                    else:
+                        print('\t\t\t', 'DNP Point', i, ':')
+                        print('\t\t\t\t',
+                              '<control> WinPt does not match the points list. Please refer to the SGConfig.')
+                else:
+                    if xl_control[0] + xl_control[1] == (check_value[5] + check_value[6]):
+                        print('\t\t\t\t', check_value[5] + check_value[6], ':', xl_control[0] + xl_control[1],
+                              '<control> WinPts match')
+                    else:
+                        print('\t\t\t', 'DNP Point', i, ':')
+                        print('\t\t\t\t',
+                              '<control> WinPt does not match the points list. Please refer to the SGConfig.')
+            else:
+                if xl_control[0] + xl_control[1] + xl_control[2] == (
+                                check_value[4] + check_value[5] + check_value[6]):
+                    print('\t\t\t\t', check_value[4] + check_value[5] + check_value[6], ':',
+                          xl_control[0] + xl_control[1] + xl_control[2], '<control> WinPts match')
+                else:
+                    print('\t\t\t', 'DNP Point', i, ':')
+                    print('\t\t\t\t',
+                          '<control> WinPt does not match the points list. Please refer to the SGConfig.')
+
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 

@@ -92,148 +92,31 @@ B021 - DNP V3.00 DPA
 	 B021MT01 : Binary Input Map Table
 		 An SOE value is not enabled. Please check the SGConfig.
 	 D20 DNP Map WinPt Check.xlsx
-		 DNP Point 0 :
-			 4 : 4
-			 <status> WinPts match
-		 DNP Point 1 :
-			 3 : 3
-			 <status> WinPts match
-		 DNP Point 2 :
-			 2 : 2
-			 <status> WinPts match
-		 DNP Point 3 :
-			 1 : 1
-			 <status> WinPts match
-		 DNP Point 4 :
-			 5 : 5
-			 <status> WinPts match
-		 DNP Point 5 :
-			 6 : 6
-			 <status> WinPts match
-		 DNP Point 6 :
-			 7 : 7
-			 <status> WinPts match
-		 DNP Point 7 :
-			 8 : 8
-			 <status> WinPts match
-		 DNP Point 8 :
-			 11 : 11
-			 <status> WinPts match
-		 DNP Point 9 :
-			 9 : 9
-			 <status> WinPts match
-		 DNP Point 10 :
-			 12 : 12
-			 <status> WinPts match
-		 DNP Point 11 :
-			 14 : 14
-			 <status> WinPts match
-		 DNP Point 12 :
-			 10 : 10
-			 <status> WinPts match
-		 DNP Point 13 :
-			 13 : 13
-			 <status> WinPts match
-		 DNP Point 14 :
-			 19 : 19
-			 <status> WinPts match
-		 DNP Point 15 :
-			 20 : 20
-			 <status> WinPts match
-		 DNP Point 16 :
-			 21 : 21
-			 <status> WinPts match
-		 DNP Point 17 :
-			 22 : 22
-			 <status> WinPts match
-		 DNP Point 18 :
-			 16 : 16
-			 <status> WinPts match
-		 DNP Point 19 :
-			 17 : 17
-			 <status> WinPts match
-		 DNP Point 20 :
-			 15 : 15
-			 <status> WinPts match
-		 DNP Point 21 :
-			 18 : 18
-			 <status> WinPts match
-		 DNP Point 22 :
-			 29 : 29
-			 <status> WinPts match
-		 DNP Point 23 :
-			 30 : 30
-			 <status> WinPts match
-		 DNP Point 24 :
-			 31 : 31
-			 <status> WinPts match
-		 DNP Point 25 :
-			 32 : 32
-			 <status> WinPts match
-		 DNP Point 26 :
-			 33 : 33
-			 <status> WinPts match
-		 DNP Point 27 :
-			 34 : 34
-			 <status> WinPts match
-		 DNP Point 28 :
-			 35 : 35
-			 <status> WinPts match
-		 DNP Point 29 :
-			 36 : 36
-			 <status> WinPts match
-		 DNP Point 30 :
-			 37 : 37
-			 <status> WinPts match
-		 DNP Point 31 :
-			 38 : 38
-			 <status> WinPts match
-		 DNP Point 32 :
-			 39 : 39
-			 <status> WinPts match
-		 DNP Point 33 :
-			 40 : 40
-			 <status> WinPts match
-		 DNP Point 34 :
-			 41 : 41
-			 <status> WinPts match
-		 DNP Point 35 :
-			 24 : 24
-			 <status> WinPts match
-		 DNP Point 36 :
-			 23 : 23
-			 <status> WinPts match
-		 DNP Point 37 :
-			 28 : 28
-			 <status> WinPts match
-		 DNP Point 38 :
-			 25 : 25
-			 <status> WinPts match
-		 DNP Point 39 :
-			 26 : 26
-			 <status> WinPts match
-		 DNP Point 40 :
-			 27 : 27
-			 <status> WinPts match
-		 DNP Point 41 :
-			 42 : 42
-			 <status> WinPts match
-		 DNP Point 42 :
-			 43 : 43
-			 <status> WinPts match
-		 DNP Point 43 :
-			 44 : 44
-			 <status> WinPts match
-		 DNP Point 44 :
-			 45 : 45
-			 <status> WinPts match
-		 DNP Point 45 :
-			 46 : 46
-			 <status> WinPts match
-		 DNP Point 46 :
-			 47 : 47
-			 <status> WinPts match
-		 DNP Point 47 :
-			 96 : 96
-			 <status> WinPts match
+		 Status Points Check
+		 Analog Points Check
+		 Control Points Check
+				 1 : 1 <control> WinPts match
+				 2 : 2 <control> WinPts match
+				 3 : 3 <control> WinPts match
+				 4 : 4 <control> WinPts match
+				 5 : 5 <control> WinPts match
+				 6 : 6 <control> WinPts match
+				 7 : 7 <control> WinPts match
+				 8 : 8 <control> WinPts match
+				 9 : 9 <control> WinPts match
+				 10 : 10 <control> WinPts match
+				 11 : 11 <control> WinPts match
+				 12 : 12 <control> WinPts match
+				 13 : 13 <control> WinPts match
+				 14 : 14 <control> WinPts match
+				 15 : 15 <control> WinPts match
+				 16 : 16 <control> WinPts match
+				 17 : 17 <control> WinPts match
+				 18 : 18 <control> WinPts match
+				 19 : 19 <control> WinPts match
+				 20 : 20 <control> WinPts match
+				 21 : 21 <control> WinPts match
+				 22 : 22 <control> WinPts match
+				 23 : 23 <control> WinPts match
+				 24 : 24 <control> WinPts match
 B023 - is disabled
