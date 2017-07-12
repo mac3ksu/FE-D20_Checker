@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import xlrd
 import os
 
 
@@ -329,6 +330,9 @@ def b021_check(app):
             print('\t\t\t', record[14].get('Field_Name'), ':', record[14].get('Field_Value'))
             print('\t\t\t', record[11].get('Field_Name'))
             print('\t\t\t\t', record[11][0][0][5].get('Field_Name'), ':', record[11][0][0][5].get('Field_Value'))
+
+        # Compare the Winpoints to what's programmed in the D20
+
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 

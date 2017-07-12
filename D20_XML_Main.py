@@ -1,5 +1,6 @@
 import os
 import sys
+import xlrd
 from D20MX_XML_Functions import d20mx_check
 from D20MPP_XML_Functions import d20mpp_check
 from D20MEII_XML_Functions import d20meII_check
@@ -22,16 +23,21 @@ if __name__ == '__main__':
     # tree = et.parse(os.path.join(file_dir, filename))
     # root = tree.getroot()
 
-    filename = 'LORAIN_H.xml'
-    file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MX'))
+    # filename = 'LORAIN_H.xml'
+    # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MX'))
+    # tree = et.parse(os.path.join(file_dir, filename))
+    # root = tree.getroot()
+
+    filename = 'ALNHRSTF.xml'
+    file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker'))
     tree = et.parse(os.path.join(file_dir, filename))
     root = tree.getroot()
 
     orig_stdout = sys.stdout
-    f = open('textfile.txt', 'w+')
+    f = open(filename[:-4] + ' Check.txt', 'w+')
     sys.stdout = f
 
-    print(filename)
+    print(filename[:-4])
 
     if root[0][0][1][0].get('Part_Number') == '526-1006':
         # This is a D20M++

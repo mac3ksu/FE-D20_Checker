@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import xlrd
 import os
 
 def set_comlist():
@@ -311,6 +312,62 @@ def b021_check(app):
         else:
             print('\t\t', 'An', app[3][0][3].get('Field_Name'), 'value is not enabled. Please check the SGConfig.')
 
+        # Compare the Winpoints to what's programmed in the D20
+        directory = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
+
+        for thing in os.listdir(directory):
+            if 'D20 DNP Map WinPt Check' in thing:
+                filename = thing
+                print('\t', filename)
+
+        filepath = directory + '/' + filename
+
+        wbook = xlrd.open_workbook(filepath)
+
+        for sheet in wbook.sheet_names():
+            if 'Sheet1' in sheet:
+                wsheet_name = sheet
+
+        wsheet = wbook.sheet_by_name(wsheet_name)
+
+        for i, cell in enumerate(wsheet.row(1)):
+            if cell.value == 'DNP INDEX':
+                dnp_index = i
+            elif cell.value == 'STATUS':
+                status_index = i
+            elif cell.value == 'ANALOG':
+                analog_index = i
+            elif cell.value == 'CONTROL':
+                control_index = i
+
+        for i, record in enumerate(app[3]):
+            check_value = record[0].get('Field_Value')
+            print('\t\t', 'DNP Point', i, ':')
+            if check_value[4] == '0':
+                if check_value[5] == '0':
+                    xl_value = str(wsheet.cell_value(i + 2, status_index))
+                    # Print for testing purposes only
+                    print('\t\t\t', check_value[6], ':', xl_value[0])
+                    if xl_value[0] == (check_value[6]):
+                        print('\t\t\t', '<status> WinPts match')
+                    else:
+                        print('\t\t\t', '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                else:
+                    xl_value = str(wsheet.cell_value(i + 2, status_index))
+                    # Print for testing purposes only
+                    print('\t\t\t', check_value[5] + check_value[6], ':', xl_value[0] + xl_value[1])
+                    if xl_value[0]+xl_value[1] == (check_value[5] + check_value[6]):
+                        print('\t\t\t', '<status> WinPts match')
+                    else:
+                        print('\t\t\t', '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+            else:
+                xl_value = str(wsheet.cell_value(i + 2, status_index))
+                # Print for testing purposes only
+                print('\t\t\t', check_value[4] + check_value[5] + check_value[6], ':', xl_value[0] + xl_value[1] + xl_value[2])
+                if wsheet.cell_value(i + 2, status_index) == (check_value[4] + check_value[5] + check_value[6]):
+                    print('\t\t\t', '<status> WinPts match')
+                else:
+                    print('\t\t\t', '<status> WinPt does not match the points list. Please refer to the SGConfig.')
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 

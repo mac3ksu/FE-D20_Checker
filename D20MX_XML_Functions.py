@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import xlrd
 import os
 
 def set_comlist():
@@ -270,6 +271,8 @@ def b021_check(app):
             print('\t\t', app[3][0][3].get('Field_Name'), ':', app[3][0][3].get('Field_Value'))
         else:
             print('\t\t', 'An', app[3][0][3].get('Field_Name'), 'value is not enabled. Please check the SGConfig.')
+
+        # Compare the Winpoints to what's programmed in the D20
 
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
