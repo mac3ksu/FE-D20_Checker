@@ -314,14 +314,43 @@ def b021_check(app):
             print('\t\t', 'An', app[3][0][3].get('Field_Name'), 'value is not enabled. Please check the SGConfig.')
 
         # Compare the Winpoints from the points list to what's programmed in the D20
+
+        # Put in the path to the XCEL template file
         directory = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
 
+        # Determine that the XCEL template's filename is D20 DNP Map WinPt Check
         for thing in os.listdir(directory):
             if 'D20 DNP Map WinPt Check' in thing:
                 xcel_filename = thing
                 print('\t', xcel_filename)
 
-        winpt_check(xcel_filename, directory, app)
+            try:
+                filepath = directory + '/' + xcel_filename
+
+                wbook = xlrd.open_workbook(filepath)
+
+                for sheet in wbook.sheet_names():
+                    if 'Sheet1' in sheet:
+                        wsheet_name = sheet
+
+                wsheet = wbook.sheet_by_name(wsheet_name)
+
+                for i, cell in enumerate(wsheet.row(1)):
+                    if cell.value == 'DNP INDEX':
+                        dnp_index = i
+                    elif cell.value == 'STATUS':
+                        status_index = i
+                    elif cell.value == 'ANALOG':
+                        analog_index = i
+                    elif cell.value == 'CONTROL':
+                        control_index = i
+            except Exception:
+                print('\t\t\t', 'Error: Cannot find the file.')
+
+        # Call the WinPt check function
+        winpt_check(xcel_filename, directory, app, status_index, 3, 'Status')
+        winpt_check(xcel_filename, directory, app, analog_index, 6, 'Analog')
+        winpt_check(xcel_filename, directory, app, control_index, 4, 'Control')
 
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')

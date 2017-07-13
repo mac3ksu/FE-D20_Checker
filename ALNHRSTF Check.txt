@@ -91,11 +91,12 @@ B021 - DNP V3.00 DPA
 			 Idle Report Period : 0
 	 B021MT01 : Binary Input Map Table
 		 An SOE value is not enabled. Please check the SGConfig.
+			 Error: Cannot find the file.
 	 D20 DNP Map WinPt Check.xlsx
 		 Status Points Check
-			 All <status> WinPts match.
+			 All < Status > WinPts match.
 		 Analog Points Check
-			 All <analog> WinPts match.
+			 All < Analog > WinPts match.
 		 Control Points Check
-			 All <control> WinPts match.
+			 All < Control > WinPts match.
 B023 - is disabled
