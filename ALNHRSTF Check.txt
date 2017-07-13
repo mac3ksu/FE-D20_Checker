@@ -93,30 +93,9 @@ B021 - DNP V3.00 DPA
 		 An SOE value is not enabled. Please check the SGConfig.
 	 D20 DNP Map WinPt Check.xlsx
 		 Status Points Check
+			 All <status> WinPts match.
 		 Analog Points Check
+			 All <analog> WinPts match.
 		 Control Points Check
-				 1 : 1 <control> WinPts match
-				 2 : 2 <control> WinPts match
-				 3 : 3 <control> WinPts match
-				 4 : 4 <control> WinPts match
-				 5 : 5 <control> WinPts match
-				 6 : 6 <control> WinPts match
-				 7 : 7 <control> WinPts match
-				 8 : 8 <control> WinPts match
-				 9 : 9 <control> WinPts match
-				 10 : 10 <control> WinPts match
-				 11 : 11 <control> WinPts match
-				 12 : 12 <control> WinPts match
-				 13 : 13 <control> WinPts match
-				 14 : 14 <control> WinPts match
-				 15 : 15 <control> WinPts match
-				 16 : 16 <control> WinPts match
-				 17 : 17 <control> WinPts match
-				 18 : 18 <control> WinPts match
-				 19 : 19 <control> WinPts match
-				 20 : 20 <control> WinPts match
-				 21 : 21 <control> WinPts match
-				 22 : 22 <control> WinPts match
-				 23 : 23 <control> WinPts match
-				 24 : 24 <control> WinPts match
+			 All <control> WinPts match.
 B023 - is disabled

@@ -6,6 +6,8 @@ def set_comlist():
   global b013_com_list # Needed to modify global copy of globvar
   b013_com_list = []
 
+# def winpt_check():
+
 def d20meII_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
     root = tree.getroot()
@@ -340,6 +342,11 @@ def b021_check(app):
             elif cell.value == 'CONTROL':
                 control_index = i
 
+        # Counters for WinPt status printing
+        status_count = 0
+        analog_count = 0
+        control_count = 0
+
         # Status Point Check
         print('\t\t', 'Status Points Check')
         for i, record in enumerate(app[3]):
@@ -351,19 +358,33 @@ def b021_check(app):
                         pass
                         # print('\t\t\t\t', check_value[6], ':', xl_status[0], '<status> WinPts match')
                     else:
-                        print('\t\t\t', 'DNP Point (', i, ')', check_value[6], ':', xl_status[0], '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                        print('\t\t\t', 'DNP Point (', i, ')', check_value[6], ':', xl_status[0],
+                            '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                        status_count = status_count + 1  # Indicates that a status WinPt does not match
                 else:
                     if xl_status[0]+xl_status[1] == (check_value[5] + check_value[6]):
                         pass
                         # print('\t\t\t\t', check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1], '<status> WinPts match')
                     else:
-                        print('\t\t\t', 'DNP Point (', i, ')', check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1], '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                        print('\t\t\t', 'DNP Point (', i, ')', check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1],
+                              '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                        status_count = status_count + 1  # Indicates that a status WinPt does not match
             else:
                 if xl_status[0] + xl_status[1] + xl_status[2] == (check_value[4] + check_value[5] + check_value[6]):
                     pass
-                    # print('\t\t\t\t', check_value[4] + check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1] + xl_status[2], '<status> WinPts match')
+                    # print('\t\t\t\t', check_value[4] + check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1]
+                    #      + xl_status[2], '<status> WinPts match')
                 else:
-                    print('\t\t\t', 'DNP Point (', i, ')', check_value[4] + check_value[5] + check_value[6], ':', xl_status[0] + xl_status[1] + xl_status[2], '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                    print('\t\t\t', 'DNP Point (', i, ')', check_value[4] + check_value[5] + check_value[6], ':',
+                          xl_status[0] + xl_status[1] + xl_status[2],
+                          '<status> WinPt does not match the points list. Please refer to the SGConfig.')
+                    status_count = status_count + 1  # Indicates that a status WinPt does not match
+
+        # If all status WinPts match, print statement
+        if status_count == 0:
+            print('\t\t\t', 'All <status> WinPts match.')
+        else:
+            pass
 
         # Analog Point Check
         print('\t\t', 'Analog Points Check')
@@ -378,6 +399,7 @@ def b021_check(app):
                     else:
                         print('\t\t\t', 'DNP Point (', i, ')',
                               '<analog> WinPt does not match the points list. Please refer to the SGConfig.')
+                        analog_count = analog_count + 1  # Indicates that an analog WinPt does not match
                 else:
                     if xl_analog[0] + xl_analog[1] == (check_value[5] + check_value[6]):
                         pass
@@ -386,6 +408,7 @@ def b021_check(app):
                     else:
                         print('\t\t\t', 'DNP Point (', i, ')',
                               '<analog> WinPt does not match the points list. Please refer to the SGConfig.')
+                        analog_count = analog_count + 1  # Indicates that an analog WinPt does not match
             else:
                 if xl_analog[0] + xl_analog[1] + xl_analog[2] == (
                         check_value[4] + check_value[5] + check_value[6]):
@@ -395,6 +418,13 @@ def b021_check(app):
                 else:
                     print('\t\t\t', 'DNP Point (', i, ')',
                           '<analog> WinPt does not match the points list. Please refer to the SGConfig.')
+                    analog_count = analog_count + 1  # Indicates that an analog WinPt does not match
+
+        # If all analog WinPts match, print statement
+        if analog_count == 0:
+            print('\t\t\t', 'All <analog> WinPts match.')
+        else:
+            pass
 
         # Control Point Check
         print('\t\t', 'Control Points Check')
@@ -404,28 +434,37 @@ def b021_check(app):
             if check_value[4] == '0':
                 if check_value[5] == '0':
                     if xl_control[0] == (check_value[6]):
-                        print('\t\t\t\t', check_value[6], ':', xl_control[0], '<control> WinPts match')
+                        pass
+                        # print('\t\t\t\t', check_value[6], ':', xl_control[0], '<control> WinPts match')
                     else:
-                        print('\t\t\t', 'DNP Point', i, ':')
-                        print('\t\t\t\t',
+                        print('\t\t\t', 'DNP Point', i,
                               '<control> WinPt does not match the points list. Please refer to the SGConfig.')
+                        control_count = control_count + 1  # Indicates that a control WinPt does not match
                 else:
                     if xl_control[0] + xl_control[1] == (check_value[5] + check_value[6]):
-                        print('\t\t\t\t', check_value[5] + check_value[6], ':', xl_control[0] + xl_control[1],
-                              '<control> WinPts match')
+                        pass
+                        # print('\t\t\t\t', check_value[5] + check_value[6], ':', xl_control[0] + xl_control[1],
+                        #       '<control> WinPts match')
                     else:
-                        print('\t\t\t', 'DNP Point', i, ':')
-                        print('\t\t\t\t',
+                        print('\t\t\t', 'DNP Point', i,
                               '<control> WinPt does not match the points list. Please refer to the SGConfig.')
+                        control_count = control_count + 1  # Indicates that a control WinPt does not match
             else:
                 if xl_control[0] + xl_control[1] + xl_control[2] == (
                                 check_value[4] + check_value[5] + check_value[6]):
-                    print('\t\t\t\t', check_value[4] + check_value[5] + check_value[6], ':',
-                          xl_control[0] + xl_control[1] + xl_control[2], '<control> WinPts match')
+                    pass
+                    # print('\t\t\t\t', check_value[4] + check_value[5] + check_value[6], ':',
+                    #       xl_control[0] + xl_control[1] + xl_control[2], '<control> WinPts match')
                 else:
-                    print('\t\t\t', 'DNP Point', i, ':')
-                    print('\t\t\t\t',
+                    print('\t\t\t', 'DNP Point', i,
                           '<control> WinPt does not match the points list. Please refer to the SGConfig.')
+                    control_count = control_count + 1  # Indicates that a control WinPt does not match
+
+        # If all control WinPts match, print statement
+        if control_count == 0:
+            print('\t\t\t', 'All <control> WinPts match.')
+        else:
+            pass
 
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
