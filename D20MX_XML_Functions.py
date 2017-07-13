@@ -6,6 +6,62 @@ def set_comlist():
   global b013_com_list # Needed to modify global copy of globvar
   b013_com_list = []
 
+def winpt_check(xcel_filename, directory, app, column, table_num, type):
+
+    try:
+        # Counters for WinPt status printing
+        count = 0
+
+        filepath = directory + '/' + xcel_filename
+
+        wbook = xlrd.open_workbook(filepath)
+
+        for sheet in wbook.sheet_names():
+            if 'Sheet1' in sheet:
+                wsheet_name = sheet
+
+        wsheet = wbook.sheet_by_name(wsheet_name)
+
+        # General Point Check
+        print('\t\t', type, 'Points Check')
+        for i, record in enumerate(app[table_num]):
+            xl_value = str(wsheet.cell_value(i + 2, column))
+            if str(wsheet.cell_value(i+2, 1)) == '':
+                print('\t\t\t', 'More', type, 'points than DNP points')
+            else:
+                check_value = record[0].get('Field_Value')
+                if check_value[4] == '0':
+                    if check_value[5] == '0':
+                        if xl_value[0] == (check_value[6]):
+                            pass
+                        else:
+                            print('\t\t\t', 'DNP Point', i, '<',
+                                  type, '> WinPt does not match the points list. Please refer to the SGConfig.')
+                            count = count + 1  # Indicates that a WinPt does not match
+                    else:
+                        if xl_value[0] + xl_value[1] == (check_value[5] + check_value[6]):
+                            pass
+                        else:
+                            print('\t\t\t', 'DNP Point', i, '<',
+                                  type, '> WinPt does not match the points list. Please refer to the SGConfig.')
+                            count = count + 1  # Indicates that a WinPt does not match
+                else:
+                    if xl_value[0] + xl_value[1] + xl_value[2] == (check_value[4] + check_value[5] + check_value[6]):
+                        pass
+                    else:
+                        print('\t\t\t', 'DNP Point', i, '<',
+                                  type, '> WinPt does not match the points list. Please refer to the SGConfig.')
+                        count = count + 1  # Indicates that a WinPt does not match
+
+        # If all WinPts match, print statement
+        if count == 0:
+            print('\t\t\t', 'All <', type, '> WinPts match.')
+        else:
+            pass
+
+    except Exception:
+        print('\t\t\t', 'Error: Cannot find the file.')
+
 def d20mx_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
     root = tree.getroot()
@@ -272,7 +328,46 @@ def b021_check(app):
         else:
             print('\t\t', 'An', app[3][0][3].get('Field_Name'), 'value is not enabled. Please check the SGConfig.')
 
-        # Compare the Winpoints to what's programmed in the D20
+        # Compare the Winpoints from the points list to what's programmed in the D20
+
+        # Put in the path to the excel template file
+        directory = os.path.expanduser(
+            os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
+
+        # Determine that the XCEL template's filename is D20 DNP Map WinPt Check
+        for thing in os.listdir(directory):
+            if 'D20 DNP Map WinPt Check' in thing:
+                xcel_filename = thing
+                print('\t', xcel_filename)
+
+            try:
+                filepath = directory + '/' + xcel_filename
+
+                wbook = xlrd.open_workbook(filepath)
+
+                for sheet in wbook.sheet_names():
+                    if 'Sheet1' in sheet:
+                        wsheet_name = sheet
+
+                wsheet = wbook.sheet_by_name(wsheet_name)
+
+                for i, cell in enumerate(wsheet.row(1)):
+                    if cell.value == 'DNP INDEX':
+                        dnp_index = i
+                    elif cell.value == 'STATUS':
+                        status_index = i
+                    elif cell.value == 'ANALOG':
+                        analog_index = i
+                    elif cell.value == 'CONTROL':
+                        control_index = i
+
+            except Exception:
+                print('\t\t\t', 'Error: Cannot find the file.')
+
+        # Call the WinPt check function
+        winpt_check(xcel_filename, directory, app, status_index, 3, 'Status')
+        winpt_check(xcel_filename, directory, app, analog_index, 6, 'Analog')
+        winpt_check(xcel_filename, directory, app, control_index, 4, 'Control')
 
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
