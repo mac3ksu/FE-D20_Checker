@@ -329,13 +329,15 @@ B021 - DNP V3.00 DPA
 			 DNP Point 39 < Status > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 40 < Status > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 41 < Status > WinPt does not match the points list. Please refer to the SGConfig.
-			 DNP Point 42 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 42 < Status > Point is undefined.
 			 DNP Point 43 < Status > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 44 < Status > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 45 < Status > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 46 < Status > WinPt does not match the points list. Please refer to the SGConfig.
-			 DNP Point 47 < Status > WinPt does not match the points list. Please refer to the SGConfig.
-			 More Status points than DNP points
+			 DNP Point 47 < Status > Point is undefined.
+			 DNP Point 48 < Status > Point is undefined.
+			 DNP Point 49 : More SGConfig < Status > points than excel template < Status > points.
+				 Please match the number of excel points to the SGConfig.
 		 Analog Points Check
 			 DNP Point 20 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 22 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
@@ -345,7 +347,8 @@ B021 - DNP V3.00 DPA
 			 DNP Point 32 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 38 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
 			 DNP Point 40 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
-			 More Analog points than DNP points
+			 DNP Point 48 : More SGConfig < Analog > points than excel template < Analog > points.
+				 Please match the number of excel points to the SGConfig.
 		 Control Points Check
 			 All < Control > WinPts match.
 B023 - DNP V3.00 DCA

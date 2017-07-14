@@ -8,6 +8,12 @@ def set_comlist():
   b013_com_list = []
 
 def winpt_check(xcel_filename, directory, app, column, table_num, type):
+    # xcel_filename - for the purpose of finding/opening the excel template file
+    # directory - the path to get to the excel template file
+    # app - the application currently in use
+    # column - which column in the excel template you are wanting to check
+    # table_num - which table in the SGConfig you are wanting to check
+    # type - string value to indicate which type of point you are wanting to check
 
     try:
         # Counters for WinPt status printing
@@ -27,10 +33,14 @@ def winpt_check(xcel_filename, directory, app, column, table_num, type):
         print('\t\t', type, 'Points Check')
         for i, record in enumerate(app[table_num]):
             xl_value = str(wsheet.cell_value(i + 2, column))
-            if str(wsheet.cell_value(i+2, 1)) == '':
-                print('\t\t\t', 'More', type, 'points than DNP points')
+            check_value = record[0].get('Field_Value')
+            if record[0].get('Field_Value') == '(______) Undefined':
+                print('\t\t\t', 'DNP Point', i, '<', type, '> Point is undefined.')
+            elif str(wsheet.cell_value(i+2, 1)) == '':
+                print('\t\t\t', 'DNP Point', i, ': More SGConfig <', type, '> points than excel template <', type, '> points.')
+                print('\t\t\t\t', 'Please match the number of excel points to the SGConfig.')
+                break
             else:
-                check_value = record[0].get('Field_Value')
                 if check_value[4] == '0':
                     if check_value[5] == '0':
                         if xl_value[0] == (check_value[6]):

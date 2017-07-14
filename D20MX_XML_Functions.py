@@ -26,10 +26,14 @@ def winpt_check(xcel_filename, directory, app, column, table_num, type):
         print('\t\t', type, 'Points Check')
         for i, record in enumerate(app[table_num]):
             xl_value = str(wsheet.cell_value(i + 2, column))
-            if str(wsheet.cell_value(i+2, 1)) == '':
-                print('\t\t\t', 'More', type, 'points than DNP points')
+            check_value = record[0].get('Field_Value')
+            if record[0].get('Field_Value') == '(______) Undefined':
+                print('\t\t\t', 'DNP Point', i, '<', type, '> Point is undefined.')
+            elif str(wsheet.cell_value(i+2, 1)) == '':
+                print('\t\t\t', 'DNP Point', i, ': More SGConfig <', type, '> points than excel template <', type, '> points.')
+                print('\t\t\t\t', 'Please match the number of excel points to the SGConfig.')
+                break
             else:
-                check_value = record[0].get('Field_Value')
                 if check_value[4] == '0':
                     if check_value[5] == '0':
                         if xl_value[0] == (check_value[6]):
