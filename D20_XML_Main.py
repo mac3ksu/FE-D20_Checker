@@ -1,6 +1,7 @@
 import os
 import sys
-import xlrd
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 from D20MX_XML_Functions import d20mx_check
 from D20MPP_XML_Functions import d20mpp_check
 from D20MEII_XML_Functions import d20meII_check
@@ -8,6 +9,12 @@ import xml.etree.ElementTree as et
 
 
 if __name__ == '__main__':
+    file_dir = Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
+    filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
+    print(filename)
+    tree = et.parse(os.path.join(file_dir, filename))
+    root = tree.getroot()
+
     # filename = 'ALNHRSTF.xml'
     # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker'))
     # tree = et.parse(os.path.join(file_dir, filename))
@@ -18,10 +25,10 @@ if __name__ == '__main__':
     # tree = et.parse(os.path.join(file_dir, filename))
     # root = tree.getroot()
 
-    filename = 'PLVLY_Q D20M++.xml'
-    file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20M++'))
-    tree = et.parse(os.path.join(file_dir, filename))
-    root = tree.getroot()
+    # filename = 'PLVLY_Q D20M++.xml'
+    # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20M++'))
+    # tree = et.parse(os.path.join(file_dir, filename))
+    # root = tree.getroot()
 
     orig_stdout = sys.stdout
     f = open(filename[:-4] + ' Check.txt', 'w+')
