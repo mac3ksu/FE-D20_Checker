@@ -361,7 +361,7 @@ def b014_check(app):
         print('\t', app[4].get('Table_Identifier'), ':', app[4].get('Table_Name'), 'Table')
         # Loop through the User Configuration table
         for i, record in enumerate(app[4]):
-            print('\t\t', 'Record ', i, ':')
+            print('\t\t', 'Record ', record.get('Record_Number'), ':')
             print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # User Name
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Password
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Control Password
@@ -531,11 +531,16 @@ def b023_check(app):
             print('\t\t', i, ':')
             print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Poll Data Type
             print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # Qualifier
-            print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # Poll Interval (Days)
-            print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # Poll Interval (Hours)
-            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Poll Interval (Minutes)
-            print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Poll Interval (Seconds)
-            print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))  # Poll Interval (Msec)
+            if record[4].get('Field_Value') != 0:
+                print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # Poll Interval (Days)
+            if record[5].get('Field_Value') != 0:
+                print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # Poll Interval (Hours)
+            if record[6].get('Field_Value') != 0:
+                print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Poll Interval (Minutes)
+            if record[7].get('Field_Value') != 0:
+                print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Poll Interval (Seconds)
+            if record[8].get('Field_Value') != 0:
+                print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))  # Poll Interval (Msec)
             # Append to the b023 pol list
             b023_pol_list.append((i, record[0].get('Field_Value')))
 
