@@ -361,9 +361,10 @@ def b014_check(app):
         print('\t', app[4].get('Table_Identifier'), ':', app[4].get('Table_Name'), 'Table')
         # Loop through the User Configuration table
         for i, record in enumerate(app[4]):
-            print('\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # User Name
-            print('\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Password
-            print('\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Control Password
+            print('\t\t', 'Record ', i, ':')
+            print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # User Name
+            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Password
+            print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Control Password
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')

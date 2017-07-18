@@ -20,16 +20,6 @@ if __name__ == '__main__':
     # tree = et.parse(os.path.join(file_dir, filename))
     # root = tree.getroot()
 
-    # filename = 'LORAIN_H.xml'
-    # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MX'))
-    # tree = et.parse(os.path.join(file_dir, filename))
-    # root = tree.getroot()
-
-    # filename = 'PLVLY_Q D20M++.xml'
-    # file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20M++'))
-    # tree = et.parse(os.path.join(file_dir, filename))
-    # root = tree.getroot()
-
     orig_stdout = sys.stdout
     f = open(filename[:-4] + ' Check.txt', 'w+')
     sys.stdout = f

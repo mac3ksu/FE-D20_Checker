@@ -314,9 +314,10 @@ def b014_check(app):
         print('\t', app[9].get('Table_Identifier'), ':', app[9].get('Table_Name'), 'Table')
         # Loop through the User Configuration table
         for i, record in enumerate(app[9]):
-            print('\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # User Name
-            print('\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Password
-            print('\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))  # Control Password
+            print('\t\t', 'Record ', i, ':')
+            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # User Name
+            print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Password
+            print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))  # Control Password
 
         print('\t', app[15].get('Table_Identifier'), ':', app[15].get('Table_Name'), 'Table')
         # Loop through the Welcome Message table
