@@ -103,7 +103,7 @@ def d20mpp_check(xml_filename, directory):
     # Check all of these applications
 
     # Print the part number. For D20M++, the number should be 526-1006
-    print(root[0][0][1][0].get('Part_Number'))
+    print(root[0][0][1][0].get('Part_Number'), '-', root[0][0].get('Device_Type') + 'M++')
     for app in root[0][0][1][0]:
         if app.get('Application_Identifier') == 'A003':
             a003_check(app)

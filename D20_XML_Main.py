@@ -15,6 +15,7 @@ if __name__ == '__main__':
     # tree = et.parse(os.path.join(file_dir, filename))
     # root = tree.getroot()
 
+    # I am keeping this because the tkinter does not work for Windows 10
     filename = 'ALNHRSTF.xml'
     file_dir = os.path.expanduser(os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker'))
     tree = et.parse(os.path.join(file_dir, filename))

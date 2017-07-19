@@ -1,5 +1,5 @@
 ALNHRSTF
-526-2007 CCU
+526-2007 CCU - D20MEII
 A020 - is disabled
 A026-1 - Communication Watchdog
 	 A026_CFG : Communication Events Table

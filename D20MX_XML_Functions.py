@@ -102,7 +102,7 @@ def d20mx_check(xml_filename, directory):
     # Check all of these applications
 
     # Print the part number. For D20MX, the number should be 526-3001
-    print(root[0][0][1][0].get('Part_Number'))
+    print(root[0][0][1][0].get('Part_Number'), '-', root[0][0].get('Device_Type'))
     for app in root[0][0][1][0]:
         if app.get('Application_Identifier') == 'A020':
             a020_check(app)
