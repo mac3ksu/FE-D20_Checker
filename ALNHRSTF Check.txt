@@ -74,9 +74,9 @@ B014-1 - Wesmaint II+
 			 Password : rd
 			 Control Password : control
 	 WWELCOME : Welcome Message Table
-		 ( 1 ) Message :  Allenhurst Substation               SAB3075.09
-		 ( 2 ) Message : Black & Veatch
-		 ( 3 ) Message : LOGIN:
+		 Row 2 Message :  Allenhurst Substation               SAB3075.09
+		 Row 3 Message : Black & Veatch
+		 Row 14 Message : LOGIN:
 B015 - Bridgeman
 	 1 remote DNP devices
 	 Number Of Rx Buffers : 2

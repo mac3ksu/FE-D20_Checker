@@ -314,7 +314,7 @@ def b014_check(app):
         print('\t', app[9].get('Table_Identifier'), ':', app[9].get('Table_Name'), 'Table')
         # Loop through the User Configuration table
         for i, record in enumerate(app[9]):
-            record_num = int(record.get('Record_Number')) -1
+            record_num = int(record.get('Record_Number')) - 1
             print('\t\t', 'Record ', record_num, ':')
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # User Name
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Password
@@ -323,7 +323,8 @@ def b014_check(app):
         print('\t', app[15].get('Table_Identifier'), ':', app[15].get('Table_Name'), 'Table')
         # Loop through the Welcome Message table
         for i, record in enumerate(app[15]):
-            print('\t\t', '(', i, ')', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))
+            print('\t\t', record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'),
+                  ':', record[3].get('Field_Value'))
 
     # If the application is disabled, print statement
     else:

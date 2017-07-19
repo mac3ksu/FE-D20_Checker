@@ -371,7 +371,7 @@ def b014_check(app):
         print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')
         # Loop through the Welcome Message table
         for i, record in enumerate(app[7]):
-            print('\t\t', '(', record.get('Record_Number'), ')', record[3].get('Field_Name'), ':',
+            print('\t\t', record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'), ':',
                   record[3].get('Field_Value'))
 
     # If the application is disabled, print statement
