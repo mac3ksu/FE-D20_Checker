@@ -446,7 +446,7 @@ def b021_check(app):
             # PyCharm presents an error if the excel file is open. You have to close the document
             # before running the program
             except Exception:
-                print('\t\t\t', 'Error: Cannot find the file.')
+                print('\t\t\t', 'Error: Cannot read the file.')
 
         # Call the WinPt check function for Status, Analog, and Control points respectively
         winpt_check(xcel_filename, directory, app, status_index, 3, 'Status')

@@ -1,6 +1,9 @@
 import xml.etree.ElementTree as ET
 import xlrd
 import os
+from openpyxl import Workbook
+from openpyxl import load_workbook
+
 
 def set_comlist():
     # global list to keep track of application b013's com list
@@ -25,6 +28,8 @@ def winpt_check(xcel_filename, directory, app, column, table_num, type):
 
         # Open the excel document for reading
         wbook = xlrd.open_workbook(filepath)
+        #wbook = Workbook(filepath) # Just makes a new xcel doc?
+        #wbook = load_workbook(filepath)  # Takes in a workbook
 
         # Read the specified excel sheet
         for sheet in wbook.sheet_names():
@@ -93,7 +98,7 @@ def winpt_check(xcel_filename, directory, app, column, table_num, type):
 
     # PyCharm presents an error if the excel file is open. You have to close the document before running the program
     except Exception:
-        print('\t\t\t', 'Error: Cannot read the file when it is open.')
+        print('\t\t\t', 'Error: Cannot read the file.')
 
 def d20meII_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))

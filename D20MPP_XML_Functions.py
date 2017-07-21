@@ -1,6 +1,9 @@
 import xml.etree.ElementTree as ET
 import xlrd
 import os
+from openpyxl import Workbook
+from openpyxl import load_workbook
+from tkinter.filedialog import askopenfilename
 
 
 def set_comlist():
@@ -219,14 +222,27 @@ def a026_check(app):
         # Check SOE Enable
         # Check COS Enable
 
+        filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
+        print('\t\t', 'You have selected', filename, 'for editing.')
+        wb = load_workbook(filename)
+        ws = wb.get_sheet_by_name('D20++ QC Doc')
+
         print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
         # Loop through the DCA Configuration table
         for i, record in enumerate(app[2]):
-            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # SOE Enable
-            print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # COS Enable
+            ws['L121'].value = record[1].get('Field_Value')
+            print('\t\t\t', ws['L121'].value)
+            print('\t\t\t', ws['L122'].value)
+            ws['L122'].value = record[2].get('Field_Value')
+            print('\t\t\t', ws['L122'].value)
+            # print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # SOE Enable
+            # print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # COS Enable
             # The SOE and COS Enable values cannot both be "Yes"
             if record[1].get('Field_Value') == record[2].get('Field_Value'):
                 print('\t\t', '** These values are not supposed to be the same. See the SGConfig. **')
+
+        # Save Workbook Changes
+        wb.save(filename)
 
     # If the application is disabled, print statement
     else:
@@ -498,7 +514,7 @@ def b021_check(app):
             # PyCharm presents an error if the excel file is open. You have to close the document
             # before running the program
             except Exception:
-                print('\t\t\t', 'Error: Cannot find the file.')
+                print('\t\t\t', 'Error: Cannot read the file.')
 
         # Call the WinPt check function for Status, Analog, and Control points respectively
         winpt_check(xcel_filename, directory, app, status_index, 3, 'Status')

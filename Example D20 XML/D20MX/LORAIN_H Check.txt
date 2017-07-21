@@ -1,5 +1,5 @@
 C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/D20MX/LORAIN_H
-526-3001
+526-3001 - D20MX
 A026-1 - Communication Watchdog
 	 A026_CFG : Communication Events Table
 		 0 :
@@ -116,19 +116,20 @@ B014-1N - Wesmaint II+
 		 SOE Buffer Size : 500
 		 SOE Location : NVRAM
 	 B014USER : User Configuration Table
-		 User Name : Scada
-		 Password : rd
-		 Control Password : k0ntr0l
+		 Record  0 :
+			 User Name : Scada
+			 Password : rd
+			 Control Password : k0ntr0l
 	 WWELCOME : Welcome Message Table
-		 ( 0 ) Message : LORAIN Substation     SAN0001 V1.32
-		 ( 1 ) Message : LAN A  - 19200 Baud Wesmaint Local Use Only
-		 ( 2 ) Message : Port 0 - 19200 Baud Westmaint            
-		 ( 3 ) Message : Port 1 - 38400 baud FE WEST EMS Harris 6000 DPA  Via MPLS
-		 ( 4 ) Message : Port 2 - 9600 baud DNP DCA to B-1 Black River and B-2 Carlisle Satec Mtrs
-		 ( 5 ) Message : Port 4 - 9600 baud DNP DCA to Q-23 Black River and Q-24 Carlisle ION Rev Mtrs
-		 ( 6 ) Message : Port 6 - Spare
-		 ( 7 ) Message : Port 7 - 9600 Baud DNP DPA SAM HMI
-		 ( 8 ) Message : NEW LOGIN:
+		 Row 2 Message : LORAIN Substation     SAN0001 V1.32
+		 Row 4 Message : LAN A  - 19200 Baud Wesmaint Local Use Only
+		 Row 5 Message : Port 0 - 19200 Baud Westmaint            
+		 Row 6 Message : Port 1 - 38400 baud FE WEST EMS Harris 6000 DPA  Via MPLS
+		 Row 7 Message : Port 2 - 9600 baud DNP DCA to B-1 Black River and B-2 Carlisle Satec Mtrs
+		 Row 8 Message : Port 4 - 9600 baud DNP DCA to Q-23 Black River and Q-24 Carlisle ION Rev Mtrs
+		 Row 9 Message : Port 6 - Spare
+		 Row 10 Message : Port 7 - 9600 Baud DNP DPA SAM HMI
+		 Row 15 Message : NEW LOGIN:
 B015 - Bridgeman
 	 5 remote DNP devices
 	 Number Of Rx Buffers : 10
@@ -151,7 +152,7 @@ B021N - DNP V3.00 DPA
 			 Idle Report Period : 3000
 	 B021MT01 : Binary Input Map Table
 		 An SOE value is not enabled. Please check the SGConfig.
-			 Error: Cannot find the file.
+			 Error: Cannot read the file.
 	 D20 DNP Map WinPt Check.xlsx
 		 Status Points Check
 			 DNP Point 0 < Status > WinPt does not match the points list. Please refer to the SGConfig.
