@@ -5,6 +5,9 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 from tkinter.filedialog import askopenfilename
 
+def access_qc_doc():
+    global filename
+    filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
 
 def set_comlist():
     # global list to keep track of application b013's com list
@@ -204,10 +207,18 @@ def a026_check(app):
     # Check Comm Event Point
     # Check Normal State
 
+
     # Check if the Application is Enabled
     if app.get('Enabled') == 'True':
+
+        access_qc_doc()
+
         # Print the application identifier followed by the application name for clarity
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        print('\t', 'You have selected', filename, 'for editing.')
+        wb = load_workbook(filename)
+        ws = wb.get_sheet_by_name('D20++ QC Doc')
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
@@ -222,18 +233,12 @@ def a026_check(app):
         # Check SOE Enable
         # Check COS Enable
 
-        filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
-        print('\t\t', 'You have selected', filename, 'for editing.')
-        wb = load_workbook(filename)
-        ws = wb.get_sheet_by_name('D20++ QC Doc')
-
         print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
         # Loop through the DCA Configuration table
         for i, record in enumerate(app[2]):
             ws['L121'].value = record[1].get('Field_Value')
-            print('\t\t\t', ws['L121'].value)
-            print('\t\t\t', ws['L122'].value)
             ws['L122'].value = record[2].get('Field_Value')
+            print('\t\t\t', ws['L121'].value)
             print('\t\t\t', ws['L122'].value)
             # print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # SOE Enable
             # print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # COS Enable
