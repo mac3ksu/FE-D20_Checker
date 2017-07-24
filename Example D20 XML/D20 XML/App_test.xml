@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Databridge Version="1.5">
+<Device_List>
+<Device Device_Name="IRONVI_V" Device_Type="D20" Number_of_Processors="1" Is_Redundant="False" Is_Multiprocessor="False" Is_LAN="False" Description="TE Ironville Substation SAB0605/03" Page_Name="Main Page" Bitmap_Name="D20MPP" X_Position="68" Y_Position="15">
+<Global_Memory Start_Address="0x500000" Global_Size="8" Global_NVRAM_Size="2048" Global_RAM_Size="5120" Global_Base_Size="1024" Global_NVRAM_Storage_Regions="0" Global_NVRAM_Storage_Size="0"/>
+<Processor_List>
+<Processor Processor_ID="_1" Description="TE Ironville Substation SAB0605/03" Part_Number="526-1006" Firmware_Name="SAB0605" Firmware_Version="003" Firmware_Created_Date="Dec 19, 1997" Firmware_Modified_Date="Jun 18, 2013" EPROM_Address="0x100000" EPROM_Size="1048576" NVRAM_Address="0x200000" NVRAM_Size="524288" RAM_Address="0x300000" RAM_Size="524288" EPROM_Image_File="" Use_Firmware="True" Use_Memory_Model="True">
+<Application Application_Name="W18979 DPA" Application_Version="107" Application_Identifier="A002" Application_Type="DPA" DCA_Index="-1" Enabled="False">
+<Table Table_Identifier="A002_COM" Table_Name="Communication Port" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002_LRU" Table_Name="LRU Configuration" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002_LXR" Table_Name="LRU Cross-Reference" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002CHAS" Table_Name="Chassis Configuration" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MSOE" Table_Name="SOE Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MT00" Table_Name="Indication Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MT02" Table_Name="SBO Control Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MT03" Table_Name="Accumulator Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MT04" Table_Name="Analog Input Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MT05" Table_Name="Analog Output Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MT11" Table_Name="Analog Reference Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MTDI" Table_Name="Digital Input Word Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MTRL" Table_Name="Pulse Control Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+<Table Table_Identifier="A002MTSP" Table_Name="Digital Output Word Map" Table_Enabled="True" Table_Modified_Date="Apr 13, 1999" Table_Default_Config="False"/>
+</Application>
+</Processor>
+</Processor_List>
+</Device>
+</Device_List>
+</Databridge>
