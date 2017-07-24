@@ -5,10 +5,6 @@ from openpyxl import Workbook
 from openpyxl import load_workbook
 from tkinter.filedialog import askopenfilename
 
-def access_qc_doc():
-    global filename
-    filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
-
 def set_comlist():
     # global list to keep track of application b013's com list
     global b013_com_list # Needed to modify global copy of b013_comlist
@@ -106,35 +102,44 @@ def d20mpp_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
     root = tree.getroot()
 
+    filename = askopenfilename()
+
+    print('\t', 'You have selected', filename, 'for editing.')
+    wb = load_workbook(filename)
+    ws = wb.get_sheet_by_name('D20++ QC Doc')
+
     # Check all of these applications
 
     # Print the part number. For D20M++, the number should be 526-1006
     print(root[0][0][1][0].get('Part_Number'), '-', root[0][0].get('Device_Type') + 'M++')
     for app in root[0][0][1][0]:
         if app.get('Application_Identifier') == 'A003':
-            a003_check(app)
+            a003_check(app, ws)
         if app.get('Application_Identifier') == 'A020':
-            a020_check(app)
+            a020_check(app, ws)
         if app.get('Application_Identifier') == 'A026':
-            a026_check(app)
+            a026_check(app, ws)
         if app.get('Application_Identifier') == 'A030':
-            a030_check(app)
+            a030_check(app, ws)
         if app.get('Application_Identifier') == 'A083-0':
-            a083_check(app)
+            a083_check(app, ws)
         if app.get('Application_Identifier') == 'B003':
-           b003_check(app)
+           b003_check(app, ws)
         if app.get('Application_Identifier') == 'B013':
-            b013_check(app)
+            b013_check(app, ws)
         if app.get('Application_Identifier') == 'B014':
-            b014_check(app)
+            b014_check(app, ws)
         if app.get('Application_Identifier') == 'B015':
-            b015_check(app)
+            b015_check(app, ws)
         if app.get('Application_Identifier') == 'B021':
-            b021_check(app)
+            b021_check(app, ws)
         if app.get('Application_Identifier') == 'B023':
-           b023_check(app)
+           b023_check(app, ws)
 
-def a003_check(app):
+        # Save Workbook Changes
+        wb.save(filename)
+
+def a003_check(app, ws):
     # Check SOE
     # Check Offline Condition
     # Check Contact BUR/BASE Time
@@ -186,7 +191,7 @@ def a003_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def a020_check(app):
+def a020_check(app, ws):
     # Check RE-INIT Interval
 
     # Check if the Application is Enabled
@@ -201,7 +206,7 @@ def a020_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def a026_check(app):
+def a026_check(app, ws):
     # Check Point Type
     # Check System Point
     # Check Comm Event Point
@@ -211,14 +216,8 @@ def a026_check(app):
     # Check if the Application is Enabled
     if app.get('Enabled') == 'True':
 
-        access_qc_doc()
-
         # Print the application identifier followed by the application name for clarity
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
-
-        print('\t', 'You have selected', filename, 'for editing.')
-        wb = load_workbook(filename)
-        ws = wb.get_sheet_by_name('D20++ QC Doc')
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
@@ -246,14 +245,11 @@ def a026_check(app):
             if record[1].get('Field_Value') == record[2].get('Field_Value'):
                 print('\t\t', '** These values are not supposed to be the same. See the SGConfig. **')
 
-        # Save Workbook Changes
-        wb.save(filename)
-
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def a030_check(app):
+def a030_check(app, ws):
     # Check Time Sync Wait
     # Check Status/ACC Freeze
     # Check ACC Freeze/ Controls
@@ -297,7 +293,7 @@ def a030_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def a083_check(app):
+def a083_check(app, ws):
     # Check That All Points Have Event Types = Both
 
     # Check if the Application is Enabled
@@ -314,7 +310,7 @@ def a083_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b003_check(app):
+def b003_check(app, ws):
     # The XML export does not contain the report deadband.
 
     # Check if the Application is Enabled
@@ -327,7 +323,7 @@ def b003_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b013_check(app):
+def b013_check(app, ws):
     # Check Baud Rate
     # Check DCD, RTS, & CTS
     # Check DCD to RX Enable Time
@@ -374,7 +370,7 @@ def b013_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b014_check(app):
+def b014_check(app, ws):
     # Check SOE BUFFER SIZE = 500
     # Check SOE LOCATION = NVRAM
 
@@ -427,7 +423,7 @@ def b014_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b015_check(app):
+def b015_check(app, ws):
     # Check Bridgeman app
 
     # Check if the Application is Enabled
@@ -459,7 +455,7 @@ def b015_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b021_check(app):
+def b021_check(app, ws):
     # Check Datalink Confirm
     # Check Idle Report Period
 
@@ -530,7 +526,7 @@ def b021_check(app):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b023_check(app):
+def b023_check(app, ws):
     # <app>
     #   <table "B023_CFG">
     #   <table "B023_DEV">
