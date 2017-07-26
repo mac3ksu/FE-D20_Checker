@@ -1,5 +1,5 @@
 C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/D20M++/PLVLY_Q D20M++
-	 You have selected C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/FE D20 M++ QC Doc Rev 3.xlsx for editing.
+	 You have selected C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/D20M++/FE D20 M++ QC Doc Rev 3.xlsx for editing.
 526-1006 - D20M++
 A003 - is disabled
 A020 - is disabled
@@ -50,109 +50,9 @@ A026 - Communication Watchdog
 			 System Point : (000080) Q-22-PV-WAK RTAC1 COM32 Ph B Amps
 			 Comm Event Point : (000153) RTAC1 Comm Watchdog
 			 Normal State : Off
-		 9 :
-			 Point Type : Analog Input
-			 System Point : (000096) Total MW
-			 Comm Event Point : (000154) Q-22 ION8600C Comm Watchdog
-			 Normal State : Off
-		 10 :
-			 Point Type : Analog Input
-			 System Point : (000138) SATEC Q-4-FW-PV RTAC2 P12 Ph A Volts
-			 Comm Event Point : (000156) Q-4-FW-PV Satec Meter Comm WD
-			 Normal State : Off
-		 11 :
-			 Point Type : Analog Input
-			 System Point : (000114) SATEC#3 Q-1-JR-PV RTAC2 P11 Ph A Volts
-			 Comm Event Point : (000157) Q-1-JR-PV Satec Meter Comm WD
-			 Normal State : Off
-		 12 :
-			 Point Type : Analog Input
-			 System Point : (000122) SATEC#4 Q-3-JR-PV RTAC2 P11 Ph A Volts
-			 Comm Event Point : (000158) Q-3-JR-PV Satec Meter Comm WD
-			 Normal State : Off
-		 13 :
-			 Point Type : Analog Input
-			 System Point : (000118) SATEC#5 Q-4-JR-PV RTAC2 P11 Ph A Volts
-			 Comm Event Point : (000159) Q-4-JR-PV Satec Meter Comm WD
-			 Normal State : Off
-		 14 :
-			 Point Type : Analog Input
-			 System Point : (000126) SATEC#6 PV-WAkron Q22 RTAC2 P11 PhA Volt
-			 Comm Event Point : (000160) Q-22-PV-WAK Satec Meter Comm WD
-			 Normal State : Off
-		 15 :
-			 Point Type : Analog Input
-			 System Point : (000080) Q-22-PV-WAK RTAC1 COM32 Ph B Amps
-			 Comm Event Point : (000161) SEL421 PR/WAK RTAC COM32 WD
-			 Normal State : Off
-		 16 :
-			 Point Type : Analog Input
-			 System Point : (000083) Q-21-PV-HP RTAC1 COM20 Ph B Amps
-			 Comm Event Point : (000162) Q-21-PV-HP RTAC1 COM20 WD
-			 Normal State : Off
-		 17 :
-			 Point Type : Analog Input
-			 System Point : (000081) Q-3-FW-PV RTAC1 COM5 Ph B Amps
-			 Comm Event Point : (000163) Q-3-FW-PV SEL421 RTAC1 COM5 WD
-			 Normal State : Off
-		 18 :
-			 Point Type : Analog Input
-			 System Point : (000082) Q-4-FW-PV RTAC1 COM7 Ph B Amps
-			 Comm Event Point : (000164) Q-4-FW-PV SEL421 RTAC1 COM7 WD
-			 Normal State : Off
-		 19 :
-			 Point Type : Analog Input
-			 System Point : (000084) Q-1-JR-PV RTAC1 COM22 Ph B Amps
-			 Comm Event Point : (000165) Q-1-JR-PV SEL421 RTAC1 COM22 WD
-			 Normal State : Off
-		 20 :
-			 Point Type : Analog Input
-			 System Point : (000085) Q-3-JR-PV RTAC1 COM26 Ph B Amps
-			 Comm Event Point : (000166) Q-3-JR-PV SEL421 RTAC1 COM26 WD
-			 Normal State : Off
-		 21 :
-			 Point Type : Analog Input
-			 System Point : (000086) Q-4-JR-PV RTAC1 COM29 Ph B Amps
-			 Comm Event Point : (000167) Q-4-JR-PV SEL421 RTAC1 COM29 WD
-			 Normal State : Off
-		 22 :
-			 Point Type : Analog Input
-			 System Point : (000150) SATEC Q-2-FW-PV Ph A Volts
-			 Comm Event Point : (000168) Fowles - PV Q2 Satec Meter Comm WD
-			 Normal State : Off
-		 23 :
-			 Point Type : Analog Input
-			 System Point : (000142) SATEC HARDNG-PV Q12 RTAC2 P13 Ph A Volts
-			 Comm Event Point : (000169) Harding - PV Q12 Satec Meter Comm WD
-			 Normal State : Off
-		 24 :
-			 Point Type : Analog Input
-			 System Point : (000146) SATEC HARDNG-PV Q13 RTAC2 P13 Ph A Volts
-			 Comm Event Point : (000170) Harding - PV Q13 Satec Meter Comm WD
-			 Normal State : Off
-		 25 :
-			 Point Type : Analog Input
-			 System Point : (000088) Fowles-PV Q2 RTAC1 COM11 Ph B Amps
-			 Comm Event Point : (000171) Q-2-FW-PV SEL421 RTAC1 COM11 WD
-			 Normal State : Off
-		 26 :
-			 Point Type : Analog Input
-			 System Point : (000090) Hardng-PV Q12 RTAC1 COM11 Ph B Amps
-			 Comm Event Point : (000172) Q-12-HD-PV SEL421 RTAC1 COM12 WD
-			 Normal State : Off
-		 27 :
-			 Point Type : Analog Input
-			 System Point : (000113) Harding - PV Q13 Ph B Amps RTAC2 P7
-			 Comm Event Point : (000173) Q-13-HD-PV SEL421 RTAC2 COM7 WD
-			 Normal State : Off
-		 28 :
-			 Point Type : Analog Input
-			 System Point : (000114) SATEC#3 Q-1-JR-PV RTAC2 P11 Ph A Volts
-			 Comm Event Point : (000174) SEL3530 RTAC2 COMM WD
-			 Normal State : Off
 	 A026DCA : DCA Configuration Table
-			 NO
-			 Yes
+			 SOE Enable : Yes
+			 COS Enable : Yes
 		 ** These values are not supposed to be the same. See the SGConfig. **
 A030 - Accumulator Freeze
 	 A030CFG : DTA Misc Parameters Table

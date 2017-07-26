@@ -104,9 +104,12 @@ def d20mpp_check(xml_filename, directory):
 
     filename = askopenfilename()
 
+    # For the purposes of editing the QC Doc
     print('\t', 'You have selected', filename, 'for editing.')
     wb = load_workbook(filename)
     ws = wb.get_sheet_by_name('D20++ QC Doc')
+
+    ws['B3'].value = xml_filename
 
     # Check all of these applications
 
@@ -199,8 +202,18 @@ def a020_check(app, ws):
         # Print the application identifier followed by the application name for clarity
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
         # Loop through the SRU table
+        count = 0
         for i, record in enumerate(app[1]):
             print('\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            if record[4].get('Field_Value') == 60:
+                pass
+            else:
+                count = count + 1
+
+        if count == 0:
+            ws['L140'].value = app[1][0][4].get('Field_Value')
+        else:
+            ws['L140'].value = 'One of the Re-init intervals does not match. Refer to the SGConfig.'
 
     # If the application is disabled, print statement
     else:
@@ -221,13 +234,28 @@ def a026_check(app, ws):
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
+        # For the purpose of printing to the QC Doc
+        row_number = 110
+        ws['B' + str(row_number)].value = 'Record Point'
+        ws['C' + str(row_number)].value = app[0][0][0].get('Field_Name')
+        ws['D' + str(row_number)].value = app[0][0][1].get('Field_Name')
+        ws['E' + str(row_number)].value = app[0][0][2].get('Field_Name')
+        ws['F' + str(row_number)].value = app[0][0][3].get('Field_Name')
+
         # Loop through the Communication Events table
         for i, record in enumerate(app[0]):
-            print('\t\t', i, ':')
-            print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Point Type
-            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # System Point
-            print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # Comm Even Point
-            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Normal State
+            row_number = row_number + 1
+            if row_number < 120:
+                print('\t\t', i, ':')
+                ws['B' + str(row_number)].value = i
+                print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Point Type
+                ws['C' + str(row_number)].value = record[0].get('Field_Value')
+                print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # System Point
+                ws['D' + str(row_number)].value = record[1].get('Field_Value')
+                print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # Comm Even Point
+                ws['E' + str(row_number)].value = record[2].get('Field_Value')
+                print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Normal State
+                ws['F' + str(row_number)].value = record[3].get('Field_Value')
 
         # Check SOE Enable
         # Check COS Enable
@@ -237,8 +265,8 @@ def a026_check(app, ws):
         for i, record in enumerate(app[2]):
             ws['L121'].value = record[1].get('Field_Value')
             ws['L122'].value = record[2].get('Field_Value')
-            print('\t\t\t', ws['L121'].value)
-            print('\t\t\t', ws['L122'].value)
+            print('\t\t\t', record[1].get('Field_Name'), ':', ws['L121'].value)
+            print('\t\t\t', record[2].get('Field_Name'), ':', ws['L122'].value)
             # print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # SOE Enable
             # print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # COS Enable
             # The SOE and COS Enable values cannot both be "Yes"
@@ -302,6 +330,7 @@ def a083_check(app, ws):
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
         print('\t\t D20 Calculator: Digital Inputs table does not have event types')
+        ws['L42'].value = 'D20 Calculator: Digital Inputs table does not have event types.'
         # for record in app[2][0]:
         #     print('\t Calc', record.get('Record_Number'))
         #     print('\t Calc', record.get('Record_Number'), '-', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
@@ -341,6 +370,9 @@ def b013_check(app, ws):
         # Print the application identifier followed by the application name for clarity
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
+        # Variable for the purpose of editing the QC Doc
+        count = 0
+
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
         # Port Com Global Variable, enable editing
@@ -350,6 +382,10 @@ def b013_check(app, ws):
             print('\t\t', i, ':')
             print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Port
             print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # Baud Rate
+            if record[1].get('Field_Value') == '9600':
+                pass
+            else:
+                count = count + 1
             print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # DCD
             print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # RTS
             print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # CTS
@@ -365,6 +401,13 @@ def b013_check(app, ws):
 
             # Append Port Com to list
             b013_com_list.append((record[0].get('Field_Value')))
+
+        if count == 0:
+            ws['L126'].value = app[0][0][1].get('Field_Value')
+        else:
+            ws['L126'].value = 'There is a baud rate value that differs. Please refer to the SGConfig.'
+
+
 
     # If the application is disabled, print statement
     else:
@@ -541,10 +584,18 @@ def b023_check(app, ws):
         # Print the table identifier followed by the table name for clarity
         print('\t', app[2].get('Table_Identifier'))
         b023_pnt_list = []
+
+        # For the use of putting the following values into the QC Doc
+        location_number = 12
+
         # Loop through the Device Point Map table
         for i, record in enumerate(app[2]):
+
+            ws['E' + str(location_number)].value = record[0].get('Field_Value')
+            ws['F' + str(location_number)].value = record[1].get('Field_Value')
             print('\t\t', i, '-', record[0].get('Field_Value'), ':', record[1].get('Field_Value'))
             b023_pnt_list.append((record[0].get('Field_Value'), record[1].get('Field_Value')))
+            location_number = location_number + 1
 
         print('\t', 'B023_POL')
         #b023_pol_list = []
