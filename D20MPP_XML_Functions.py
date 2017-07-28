@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ET
 import xlrd
 import os
-from openpyxl import Workbook
 from openpyxl import load_workbook
 from tkinter.filedialog import askopenfilename
 
@@ -104,10 +103,12 @@ def d20mpp_check(xml_filename, directory):
 
     filename = askopenfilename()
 
+    ws_name = 'D20++ QC Doc'
+
     # For the purposes of editing the QC Doc
     print('\t', 'You have selected', filename, 'for editing.')
     wb = load_workbook(filename)
-    ws = wb.get_sheet_by_name('D20++ QC Doc')
+    ws = wb.get_sheet_by_name(ws_name)
 
     ws['B3'].value = xml_filename
 
@@ -193,6 +194,10 @@ def a003_check(app, ws):
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
+        # Edit excel document column "L" row "136"
+        ws['L136'].value = "Application A003 is disabled for this site."
+        ws['L137'].value = "Application A003 is disabled for this site."
+        ws['L140'].value = "Application A003 is disabled for this site."
 
 def a020_check(app, ws):
     # Check RE-INIT Interval
@@ -211,13 +216,14 @@ def a020_check(app, ws):
                 count = count + 1
 
         if count == 0:
-            ws['L140'].value = app[1][0][4].get('Field_Value')
+            ws['L40'].value = app[1][0][4].get('Field_Value')
         else:
-            ws['L140'].value = 'One of the Re-init intervals does not match. Refer to the SGConfig.'
+            ws['L40'].value = 'One of the Re-init intervals does not match. Refer to the SGConfig.'
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
+        ws['L40'].value = "Application A020 is disabled for this site."
 
 def a026_check(app, ws):
     # Check Point Type
@@ -256,6 +262,8 @@ def a026_check(app, ws):
                 ws['E' + str(row_number)].value = record[2].get('Field_Value')
                 print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Normal State
                 ws['F' + str(row_number)].value = record[3].get('Field_Value')
+
+            ws['L110'].value = "**Not all values. If you need them all, please refer to the SGConfig**"
 
         # Check SOE Enable
         # Check COS Enable
@@ -453,6 +461,10 @@ def b014_check(app, ws):
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Password
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Control Password
 
+        # For the purpose of printing to the QC Doc
+        ws['L71'].value = "Please refer to the SGConfig."
+        row_num = 76
+
         # Check Welcome Message
 
         # Print the table identifier followed by the table name for clarity
@@ -461,6 +473,10 @@ def b014_check(app, ws):
         for i, record in enumerate(app[5]):
             print('\t\t', record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'),
                   ':', record[3].get('Field_Value'))
+            # ws['C' + str(row_num)].value = record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'), ':', record[3].get('Field_Value')
+            row_num = row_num + 1
+
+
 
     # If the application is disabled, print statement
     else:
@@ -481,11 +497,25 @@ def b015_check(app, ws):
         print('\t', num_dnp_dev, 'remote DNP devices')
         print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))  # Number of Rx Buffers
 
+        # For the purpose of printing to the Local Application table of the QC Doc
+        row_number = 86
+
         print('\t', 'Local Application Table [LAN Address(Hex), Data Link Channel]')
         # Loop through the Local Application table
         for i, record in enumerate(app[2]):
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), ':', b013_com_list[i])
+            ws['D' + str(row_number)].value = record[0].get('Field_Value')
+            ws['E' + str(row_number)].value = record[2].get('Field_Value')
+            ws['F' + str(row_number)].value = record[3].get('Field_Value')
+            ws['L' + str(row_number)].value = b013_com_list[i]
+            row_number = row_number + 1
+
+        # Indication of COM number
+        ws['L85'].value = 'Corresponding COM'
+
+        # For the purpose of printing to the Remote Application Table of the QC Doc
+        row_number = 96
 
         print('\t', 'Remote Application Table [LAN Address(Hex), Data Link Channel]')
         # Check TXT Delay to Appl.
@@ -493,6 +523,10 @@ def b015_check(app, ws):
         for record in app[3]:
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), '   ', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            ws['D' + str(row_number)].value = record[0].get('Field_Value')
+            ws['E' + str(row_number)].value = record[2].get('Field_Value')
+            ws['F' + str(row_number)].value = record[3].get('Field_Value')
+            row_number = row_number + 1
 
     # If the application is disabled, print statement
     else:
@@ -571,10 +605,11 @@ def b021_check(app, ws):
 
 def b023_check(app, ws):
     # <app>
-    #   <table "B023_CFG">
-    #   <table "B023_DEV">
     #   <table "B023_PNT">
     #   There is no B023_POL
+    #   <table "B023_DEV">
+    #   <table "B023_CFG">
+
 
     # Check if the Application is Enabled
     if app.get('Enabled') == 'True':
@@ -586,7 +621,7 @@ def b023_check(app, ws):
         b023_pnt_list = []
 
         # For the use of putting the following values into the QC Doc
-        location_number = 12
+        location_number = 23
 
         # Loop through the Device Point Map table
         for i, record in enumerate(app[2]):
@@ -616,23 +651,23 @@ def b023_check(app, ws):
         b023_dev_list = []
         # Loop through the Device Configuration table
         for i, record in enumerate(app[1]):
-            #Application Address
+            # Application Address
             print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-            #Poll Interval (s)
+            # Poll Interval (s)
             print('\t\t\t', record[5][0][0][3].get('Field_Name'), ':', record[5][0][0][3].get('Field_Value'))
-            #Integrity Poll Interval
+            # Integrity Poll Interval
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
-            #Offline After Fail
+            # Offline After Fail
             print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
-            #Failures For Bad Channel
+            # Failures For Bad Channel
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
-            #Time Syncing
+            # Time Syncing
             print('\t\t\t', record[3][0][0][4].get('Field_Name'), ':', record[3][0][0][4].get('Field_Value'))
-            #Data Link CFM Required
+            # Data Link CFM Required
             print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
-            #First Point Record
+            # First Point Record
             print('\t\t\t', record[9][0][0][2].get('Field_Name'), ':', record[9][0][0][2].get('Field_Value'))
-            #Number of Point Records
+            # Number of Point Records
             print('\t\t\t', record[9][0][0][3].get('Field_Name'), ':', record[9][0][0][3].get('Field_Value'))
             for index in range(int(record[9][0][0][2].get('Field_Value')),
                                int(record[9][0][0][2].get('Field_Value')) + int(
@@ -665,5 +700,4 @@ def b023_check(app, ws):
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
-
 
