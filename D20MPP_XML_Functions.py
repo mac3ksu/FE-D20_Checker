@@ -101,7 +101,7 @@ def d20mpp_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
     root = tree.getroot()
 
-    filename = askopenfilename()
+    filename = askopenfilename(title='Select QC Doc to edit')
 
     ws_name = 'D20++ QC Doc'
 
@@ -842,16 +842,17 @@ def b023_check(app, ws):
         b023_pnt_list = []
 
         # For the use of putting the following values into the QC Doc
-        location_number = 23
+        pnt_location_number = 23
+        cfg_row_number = 33
 
         # Loop through the Device Point Map table
         for i, record in enumerate(app[2]):
 
-            ws['E' + str(location_number)].value = record[0].get('Field_Value')
-            ws['F' + str(location_number)].value = record[1].get('Field_Value')
+            ws['E' + str(pnt_location_number)].value = record[0].get('Field_Value')
+            ws['F' + str(pnt_location_number)].value = record[1].get('Field_Value')
             print('\t\t', i, '-', record[0].get('Field_Value'), ':', record[1].get('Field_Value'))
             b023_pnt_list.append((record[0].get('Field_Value'), record[1].get('Field_Value')))
-            location_number = location_number + 1
+            pnt_location_number = pnt_location_number + 1
 
         print('\t', 'B023_POL')
         #b023_pol_list = []
@@ -906,16 +907,28 @@ def b023_check(app, ws):
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'))
+
+        # For the purpose of printing to the QC Doc
+        restart_count = 0
+        restart_val = app[0][0][2].get('Field_Value')
+
         # Loop through the DCA Configuration table
         for i, record in enumerate(app[0]):
             #DCA Address
             print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
             #Restart Delay
             print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            if restart_val != record[2].get('Field_Value'):
+                restart_count = restart_count + 1
             print('\t\t\t', 'Devices in DCA:')
             for index in range(int(record[8].get('Field_Value')),
                                int(record[8].get('Field_Value')) + int(record[9].get('Field_Value'))):
                 print('\t\t\t\t', b023_dev_list[index])
+
+        if restart_count == 0:
+            ws['L' + str(cfg_row_number)].value = restart_val
+        else:
+            ws['L' + str(cfg_row_number)].value = 'One of the restart values differ. Please refer to the SGConfig.'
         return
 
     # If the application is disabled, print statement
