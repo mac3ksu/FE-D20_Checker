@@ -1,5 +1,4 @@
 C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/D20M++/PLVLY_Q D20M++
-	 You have selected C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/D20M++/FE D20 M++ QC Doc Rev 3.xlsx for editing.
 526-1006 - D20M++
 A003 - is disabled
 A020 - is disabled
@@ -151,8 +150,8 @@ A026 - Communication Watchdog
 			 Comm Event Point : (000174) SEL3530 RTAC2 COMM WD
 			 Normal State : Off
 	 A026DCA : DCA Configuration Table
-			 SOE Enable : Yes
-			 COS Enable : Yes
+		 SOE Enable : Yes
+		 COS Enable : Yes
 		 ** These values are not supposed to be the same. See the SGConfig. **
 A030 - Accumulator Freeze
 	 A030CFG : DTA Misc Parameters Table

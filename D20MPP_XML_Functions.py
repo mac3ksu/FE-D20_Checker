@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 import xlrd
 import os
 import ntpath
-from openpyxl import load_workbook
+# from openpyxl import load_workbook
 from tkinter.filedialog import askopenfilename
 
 def set_comlist():
@@ -99,16 +99,16 @@ def d20mpp_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
     root = tree.getroot()
 
-    filename = askopenfilename(title='Select QC Doc to edit')
-
-    ws_name = 'D20++ QC Doc'
+    # filename = askopenfilename(title='Select QC Doc to edit')
+    #
+    # ws_name = 'D20++ QC Doc'
 
     # For the purposes of editing the QC Doc
-    print('\t', 'You have selected', filename, 'for editing.')
-    wb = load_workbook(filename)
-    ws = wb.get_sheet_by_name(ws_name)
-
-    ws['B3'].value = xml_filename
+    # print('\t', 'You have selected', filename, 'for editing.')
+    # wb = load_workbook(filename)
+    # ws = wb.get_sheet_by_name(ws_name)
+    #
+    # ws['B3'].value = xml_filename
 
     # Check all of these applications
 
@@ -116,36 +116,36 @@ def d20mpp_check(xml_filename, directory):
     print(root[0][0][1][0].get('Part_Number'), '-', root[0][0].get('Device_Type') + 'M++')
     for app in root[0][0][1][0]:
         if app.get('Application_Identifier') == 'A003':
-            a003_check(app, ws)
+            a003_check(app)
         if app.get('Application_Identifier') == 'A020':
-            a020_check(app, ws)
+            a020_check(app)
         if app.get('Application_Identifier') == 'A026':
-            a026_check(app, ws)
+            a026_check(app)
         if app.get('Application_Identifier') == 'A030':
-            a030_check(app, ws)
+            a030_check(app)
         if app.get('Application_Identifier') == 'A083-0':
-            a083_check(app, ws)
+            a083_check(app)
         if app.get('Application_Identifier') == 'B003':
-           b003_check(app, ws)
+           b003_check(app)
         if app.get('Application_Identifier') == 'B013':
-            b013_check(app, ws)
+            b013_check(app)
         if app.get('Application_Identifier') == 'B014':
-            b014_check(app, ws)
+            b014_check(app)
         if app.get('Application_Identifier') == 'B015':
-            b015_check(app, ws)
+            b015_check(app)
         if app.get('Application_Identifier') == 'B021':
-            b021_check(app, ws)
+            b021_check(app)
         if app.get('Application_Identifier') == 'B023':
-           b023_check(app, ws)
+           b023_check(app)
 
-        ws['L' + str(198)].value = 'User Check'
-        ws['L' + str(219)].value = 'User Check'
-        ws['L' + str(222)].value = 'User Check'
+        # ws['L' + str(198)].value = 'User Check'
+        # ws['L' + str(219)].value = 'User Check'
+        # ws['L' + str(222)].value = 'User Check'
 
         # Save Workbook Changes
-        wb.save(filename)
+        # wb.save(filename)
 
-def a003_check(app, ws):
+def a003_check(app):
     # Check SOE
     # Check Offline Condition
     # Check Contact BUR/BASE Time
@@ -197,11 +197,11 @@ def a003_check(app, ws):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
         # Edit excel document column "L" row "136"
-        ws['L' + str(186)].value = "Application A003 is disabled for this site."
-        ws['L' + str(187)].value = "Application A003 is disabled for this site."
-        ws['L' + str(190)].value = "Application A003 is disabled for this site."
+        # ws['L' + str(186)].value = "Application A003 is disabled for this site."
+        # ws['L' + str(187)].value = "Application A003 is disabled for this site."
+        # ws['L' + str(190)].value = "Application A003 is disabled for this site."
 
-def a020_check(app, ws):
+def a020_check(app):
     # Check RE-INIT Interval
 
     # Check if the Application is Enabled
@@ -217,17 +217,17 @@ def a020_check(app, ws):
             else:
                 count = count + 1
 
-        if count == 0:
-            ws['L' + str(40)].value = app[1][0][4].get('Field_Value')
-        else:
-            ws['L' + str(40)].value = 'One of the Re-init intervals does not match. Refer to the SGConfig.'
+        # if count == 0:
+        #     ws['L' + str(40)].value = app[1][0][4].get('Field_Value')
+        # else:
+        #     ws['L' + str(40)].value = 'One of the Re-init intervals does not match. Refer to the SGConfig.'
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
-        ws['L' + str(40)].value = "Application A020 is disabled for this site."
+        # ws['L' + str(40)].value = "Application A020 is disabled for this site."
 
-def a026_check(app, ws):
+def a026_check(app):
     # Check Point Type
     # Check System Point
     # Check Comm Event Point
@@ -243,46 +243,43 @@ def a026_check(app, ws):
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
         # For the purpose of printing to the QC Doc
-        row_number = 138
-        ws['B' + str(row_number)].value = 'Record Point'
-        ws['C' + str(row_number)].value = app[0][0][0].get('Field_Name')
-        ws['D' + str(row_number)].value = app[0][0][1].get('Field_Name')
-        ws['E' + str(row_number)].value = app[0][0][2].get('Field_Name')
-        ws['F' + str(row_number)].value = app[0][0][3].get('Field_Name')
+        # row_number = 138
+        # ws['B' + str(row_number)].value = 'Record Point'
+        # ws['C' + str(row_number)].value = app[0][0][0].get('Field_Name')
+        # ws['D' + str(row_number)].value = app[0][0][1].get('Field_Name')
+        # ws['E' + str(row_number)].value = app[0][0][2].get('Field_Name')
+        # ws['F' + str(row_number)].value = app[0][0][3].get('Field_Name')
 
         # Loop through the Communication Events table
         for i, record in enumerate(app[0]):
-            row_number = row_number + 1
-            if row_number < 170:
-                print('\t\t', i, ':')
-                ws['B' + str(row_number)].value = i
-                print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Point Type
-                ws['C' + str(row_number)].value = record[0].get('Field_Value')
-                print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # System Point
-                ws['D' + str(row_number)].value = record[1].get('Field_Value')
-                print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # Comm Even Point
-                ws['E' + str(row_number)].value = record[2].get('Field_Value')
-                print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Normal State
-                ws['F' + str(row_number)].value = record[3].get('Field_Value')
+            # row_number = row_number + 1
+            # if row_number < 170:
+            print('\t\t', i, ':')
+            # ws['B' + str(row_number)].value = i
+            print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Point Type
+            # ws['C' + str(row_number)].value = record[0].get('Field_Value')
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # System Point
+            # ws['D' + str(row_number)].value = record[1].get('Field_Value')
+            print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # Comm Even Point
+            # ws['E' + str(row_number)].value = record[2].get('Field_Value')
+            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Normal State
+            # ws['F' + str(row_number)].value = record[3].get('Field_Value')
 
-            ws['L' + str(138)].value = "**May not contain all values. If you need them all, please refer to the SGConfig**"
+            # ws['L' + str(138)].value = "**May not contain all values. If you need them all, please refer to the SGConfig**"
 
         # Check SOE Enable
         # Check COS Enable
 
         # For the purpose of printing the SOE and COS to the QC Doc
-        row_number = 171
+        # row_number = 171
 
         print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
         # Loop through the DCA Configuration table
         for i, record in enumerate(app[2]):
-            ws['L' + str(row_number)].value = record[1].get('Field_Value')
-            ws['L' + str(row_number + 1)].value = record[2].get('Field_Value')
-            print('\t\t\t', record[1].get('Field_Name'), ':', ws['L' + str(row_number)].value)
-            print('\t\t\t', record[2].get('Field_Name'), ':', ws['L' + str(row_number + 1)].value)
-            # print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # SOE Enable
-            # print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # COS Enable
-            # The SOE and COS Enable values cannot both be "Yes"
+            # ws['L' + str(row_number)].value = record[1].get('Field_Value')
+            # ws['L' + str(row_number + 1)].value = record[2].get('Field_Value')
+            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # SOE Enable
+            print('\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # COS Enable
             if record[1].get('Field_Value') == record[2].get('Field_Value'):
                 print('\t\t', '** These values are not supposed to be the same. See the SGConfig. **')
 
@@ -290,7 +287,7 @@ def a026_check(app, ws):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def a030_check(app, ws):
+def a030_check(app):
     # Check Time Sync Wait
     # Check Status/ACC Freeze
     # Check ACC Freeze/ Controls
@@ -317,12 +314,12 @@ def a030_check(app, ws):
                 count = count + 1
 
         # For the purpose of printing to the QC Doc for Time Sync Wait, Status/ACC Freeze, and ACC Freeze/Controls
-        row_number = 179
-
-        if count == 0:
-            ws['L' + str(row_number)].value = app[1][0][1].get('Field_Value')
-        else:
-            ws['L' + str(row_number)].value = 'A Time Sync Wait value differs. Please refer to the SGConfig.'
+        # row_number = 179
+        #
+        # if count == 0:
+        #     ws['L' + str(row_number)].value = app[1][0][1].get('Field_Value')
+        # else:
+        #     ws['L' + str(row_number)].value = 'A Time Sync Wait value differs. Please refer to the SGConfig.'
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
@@ -332,11 +329,11 @@ def a030_check(app, ws):
             for i, record in enumerate(app[2]):
                 print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
                 print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-            ws['L' + str(row_number + 1)].value = 'There are STATUS/ACC FREEZE values. ' \
-                                                      'Please remove them from the SGConfig.'
+            # ws['L' + str(row_number + 1)].value = 'There are STATUS/ACC FREEZE values. ' \
+            #                                           'Please remove them from the SGConfig.'
         except IndexError:
             print('\t\t', '<no entries>')
-            ws['L' + str(row_number + 1)].value = 'There are no STATUS/ACC FREEZE values.'
+            # ws['L' + str(row_number + 1)].value = 'There are no STATUS/ACC FREEZE values.'
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
@@ -346,18 +343,18 @@ def a030_check(app, ws):
             for i, record in enumerate(app[3]):
                 print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
                 print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-            ws['L' + str(row_number + 2)].value = 'There are ACC FREEZE/CONTROLS values. ' \
-                                                  'Please remove them from the SGConfig.'
+            # ws['L' + str(row_number + 2)].value = 'There are ACC FREEZE/CONTROLS values. ' \
+            #                                       'Please remove them from the SGConfig.'
         # If there are no records
         except IndexError:
             print('\t\t', '<no entries>')
-            ws['L' + str(row_number + 2)].value = 'There are no ACC FREEZE/CONTROLS values.'
+            # ws['L' + str(row_number + 2)].value = 'There are no ACC FREEZE/CONTROLS values.'
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def a083_check(app, ws):
+def a083_check(app):
     # Check That All Points Have Event Types = Both
 
     # Check if the Application is Enabled
@@ -366,7 +363,7 @@ def a083_check(app, ws):
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
 
         print('\t\t D20 Calculator: Digital Inputs table does not have event types')
-        ws['L42'].value = 'D20 Calculator: Digital Inputs table does not have event types.'
+        # ws['L42'].value = 'D20 Calculator: Digital Inputs table does not have event types.'
         # for record in app[2][0]:
         #     print('\t Calc', record.get('Record_Number'))
         #     print('\t Calc', record.get('Record_Number'), '-', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
@@ -375,7 +372,7 @@ def a083_check(app, ws):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b003_check(app, ws):
+def b003_check(app):
     # The XML export does not contain the report deadband.
 
     # Check if the Application is Enabled
@@ -388,7 +385,7 @@ def b003_check(app, ws):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b013_check(app, ws):
+def b013_check(app):
     # Check Baud Rate
     # Check DCD, RTS, & CTS
     # Check DCD to RX Enable Time
@@ -402,7 +399,7 @@ def b013_check(app, ws):
     # Check Response Timeout
 
     # For the purpose of printing to the QC Doc
-    row_num = 206
+    # row_num = 206
 
     # Check if the Application is Enabled
     if app.get('Enabled') == 'True':
@@ -415,27 +412,27 @@ def b013_check(app, ws):
         set_comlist()
 
         # Indication Counts
-        dcdcount = 0
-        rxencount = 0
-        rtsprecount = 0
-        rtspostcount = 0
-        maxframecount = 0
-        trretriecount = 0
-        trbuffcount = 0
-        recbuffcount = 0
-        contimcount = 0
-        restimcount = 0
-        # Reference Values
-        dcdval = app[0][0][3].get('Field_Value')
-        rxenval = app[0][0][6].get('Field_Value')
-        rtspreval = app[0][0][7].get('Field_Value')
-        rtspostval = app[0][0][8].get('Field_Value')
-        maxframeval = app[0][0][9].get('Field_Value')
-        trretrieval = app[0][0][10].get('Field_Value')
-        trbuffval = app[0][0][11].get('Field_Value')
-        recbuffval = app[0][0][12].get('Field_Value')
-        contimval = app[0][0][13].get('Field_Value')
-        restimval = app[0][0][14].get('Field_Value')
+        # dcdcount = 0
+        # rxencount = 0
+        # rtsprecount = 0
+        # rtspostcount = 0
+        # maxframecount = 0
+        # trretriecount = 0
+        # trbuffcount = 0
+        # recbuffcount = 0
+        # contimcount = 0
+        # restimcount = 0
+        # # Reference Values
+        # dcdval = app[0][0][3].get('Field_Value')
+        # rxenval = app[0][0][6].get('Field_Value')
+        # rtspreval = app[0][0][7].get('Field_Value')
+        # rtspostval = app[0][0][8].get('Field_Value')
+        # maxframeval = app[0][0][9].get('Field_Value')
+        # trretrieval = app[0][0][10].get('Field_Value')
+        # trbuffval = app[0][0][11].get('Field_Value')
+        # recbuffval = app[0][0][12].get('Field_Value')
+        # contimval = app[0][0][13].get('Field_Value')
+        # restimval = app[0][0][14].get('Field_Value')
 
         # Loop through the Port Configuration table
         for i, record in enumerate(app[0]):
@@ -445,102 +442,102 @@ def b013_check(app, ws):
             print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # DCD
             print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # RTS
             print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # CTS
-            if record[3].get('Field_Value') != dcdval:
-                dcdcount = dcdcount + 1
-            elif record[4].get('Field_Value') != dcdval:
-                dcdcount = dcdcount + 1
-            elif record[5].get('Field_Value') != dcdval:
-                dcdcount = dcdcount + 1
+            # if record[3].get('Field_Value') != dcdval:
+            #     dcdcount = dcdcount + 1
+            # elif record[4].get('Field_Value') != dcdval:
+            #     dcdcount = dcdcount + 1
+            # elif record[5].get('Field_Value') != dcdval:
+            #     dcdcount = dcdcount + 1
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # DCD to Rx Enable Time
-            if record[6].get('Field_Value') != rxenval:
-                rxencount = rxencount + 1
+            # if record[6].get('Field_Value') != rxenval:
+            #     rxencount = rxencount + 1
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # RTS Preamble
-            if record[7].get('Field_Value') != rtspreval:
-                rtsprecount = rtsprecount + 1
+            # if record[7].get('Field_Value') != rtspreval:
+            #     rtsprecount = rtsprecount + 1
             print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))  # RTS Postamble
-            if record[8].get('Field_Value') != rtspostval:
-                rtspostcount = rtspostcount + 1
+            # if record[8].get('Field_Value') != rtspostval:
+            #     rtspostcount = rtspostcount + 1
             print('\t\t\t', record[9].get('Field_Name'), ':', record[9].get('Field_Value'))  # Max Frame Size
-            if record[9].get('Field_Value') != maxframeval:
-                maxframecount = maxframecount + 1
+            # if record[9].get('Field_Value') != maxframeval:
+            #     maxframecount = maxframecount + 1
             print('\t\t\t', record[10].get('Field_Name'), ':', record[10].get('Field_Value'))  # Transmit Retries
-            if record[10].get('Field_Value') != trretrieval:
-                trretriecount = trretriecount + 1
+            # if record[10].get('Field_Value') != trretrieval:
+            #     trretriecount = trretriecount + 1
             print('\t\t\t', record[11].get('Field_Name'), ':', record[11].get('Field_Value'))  # Transmit Buffers
-            if record[11].get('Field_Value') != trbuffval:
-                trbuffcount = trbuffcount + 1
+            # if record[11].get('Field_Value') != trbuffval:
+            #     trbuffcount = trbuffcount + 1
             print('\t\t\t', record[12].get('Field_Name'), ':', record[12].get('Field_Value'))  # Receive Buffers
-            if record[12].get('Field_Value') != recbuffval:
-                recbuffcount = recbuffcount + 1
+            # if record[12].get('Field_Value') != recbuffval:
+            #     recbuffcount = recbuffcount + 1
             print('\t\t\t', record[13].get('Field_Name'), ':', record[13].get('Field_Value'))  # Confirm Timeout
-            if record[13].get('Field_Value') != contimval:
-                contimcount = contimcount + 1
+            # if record[13].get('Field_Value') != contimval:
+            #     contimcount = contimcount + 1
             print('\t\t\t', record[14].get('Field_Name'), ':', record[14].get('Field_Value'))  # Response Timeout
-            if record[14].get('Field_Value') != restimval:
-                restimcount = restimcount + 1
+            # if record[14].get('Field_Value') != restimval:
+            #     restimcount = restimcount + 1
 
             # Append Port Com to list
             b013_com_list.append((record[0].get('Field_Value')))
 
         # QC Doc DCD, RTS, CTS
-        if dcdcount == 0:
-            ws['L' + str(row_num)].value = dcdval
-        else:
-            ws['L' + str(row_num)].value = 'A DCD, RTS, or CTS value differs. Please refer to the SGConfig.'
-        # QC Doc Baud Rate
-        ws['L' + str(176)].value = 'Please refer to the SGConfig for the Baud Rate.'
-        # QC Doc Rx Enable Time
-        if rxencount == 0:
-            ws['L' + str(row_num + 1)].value = rxenval
-        else:
-            ws['L' + str(row_num + 1)].value = 'A DCD to Rx Enable Time value differs. Please refer to the SGConfig.'
-        # QC Doc RTS Preamble
-        if rtsprecount == 0:
-            ws['L' + str(row_num + 2)].value = rtspreval
-        else:
-            ws['L' + str(row_num + 2)].value = 'A RTS Preamble value differs. Please refer to the SGConfig.'
-        # QC Doc RTS Postamble
-        if rtspostcount == 0:
-            ws['L' + str(row_num + 3)].value = rtspostval
-        else:
-            ws['L' + str(row_num + 3)].value = 'A RTS Postamble value differs. Please refer to the SGConfig.'
-        # QC Doc Max Frame Size
-        if maxframecount == 0:
-            ws['L' + str(row_num + 4)].value = maxframeval
-        else:
-            ws['L' + str(row_num + 4)].value = 'A Max Frame Size value differs. Please refer to the SGConfig.'
-        # QC Doc Transmit Retries
-        if trretriecount == 0:
-            ws['L' + str(row_num + 5)].value = trretrieval
-        else:
-            ws['L' + str(row_num + 5)].value = 'A Transmit Retries value differs. Please refer to the SGConfig.'
-        # QC Doc Transmit Buffers
-        if trbuffcount == 0:
-            ws['L' + str(row_num + 6)].value = trbuffval
-        else:
-            ws['L' + str(row_num + 6)].value = 'A Transmit Buffers value differs. Please refer to the SGConfig.'
-        # QC Doc Receive Buffers
-        if recbuffcount == 0:
-            ws['L' + str(row_num + 7)].value = recbuffval
-        else:
-            ws['L' + str(row_num + 7)].value = 'A Receive Buffers value differs. Please refer to the SGConfig.'
-        # QC Doc Confirm Timeout
-        if contimcount == 0:
-            ws['L' + str(row_num + 8)].value = contimval
-        else:
-            ws['L' + str(row_num + 8)].value = 'A Confirm Timeout value differs. Please refer to the SGConfig.'
-        # QC Doc Response Timeout
-        if restimcount == 0:
-            ws['L' + str(row_num + 9)].value = restimval
-        else:
-            ws['L' + str(row_num + 9)].value = 'A Response Timeout value differs. Please refer to the SGConfig.'
+        # if dcdcount == 0:
+        #     ws['L' + str(row_num)].value = dcdval
+        # else:
+        #     ws['L' + str(row_num)].value = 'A DCD, RTS, or CTS value differs. Please refer to the SGConfig.'
+        # # QC Doc Baud Rate
+        # ws['L' + str(176)].value = 'Please refer to the SGConfig for the Baud Rate.'
+        # # QC Doc Rx Enable Time
+        # if rxencount == 0:
+        #     ws['L' + str(row_num + 1)].value = rxenval
+        # else:
+        #     ws['L' + str(row_num + 1)].value = 'A DCD to Rx Enable Time value differs. Please refer to the SGConfig.'
+        # # QC Doc RTS Preamble
+        # if rtsprecount == 0:
+        #     ws['L' + str(row_num + 2)].value = rtspreval
+        # else:
+        #     ws['L' + str(row_num + 2)].value = 'A RTS Preamble value differs. Please refer to the SGConfig.'
+        # # QC Doc RTS Postamble
+        # if rtspostcount == 0:
+        #     ws['L' + str(row_num + 3)].value = rtspostval
+        # else:
+        #     ws['L' + str(row_num + 3)].value = 'A RTS Postamble value differs. Please refer to the SGConfig.'
+        # # QC Doc Max Frame Size
+        # if maxframecount == 0:
+        #     ws['L' + str(row_num + 4)].value = maxframeval
+        # else:
+        #     ws['L' + str(row_num + 4)].value = 'A Max Frame Size value differs. Please refer to the SGConfig.'
+        # # QC Doc Transmit Retries
+        # if trretriecount == 0:
+        #     ws['L' + str(row_num + 5)].value = trretrieval
+        # else:
+        #     ws['L' + str(row_num + 5)].value = 'A Transmit Retries value differs. Please refer to the SGConfig.'
+        # # QC Doc Transmit Buffers
+        # if trbuffcount == 0:
+        #     ws['L' + str(row_num + 6)].value = trbuffval
+        # else:
+        #     ws['L' + str(row_num + 6)].value = 'A Transmit Buffers value differs. Please refer to the SGConfig.'
+        # # QC Doc Receive Buffers
+        # if recbuffcount == 0:
+        #     ws['L' + str(row_num + 7)].value = recbuffval
+        # else:
+        #     ws['L' + str(row_num + 7)].value = 'A Receive Buffers value differs. Please refer to the SGConfig.'
+        # # QC Doc Confirm Timeout
+        # if contimcount == 0:
+        #     ws['L' + str(row_num + 8)].value = contimval
+        # else:
+        #     ws['L' + str(row_num + 8)].value = 'A Confirm Timeout value differs. Please refer to the SGConfig.'
+        # # QC Doc Response Timeout
+        # if restimcount == 0:
+        #     ws['L' + str(row_num + 9)].value = restimval
+        # else:
+        #     ws['L' + str(row_num + 9)].value = 'A Response Timeout value differs. Please refer to the SGConfig.'
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
-        ws['L' + str(row_num)].value = 'Application B013 is disabled (Rows 206 - 215).'
+        # ws['L' + str(row_num)].value = 'Application B013 is disabled (Rows 206 - 215).'
 
-def b014_check(app, ws):
+def b014_check(app):
     # Check SOE BUFFER SIZE
     # Check SOE LOCATION
 
@@ -553,34 +550,34 @@ def b014_check(app, ws):
         print('\t', app[1].get('Table_Identifier'), ':', app[1].get('Table_Name'))
 
         # For the purpose of printing to the QC Doc
-        row_num = 67
-        sbuffer_count = 0
-        slocation_count = 0
-        sbuffer_val = app[1][0][0].get('Field_Value')
-        slocation_val = app[1][0][4][0][0][0].get('Field_Value')
+        # row_num = 67
+        # sbuffer_count = 0
+        # slocation_count = 0
+        # sbuffer_val = app[1][0][0].get('Field_Value')
+        # slocation_val = app[1][0][4][0][0][0].get('Field_Value')
 
         # Loop through the Buffer Configuration table
         for i, record in enumerate(app[1]):
             print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # SOE Buffer Size
-            if record[0].get('Field_Value') == sbuffer_val:
-                pass
-            else:
-                sbuffer_count = sbuffer_count + 1
+            # if record[0].get('Field_Value') == sbuffer_val:
+            #     pass
+            # else:
+            #     sbuffer_count = sbuffer_count + 1
             print('\t\t', record[4][0][0][0].get('Field_Name'), ':', record[4][0][0][0].get('Field_Value'))  # SOE Location
-            if record[4][0][0][0].get('Field_Value') == slocation_val:
-                pass
-            else:
-                slocation_count = slocation_count + 1
+            # if record[4][0][0][0].get('Field_Value') == slocation_val:
+            #     pass
+            # else:
+            #     slocation_count = slocation_count + 1
         # Print the SOE BUFFER SIZE to the QC Doc
-        if sbuffer_count == 0:
-            ws['L' + str(row_num)].value = sbuffer_val
-        else:
-            ws['L' + str(row_num)].value = 'Not all SOE BUFFER SIZE values are the same. Please refer to the SGConfig.'
-        # Print the SOE LOCATION to the QC Doc
-        if slocation_count == 0:
-            ws['L' + str(row_num + 1)].value = slocation_val
-        else:
-            ws['L' + str(row_num + 1)].value = 'Not all SOE LOCATION values are the same. Please refer to the SGConfig.'
+        # if sbuffer_count == 0:
+        #     ws['L' + str(row_num)].value = sbuffer_val
+        # else:
+        #     ws['L' + str(row_num)].value = 'Not all SOE BUFFER SIZE values are the same. Please refer to the SGConfig.'
+        # # Print the SOE LOCATION to the QC Doc
+        # if slocation_count == 0:
+        #     ws['L' + str(row_num + 1)].value = slocation_val
+        # else:
+        #     ws['L' + str(row_num + 1)].value = 'Not all SOE LOCATION values are the same. Please refer to the SGConfig.'
 
         # Check the Standard UTC Offset
         # Check the DST Offset
@@ -589,29 +586,29 @@ def b014_check(app, ws):
         print('\t', app[4].get('Table_Identifier'), ':', app[4].get('Table_Name'), 'Table')
 
         # For the purpose of printing to the QC Doc
-        utc_count = 0
-        dst_count = 0
-        utc_val = app[4][0][11].get('Field_Value')
-        dst_val = app[4][0][12].get('Field_Value')
+        # utc_count = 0
+        # dst_count = 0
+        # utc_val = app[4][0][11].get('Field_Value')
+        # dst_val = app[4][0][12].get('Field_Value')
 
         # Loop through the Daylight Savings Time table
         for i, record in enumerate(app[4]):
             print('\t\t', record[11].get('Field_Name'), ':', record[11].get('Field_Value'))  # Standard UTC Offset
-            if record[11].get('Field_Value') != utc_val:
-                utc_count = utc_count + 1
+            # if record[11].get('Field_Value') != utc_val:
+            #     utc_count = utc_count + 1
             print('\t\t', record[12].get('Field_Name'), ':', record[12].get('Field_Value'))  # DST Offset
-            if record[12].get('Field_Value') != dst_val:
-                dst_count = dst_count + 1
+            # if record[12].get('Field_Value') != dst_val:
+            #     dst_count = dst_count + 1
 
-        if utc_count == 0:
-            ws['L' + str(row_num + 2)].value = utc_val
-        else:
-            ws['L' + str(row_num + 2)].value = 'Not all Standard UTC Offset values are the same. ' \
-                                               'Please refer to the SGConfig.'
-        if dst_count == 0:
-            ws['L' + str(row_num + 3)].value = dst_val
-        else:
-            ws['L' + str(row_num + 3)].value = 'Not all DST Offset values are the same. Please refer to the SGConfig.'
+        # if utc_count == 0:
+        #     ws['L' + str(row_num + 2)].value = utc_val
+        # else:
+        #     ws['L' + str(row_num + 2)].value = 'Not all Standard UTC Offset values are the same. ' \
+        #                                        'Please refer to the SGConfig.'
+        # if dst_count == 0:
+        #     ws['L' + str(row_num + 3)].value = dst_val
+        # else:
+        #     ws['L' + str(row_num + 3)].value = 'Not all DST Offset values are the same. Please refer to the SGConfig.'
 
         # Check User Name = something
         # Check Password = something
@@ -628,8 +625,8 @@ def b014_check(app, ws):
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Control Password
 
         # For the purpose of printing to the QC Doc
-        ws['L71'].value = "Please refer to the SGConfig."
-        row_num = 78
+        # ws['L71'].value = "Please refer to the SGConfig."
+        # row_num = 78
 
         # Check Welcome Message
 
@@ -639,17 +636,15 @@ def b014_check(app, ws):
         for i, record in enumerate(app[5]):
             print('\t\t', record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'),
                   ':', record[3].get('Field_Value'))
-            ws['C' + str(row_num)].value = record[0].get('Field_Value')
-            ws['D' + str(row_num)].value = record[3].get('Field_Value')
-            row_num = row_num + 1
-
-
+            # ws['C' + str(row_num)].value = record[0].get('Field_Value')
+            # ws['D' + str(row_num)].value = record[3].get('Field_Value')
+            # row_num = row_num + 1
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b015_check(app, ws):
+def b015_check(app):
     # Check Bridgeman app
 
     # Check if the Application is Enabled
@@ -664,41 +659,41 @@ def b015_check(app, ws):
         print('\t', num_dnp_dev, 'remote DNP devices')
 
         # For the purpose of printing to the QC Doc
-        rxcount = 0
-        rxval = app[0][0][1].get('Field_Value')
+        # rxcount = 0
+        # rxval = app[0][0][1].get('Field_Value')
 
         for record in app[0]:
             print('\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # Number of Rx Buffers
-            if record[1].get('Field_Value') != rxval:
-                rxcount = rxcount + 1
+            # if record[1].get('Field_Value') != rxval:
+            #     rxcount = rxcount + 1
 
-        if rxcount == 0:
-            ws['L' + str(110)].value = rxval
-        else:
-            ws['L' + str(110)].value = 'Not all Number of RX Buffers values are the same. Please refer to the SGConfig.'
+        # if rxcount == 0:
+        #     ws['L' + str(110)].value = rxval
+        # else:
+        #     ws['L' + str(110)].value = 'Not all Number of RX Buffers values are the same. Please refer to the SGConfig.'
 
         # For the purpose of printing to the Local Application table of the QC Doc
-        row_number = 114
+        # row_number = 114
 
         print('\t', 'Local Application Table [LAN Address(Hex), Data Link Channel]')
         # Loop through the Local Application table
         for i, record in enumerate(app[2]):
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), ':', b013_com_list[i])
-            ws['D' + str(row_number)].value = record[0].get('Field_Value')
-            ws['E' + str(row_number)].value = record[2].get('Field_Value')
-            ws['F' + str(row_number)].value = record[3].get('Field_Value')
-            ws['L' + str(row_number)].value = b013_com_list[i]
-            row_number = row_number + 1
+            # ws['D' + str(row_number)].value = record[0].get('Field_Value')
+            # ws['E' + str(row_number)].value = record[2].get('Field_Value')
+            # ws['F' + str(row_number)].value = record[3].get('Field_Value')
+            # ws['L' + str(row_number)].value = b013_com_list[i]
+            # row_number = row_number + 1
 
         # Indication of COM number
-        ws['L' + str(113)].value = 'Corresponding COM Port'
-        ws['L' + str(123)].value = 'Corresponding COM Port'
+        # ws['L' + str(113)].value = 'Corresponding COM Port'
+        # ws['L' + str(123)].value = 'Corresponding COM Port'
 
         # For the purpose of printing to the Remote Application Table of the QC Doc
-        row_number = 124
-        txcount = 0
-        txval = app[3][0][4].get('Field_Value')
+        # row_number = 124
+        # txcount = 0
+        # txval = app[3][0][4].get('Field_Value')
 
         print('\t', 'Remote Application Table [LAN Address(Hex), Data Link Channel]')
         # Check TXT Delay to Appl.
@@ -706,24 +701,24 @@ def b015_check(app, ws):
         for i, record in enumerate(app[3]):
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), '   ', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
-            ws['D' + str(row_number)].value = record[0].get('Field_Value')
-            ws['E' + str(row_number)].value = record[2].get('Field_Value')
-            ws['F' + str(row_number)].value = record[3].get('Field_Value')
-            ws['L' + str(row_number)].value = b013_com_list[i]
-            if record[4].get('Field_Value') != txval:
-                txcount = txcount + 1
-            row_number = row_number + 1
+            # ws['D' + str(row_number)].value = record[0].get('Field_Value')
+            # ws['E' + str(row_number)].value = record[2].get('Field_Value')
+            # ws['F' + str(row_number)].value = record[3].get('Field_Value')
+            # ws['L' + str(row_number)].value = b013_com_list[i]
+            # if record[4].get('Field_Value') != txval:
+            #     txcount = txcount + 1
+            # row_number = row_number + 1
 
-        if txcount == 0:
-            ws['L' + str(205)].value = txval
-        else:
-            ws['L' + str(205)].value = 'Refer to the SGConfig for TX DELAY TO APPL. values.'
+        # if txcount == 0:
+        #     ws['L' + str(205)].value = txval
+        # else:
+        #     ws['L' + str(205)].value = 'Refer to the SGConfig for TX DELAY TO APPL. values.'
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b021_check(app, ws):
+def b021_check(app):
     # Check Datalink Confirm
     # Check Idle Report Period
 
@@ -736,38 +731,38 @@ def b021_check(app, ws):
         print('\t', app[0].get('Table_Identifier'), ':', app[0].get('Table_Name'), 'Table')
 
         # For the purpose of printing to the QC Doc
-        datalink_control_value = app[0][0][14].get('Field_Value')
-        idlereport_control_value = app[0][0][11][0][0][5].get('Field_Value')
-        datalink_count = 0
-        idlereport_count = 0
-        row_number = 183
+        # datalink_control_value = app[0][0][14].get('Field_Value')
+        # idlereport_control_value = app[0][0][11][0][0][5].get('Field_Value')
+        # datalink_count = 0
+        # idlereport_count = 0
+        # row_number = 183
 
         # Loop through the DPA Configuration table
         for i, record in enumerate(app[0]):
             print('\t\t', i, ':')
             print('\t\t\t', record[14].get('Field_Name'), ':', record[14].get('Field_Value'))  # Data Link Confirm
-            if record[14].get('Field_Value') == datalink_control_value:
-                pass
-            else:
-                datalink_count = datalink_count + 1
+            # if record[14].get('Field_Value') == datalink_control_value:
+            #     pass
+            # else:
+            #     datalink_count = datalink_count + 1
             print('\t\t\t', record[11].get('Field_Name'))  # Unsolicited Response
             print('\t\t\t\t', record[11][0][0][5].get('Field_Name'), ':', record[11][0][0][5].get('Field_Value'))
                                                                                                # Idle Report Period
-            if record[11][0][0][5].get('Field_Value') == idlereport_control_value:
-                pass
-            else:
-                idlereport_count = idlereport_count + 1
+            # if record[11][0][0][5].get('Field_Value') == idlereport_control_value:
+            #     pass
+            # else:
+            #     idlereport_count = idlereport_count + 1
 
-        if datalink_count == 0:
-            ws['L' + str(row_number)].value = datalink_control_value
-        else:
-            ws['L' + str(row_number)].value = 'There is a DATALINK CONFIRM value that is not disabled. ' \
-                                              'Please refer to the SGConfig.'
-        if idlereport_count == 0:
-            ws['L' + str(row_number + 1)].value = idlereport_control_value
-        else:
-            ws['L' + str(row_number + 1)].value = 'There is an Idle Report Period value that differs. ' \
-                                              'Please refer to the SGConfig.'
+        # if datalink_count == 0:
+        #     ws['L' + str(row_number)].value = datalink_control_value
+        # else:
+        #     ws['L' + str(row_number)].value = 'There is a DATALINK CONFIRM value that is not disabled. ' \
+        #                                       'Please refer to the SGConfig.'
+        # if idlereport_count == 0:
+        #     ws['L' + str(row_number + 1)].value = idlereport_control_value
+        # else:
+        #     ws['L' + str(row_number + 1)].value = 'There is an Idle Report Period value that differs. ' \
+        #                                       'Please refer to the SGConfig.'
 
         # Compare the Winpoints from the points list to what's programmed in the D20
 
@@ -814,7 +809,7 @@ def b021_check(app, ws):
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
-def b023_check(app, ws):
+def b023_check(app):
     # <app>
     #   <table "B023_PNT">
     #   There is no B023_POL
@@ -832,18 +827,18 @@ def b023_check(app, ws):
         b023_pnt_list = []
 
         # For the use of putting the following values into the QC Doc
-        pnt_location_number = 23
-        cfg_row_number = 33
-        dev_row_number = 216
+        # pnt_location_number = 23
+        # cfg_row_number = 33
+        # dev_row_number = 216
 
         # Loop through the Device Point Map table
         for i, record in enumerate(app[2]):
 
-            ws['E' + str(pnt_location_number)].value = record[0].get('Field_Value')
-            ws['F' + str(pnt_location_number)].value = record[1].get('Field_Value')
+            # ws['E' + str(pnt_location_number)].value = record[0].get('Field_Value')
+            # ws['F' + str(pnt_location_number)].value = record[1].get('Field_Value')
             print('\t\t', i, '-', record[0].get('Field_Value'), ':', record[1].get('Field_Value'))
             b023_pnt_list.append((record[0].get('Field_Value'), record[1].get('Field_Value')))
-            pnt_location_number = pnt_location_number + 1
+            # pnt_location_number = pnt_location_number + 1
 
         print('\t', 'B023_POL')
         #b023_pol_list = []
@@ -864,19 +859,19 @@ def b023_check(app, ws):
         b023_dev_list = []
 
         # For the purpose of printing to the QC Doc
-        pollCount = 0
-        integCount = 0
-        offCount = 0
-        failCount = 0
-        timeCount = 0
-        dataCount = 0
-
-        pollVal = app[1][0][5][0][0][3].get('Field_Value')
-        integVal = app[1][0][6].get('Field_Value')
-        offVal = app[1][0][3][0][0][8].get('Field_Value')
-        failVal = app[1][0][7].get('Field_Value')
-        timeVal = app[1][0][3][0][0][4].get('Field_Value')
-        dataVal = app[1][0][3][0][0][7].get('Field_Value')
+        # pollCount = 0
+        # integCount = 0
+        # offCount = 0
+        # failCount = 0
+        # timeCount = 0
+        # dataCount = 0
+        #
+        # pollVal = app[1][0][5][0][0][3].get('Field_Value')
+        # integVal = app[1][0][6].get('Field_Value')
+        # offVal = app[1][0][3][0][0][8].get('Field_Value')
+        # failVal = app[1][0][7].get('Field_Value')
+        # timeVal = app[1][0][3][0][0][4].get('Field_Value')
+        # dataVal = app[1][0][3][0][0][7].get('Field_Value')
 
         # Loop through the Device Configuration table
         for i, record in enumerate(app[1]):
@@ -884,28 +879,28 @@ def b023_check(app, ws):
             print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
             # Poll Interval (s)
             print('\t\t\t', record[5][0][0][3].get('Field_Name'), ':', record[5][0][0][3].get('Field_Value'))
-            if record[5][0][0][3].get('Field_Value') != pollVal:
-                pollCount = pollCount + 1
+            # if record[5][0][0][3].get('Field_Value') != pollVal:
+            #     pollCount = pollCount + 1
             # Integrity Poll Interval
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
-            if record[6].get('Field_Value') != integVal:
-                integCount = integCount + 1
+            # if record[6].get('Field_Value') != integVal:
+            #     integCount = integCount + 1
             # Offline After Fail
             print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
-            if record[3][0][0][8].get('Field_Value') != offVal:
-                offCount = offCount + 1
+            # if record[3][0][0][8].get('Field_Value') != offVal:
+            #     offCount = offCount + 1
             # Failures For Bad Channel
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
-            if record[7].get('Field_Value') != failVal:
-                failCount = failCount + 1
+            # if record[7].get('Field_Value') != failVal:
+            #     failCount = failCount + 1
             # Time Syncing
             print('\t\t\t', record[3][0][0][4].get('Field_Name'), ':', record[3][0][0][4].get('Field_Value'))
-            if record[3][0][0][4].get('Field_Value') != timeVal:
-                timeCount = timeCount + 1
+            # if record[3][0][0][4].get('Field_Value') != timeVal:
+            #     timeCount = timeCount + 1
             # Data Link CFM Required
             print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
-            if record[3][0][0][7].get('Field_Value') != dataVal:
-                dataCount = dataCount + 1
+            # if record[3][0][0][7].get('Field_Value') != dataVal:
+            #     dataCount = dataCount + 1
             # First Point Record
             print('\t\t\t', record[9][0][0][2].get('Field_Name'), ':', record[9][0][0][2].get('Field_Value'))
             # Number of Point Records
@@ -924,43 +919,43 @@ def b023_check(app, ws):
             # print('\t\t\t', record[9][0][0][5].get('Field_Name'), ':', record[9][0][0][5].get('Field_Value'))
             b023_dev_list.append(record[0].get('Field_Value'))
 
-        if pollCount == 0:
-            ws['L' + str(cfg_row_number + 1)].value = pollVal
-        else:
-            ws['L' + str(cfg_row_number + 1)].value = 'Some of the POLL INTERVAL values differ. ' \
-                                                      'Please refer to the SGConfig.'
-        if integCount == 0:
-            ws['L' + str(cfg_row_number + 2)].value = integVal
-        else:
-            ws['L' + str(cfg_row_number + 2)].value = 'Some of the INTEGRITY POLL INTERVAL values differ. ' \
-                                                      'Please refer to the SGConfig.'
-        if offCount == 0:
-            ws['L' + str(cfg_row_number + 3)].value = offVal
-        else:
-            ws['L' + str(cfg_row_number + 3)].value = 'Some of the OFFLINE AFTER FAIL values differ. ' \
-                                                      'Please refer to the SGConfig.'
-        if failCount == 0:
-            ws['L' + str(cfg_row_number + 4)].value = failVal
-        else:
-            ws['L' + str(cfg_row_number + 4)].value = 'Some of the FAILURES FOR BAD CHAN. values differ. ' \
-                                                      'Please refer to the SGConfig.'
-        if timeCount == 0:
-            ws['L' + str(cfg_row_number + 5)].value = timeVal
-        else:
-            ws['L' + str(cfg_row_number + 5)].value = 'Some of the TIMESYNCING values differ.' \
-                                                      ' Please refer to the SGConfig.'
-        if dataCount == 0:
-            ws['L' + str(dev_row_number)].value = dataVal
-        else:
-            ws['L' + str(dev_row_number)].value = 'Some of the Data Link CFM Required' \
-                                                  ' values differ. Please refer to the SGConfig.'
+        # if pollCount == 0:
+        #     ws['L' + str(cfg_row_number + 1)].value = pollVal
+        # else:
+        #     ws['L' + str(cfg_row_number + 1)].value = 'Some of the POLL INTERVAL values differ. ' \
+        #                                               'Please refer to the SGConfig.'
+        # if integCount == 0:
+        #     ws['L' + str(cfg_row_number + 2)].value = integVal
+        # else:
+        #     ws['L' + str(cfg_row_number + 2)].value = 'Some of the INTEGRITY POLL INTERVAL values differ. ' \
+        #                                               'Please refer to the SGConfig.'
+        # if offCount == 0:
+        #     ws['L' + str(cfg_row_number + 3)].value = offVal
+        # else:
+        #     ws['L' + str(cfg_row_number + 3)].value = 'Some of the OFFLINE AFTER FAIL values differ. ' \
+        #                                               'Please refer to the SGConfig.'
+        # if failCount == 0:
+        #     ws['L' + str(cfg_row_number + 4)].value = failVal
+        # else:
+        #     ws['L' + str(cfg_row_number + 4)].value = 'Some of the FAILURES FOR BAD CHAN. values differ. ' \
+        #                                               'Please refer to the SGConfig.'
+        # if timeCount == 0:
+        #     ws['L' + str(cfg_row_number + 5)].value = timeVal
+        # else:
+        #     ws['L' + str(cfg_row_number + 5)].value = 'Some of the TIMESYNCING values differ.' \
+        #                                               ' Please refer to the SGConfig.'
+        # if dataCount == 0:
+        #     ws['L' + str(dev_row_number)].value = dataVal
+        # else:
+        #     ws['L' + str(dev_row_number)].value = 'Some of the Data Link CFM Required' \
+        #                                           ' values differ. Please refer to the SGConfig.'
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'))
 
         # For the purpose of printing to the QC Doc
-        restart_count = 0
-        restart_val = app[0][0][2].get('Field_Value')
+        # restart_count = 0
+        # restart_val = app[0][0][2].get('Field_Value')
 
         # Loop through the DCA Configuration table
         for i, record in enumerate(app[0]):
@@ -968,17 +963,17 @@ def b023_check(app, ws):
             print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
             #Restart Delay
             print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
-            if restart_val != record[2].get('Field_Value'):
-                restart_count = restart_count + 1
+            # if restart_val != record[2].get('Field_Value'):
+            #     restart_count = restart_count + 1
             print('\t\t\t', 'Devices in DCA:')
             for index in range(int(record[8].get('Field_Value')),
                                int(record[8].get('Field_Value')) + int(record[9].get('Field_Value'))):
                 print('\t\t\t\t', b023_dev_list[index])
 
-        if restart_count == 0:
-            ws['L' + str(cfg_row_number)].value = restart_val
-        else:
-            ws['L' + str(cfg_row_number)].value = 'One of the restart values differ. Please refer to the SGConfig.'
+        # if restart_count == 0:
+        #     ws['L' + str(cfg_row_number)].value = restart_val
+        # else:
+        #     ws['L' + str(cfg_row_number)].value = 'One of the restart values differ. Please refer to the SGConfig.'
         return
 
     # If the application is disabled, print statement
