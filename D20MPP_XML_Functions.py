@@ -773,6 +773,9 @@ def b021_check(app, ws):
 
         # Compare the Winpoints from the points list to what's programmed in the D20
 
+        # Show an "Open" dialog box and return the path to the selected file
+        filename = askopenfilename(title='Select EXCEL D20 DNP Map WinPt Check')
+
         # Put in the path to the excel template file
         directory = os.path.expanduser(
             os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
@@ -844,6 +847,7 @@ def b023_check(app, ws):
         # For the use of putting the following values into the QC Doc
         pnt_location_number = 23
         cfg_row_number = 33
+        dev_row_number = 216
 
         # Loop through the Device Point Map table
         for i, record in enumerate(app[2]):
@@ -871,22 +875,50 @@ def b023_check(app, ws):
         # Print the table identifier followed by the table name for clarity
         print('\t', app[1].get('Table_Identifier'))
         b023_dev_list = []
+
+        # For the purpose of printing to the QC Doc
+        pollCount = 0
+        integCount = 0
+        offCount = 0
+        failCount = 0
+        timeCount = 0
+        dataCount = 0
+
+        pollVal = app[1][0][5][0][0][3].get('Field_Value')
+        integVal = app[1][0][6].get('Field_Value')
+        offVal = app[1][0][3][0][0][8].get('Field_Value')
+        failVal = app[1][0][7].get('Field_Value')
+        timeVal = app[1][0][3][0][0][4].get('Field_Value')
+        dataVal = app[1][0][3][0][0][7].get('Field_Value')
+
         # Loop through the Device Configuration table
         for i, record in enumerate(app[1]):
             # Application Address
             print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
             # Poll Interval (s)
             print('\t\t\t', record[5][0][0][3].get('Field_Name'), ':', record[5][0][0][3].get('Field_Value'))
+            if record[5][0][0][3].get('Field_Value') != pollVal:
+                pollCount = pollCount + 1
             # Integrity Poll Interval
             print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+            if record[6].get('Field_Value') != integVal:
+                integCount = integCount + 1
             # Offline After Fail
             print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
+            if record[3][0][0][8].get('Field_Value') != offVal:
+                offCount = offCount + 1
             # Failures For Bad Channel
             print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))
+            if record[7].get('Field_Value') != failVal:
+                failCount = failCount + 1
             # Time Syncing
             print('\t\t\t', record[3][0][0][4].get('Field_Name'), ':', record[3][0][0][4].get('Field_Value'))
+            if record[3][0][0][4].get('Field_Value') != timeVal:
+                timeCount = timeCount + 1
             # Data Link CFM Required
             print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
+            if record[3][0][0][7].get('Field_Value') != dataVal:
+                dataCount = dataCount + 1
             # First Point Record
             print('\t\t\t', record[9][0][0][2].get('Field_Name'), ':', record[9][0][0][2].get('Field_Value'))
             # Number of Point Records
@@ -904,6 +936,37 @@ def b023_check(app, ws):
             #     print('\t\t\t\t', b023_pol_list[index])
             # print('\t\t\t', record[9][0][0][5].get('Field_Name'), ':', record[9][0][0][5].get('Field_Value'))
             b023_dev_list.append(record[0].get('Field_Value'))
+
+        if pollCount == 0:
+            ws['L' + str(cfg_row_number + 1)].value = pollVal
+        else:
+            ws['L' + str(cfg_row_number + 1)].value = 'Some of the POLL INTERVAL values differ. ' \
+                                                      'Please refer to the SGConfig.'
+        if integCount == 0:
+            ws['L' + str(cfg_row_number + 2)].value = integVal
+        else:
+            ws['L' + str(cfg_row_number + 2)].value = 'Some of the INTEGRITY POLL INTERVAL values differ. ' \
+                                                      'Please refer to the SGConfig.'
+        if offCount == 0:
+            ws['L' + str(cfg_row_number + 3)].value = offVal
+        else:
+            ws['L' + str(cfg_row_number + 3)].value = 'Some of the OFFLINE AFTER FAIL values differ. ' \
+                                                      'Please refer to the SGConfig.'
+        if failCount == 0:
+            ws['L' + str(cfg_row_number + 4)].value = failVal
+        else:
+            ws['L' + str(cfg_row_number + 4)].value = 'Some of the FAILURES FOR BAD CHAN. values differ. ' \
+                                                      'Please refer to the SGConfig.'
+        if timeCount == 0:
+            ws['L' + str(cfg_row_number + 5)].value = timeVal
+        else:
+            ws['L' + str(cfg_row_number + 5)].value = 'Some of the TIMESYNCING values differ.' \
+                                                      ' Please refer to the SGConfig.'
+        if dataCount == 0:
+            ws['L' + str(dev_row_number)].value = dataVal
+        else:
+            ws['L' + str(dev_row_number)].value = 'Some of the Data Link CFM Required' \
+                                                  ' values differ. Please refer to the SGConfig.'
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[0].get('Table_Identifier'))

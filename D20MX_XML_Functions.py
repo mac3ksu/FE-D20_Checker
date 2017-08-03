@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import xlrd
 import os
+from tkinter.filedialog import askopenfilename
 
 def set_comlist():
     # global list to keep track of application b013's com list
@@ -405,6 +406,9 @@ def b021_check(app):
             print('\t\t', 'An', app[3][0][3].get('Field_Name'), 'value is not enabled. Please check the SGConfig.')
 
         # Compare the Winpoints from the points list to what's programmed in the D20
+
+        # Show an "Open" dialog box and return the path to the selected file
+        filename = askopenfilename(title='Select EXCEL D20 DNP Map WinPt Check')
 
         # Put in the path to the excel template file
         directory = os.path.expanduser(
