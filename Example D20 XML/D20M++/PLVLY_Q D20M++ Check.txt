@@ -290,14 +290,68 @@ B021 - DNP V3.00 DPA
 			 Data Link Confirm : Disabled
 			 Unsolicited Responses
 				 Idle Report Period : 3000
-			 Error: Cannot read the file.
-			 Error: Cannot read the file.
-	 D20 DNP Map WinPt Check.xlsx
-	 ~$D20 DNP Map WinPt Check.xlsx
-			 Error: Cannot read the file.
-			 Error: Cannot read the file when it is open.
-			 Error: Cannot read the file when it is open.
-			 Error: Cannot read the file when it is open.
+	 D20 DNP Map WinPt Check
+		 Status Points Check
+			 DNP Point 0 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 1 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 2 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 3 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 8 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 9 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 10 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 11 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 12 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 13 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 14 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 15 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 16 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 17 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 18 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 19 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 20 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 21 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 22 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 23 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 24 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 25 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 26 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 27 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 28 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 29 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 30 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 31 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 32 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 33 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 34 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 35 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 36 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 37 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 38 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 39 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 40 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 41 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 42 < Status > Point is undefined.
+			 DNP Point 43 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 44 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 45 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 46 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 47 < Status > Point is undefined.
+			 DNP Point 48 < Status > Point is undefined.
+			 DNP Point 49 : More SGConfig < Status > points than excel template < Status > points.
+				 Please match the number of excel points to the SGConfig.
+		 Analog Points Check
+			 DNP Point 20 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 22 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 26 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 28 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 30 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 32 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 38 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 40 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 48 : More SGConfig < Analog > points than excel template < Analog > points.
+				 Please match the number of excel points to the SGConfig.
+		 Control Points Check
+			 All < Control > WinPts match.
 B023 - DNP V3.00 DCA
 	 B023_PNT
 		 0 - Analog Input : 18

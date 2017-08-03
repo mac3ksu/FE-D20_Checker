@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import xlrd
 import os
+import ntpath
 from openpyxl import load_workbook
 from tkinter.filedialog import askopenfilename
 
@@ -9,7 +10,7 @@ def set_comlist():
     global b013_com_list # Needed to modify global copy of b013_comlist
     b013_com_list = []
 
-def winpt_check(xcel_filename, directory, app, column, table_num, type):
+def winpt_check(directory, app, column, table_num, type):
     # xcel_filename - for the purpose of finding/opening the excel template file
     # directory - the path to get to the excel template file
     # app - the application currently in use
@@ -22,11 +23,8 @@ def winpt_check(xcel_filename, directory, app, column, table_num, type):
         # Counters for WinPt status printing
         count = 0
 
-        # Add the excel document to the passed-in directory
-        filepath = directory + '/' + xcel_filename
-
         # Open the excel document for reading
-        wbook = xlrd.open_workbook(filepath)
+        wbook = xlrd.open_workbook(directory)
 
         # Read the specified excel sheet
         for sheet in wbook.sheet_names():
@@ -774,54 +772,43 @@ def b021_check(app, ws):
         # Compare the Winpoints from the points list to what's programmed in the D20
 
         # Show an "Open" dialog box and return the path to the selected file
-        filename = askopenfilename(title='Select EXCEL D20 DNP Map WinPt Check')
+        directory = askopenfilename(title='Select Excel D20 DNP Map WinPt Check')
+        xcel_filename = ntpath.basename(directory)[:-5]  # In case it becomes necessary
+        print('\t', xcel_filename)
 
-        # Put in the path to the excel template file
-        directory = os.path.expanduser(
-            os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
+        # Try to read the file
+        try:
 
-        # Determine that the XCEL template's filename is D20 DNP Map WinPt Check
-        for thing in os.listdir(directory):
-            # Excel template should be named D20 DNP Map WinPt Check
-            if 'D20 DNP Map WinPt Check' in thing:
-                xcel_filename = thing
-                print('\t', xcel_filename)
+            # Open the excel document for reading
+            wbook = xlrd.open_workbook(directory)
 
-            # Try to read the file
-            try:
-                # Add the filename to the directory
-                filepath = directory + '/' + xcel_filename
+            # Read the specified excel sheet
+            for sheet in wbook.sheet_names():
+                if 'Sheet1' in sheet:
+                    wsheet_name = sheet
 
-                # Open the excel document for reading
-                wbook = xlrd.open_workbook(filepath)
+            wsheet = wbook.sheet_by_name(wsheet_name)
 
-                # Read the specified excel sheet
-                for sheet in wbook.sheet_names():
-                    if 'Sheet1' in sheet:
-                        wsheet_name = sheet
+            # Determine which column the specified points are in
+            for i, cell in enumerate(wsheet.row(1)):
+                if cell.value == 'DNP INDEX':
+                    dnp_index = i
+                elif cell.value == 'STATUS':
+                    status_index = i
+                elif cell.value == 'ANALOG':
+                    analog_index = i
+                elif cell.value == 'CONTROL':
+                    control_index = i
 
-                wsheet = wbook.sheet_by_name(wsheet_name)
-
-                # Determine which column the specified points are in
-                for i, cell in enumerate(wsheet.row(1)):
-                    if cell.value == 'DNP INDEX':
-                        dnp_index = i
-                    elif cell.value == 'STATUS':
-                        status_index = i
-                    elif cell.value == 'ANALOG':
-                        analog_index = i
-                    elif cell.value == 'CONTROL':
-                        control_index = i
-
-            # PyCharm presents an error if the excel file is open. You have to close the document
-            # before running the program
-            except Exception:
-                print('\t\t\t', 'Error: Cannot read the file.')
+        # PyCharm presents an error if the excel file is open. You have to close the document
+        # before running the program
+        except Exception:
+            print('\t\t\t', 'Error: Cannot read the file.')
 
         # Call the WinPt check function for Status, Analog, and Control points respectively
-        winpt_check(xcel_filename, directory, app, status_index, 3, 'Status')
-        winpt_check(xcel_filename, directory, app, analog_index, 6, 'Analog')
-        winpt_check(xcel_filename, directory, app, control_index, 4, 'Control')
+        winpt_check(directory, app, status_index, 3, 'Status')
+        winpt_check(directory, app, analog_index, 6, 'Analog')
+        winpt_check(directory, app, control_index, 4, 'Control')
 
     # If the application is disabled, print statement
     else:

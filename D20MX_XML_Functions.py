@@ -410,7 +410,6 @@ def b021_check(app):
         xcel_filename = ntpath.basename(directory)[:-5]  # In case it becomes necessary
         print('\t', xcel_filename)
 
-
         # Try to read the file
         try:
             # Open the excel document for reading
@@ -440,9 +439,9 @@ def b021_check(app):
             print('\t\t\t', 'Error: Cannot read the file.')
 
         # Call the WinPt check function for Status, Analog, and Control points respectively
-        winpt_check(directory, app, status_index, 3, 'Status')
-        winpt_check(directory, app, analog_index, 6, 'Analog')
-        winpt_check(directory, app, control_index, 4, 'Control')
+        winpt_check(wsheet, app, status_index, 3, 'Status')
+        winpt_check(wsheet, app, analog_index, 6, 'Analog')
+        winpt_check(wsheet, app, control_index, 4, 'Control')
 
     # If the application is disabled, print statement
     else:
