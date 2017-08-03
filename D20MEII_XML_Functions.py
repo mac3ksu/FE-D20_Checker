@@ -10,8 +10,7 @@ def set_comlist():
     global b013_com_list # Needed to modify global copy of globvar
     b013_com_list = []
 
-def winpt_check(xcel_filename, directory, app, column, table_num, type):
-    # xcel_filename - for the purpose of finding/opening the excel template file
+def winpt_check(directory, app, column, table_num, type):
     # directory - the path to get to the excel template file
     # app - the application currently in use
     # column - which column in the excel template you are wanting to check
@@ -23,13 +22,8 @@ def winpt_check(xcel_filename, directory, app, column, table_num, type):
         # Counters for WinPt status printing
         count = 0
 
-        # Add the excel document to the passed-in directory
-        #filepath = directory + '/' + xcel_filename
-
         # Open the excel document for reading
         wbook = xlrd.open_workbook(directory)
-        #wbook = Workbook(filepath) # Just makes a new xcel doc?
-        #wbook = load_workbook(filepath)  # Takes in a workbook
 
         # Read the specified excel sheet
         for sheet in wbook.sheet_names():
@@ -458,25 +452,12 @@ def b021_check(app):
         # Compare the Winpoints from the points list to what's programmed in the D20
 
         # Show an "Open" dialog box and return the path to the selected file
-        directory = askopenfilename(title='Select EXCEL D20 DNP Map WinPt Check')
-        xcel_filename = ntpath.basename(directory)[:-5]
-
-        # Put in the path to the excel template file
-        # directory = os.path.expanduser(
-        #     os.path.join('~', 'Documents', 'GitHub', 'FE-D20_Checker', 'Example D20 XML', 'D20MEII'))
-
-        # Determine that the XCEL template's filename is D20 DNP Map WinPt Check
-        #for thing in os.listdir(directory):
-            # Excel template should be named D20 DNP Map WinPt Check
-        # if 'D20 DNP Map WinPt Check' in thing:
-        #     xcel_filename = thing
-        #     print('\t', xcel_filename)
+        directory = askopenfilename(title='Select Excel D20 DNP Map WinPt Check')
+        xcel_filename = ntpath.basename(directory)[:-5]  # In case it becomes necessary
+        print('\t', xcel_filename)
 
         # Try to read the file
         try:
-            # Add the filename to the directory
-            #filepath = directory + '/' + xcel_filename
-
             # Open the excel document for reading
             wbook = xlrd.open_workbook(directory)
 
@@ -504,9 +485,9 @@ def b021_check(app):
             print('\t\t\t', 'Error: Cannot find the file.')
 
         # Call the WinPt check function for Status, Analog, and Control points respectively
-        winpt_check(xcel_filename, directory, app, status_index, 3, 'Status')
-        winpt_check(xcel_filename, directory, app, analog_index, 6, 'Analog')
-        winpt_check(xcel_filename, directory, app, control_index, 4, 'Control')
+        winpt_check(directory, app, status_index, 3, 'Status')
+        winpt_check(directory, app, analog_index, 6, 'Analog')
+        winpt_check(directory, app, control_index, 4, 'Control')
 
     # If the application is disabled, print statement
     else:
