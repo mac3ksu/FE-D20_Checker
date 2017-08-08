@@ -1,0 +1,104 @@
+ALNHRSTF
+526-2007 CCU - D20MEII
+A020 - is disabled
+A026-1 - Communication Watchdog
+	 A026_CFG : Communication Events Table
+		 0 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : Comm. Fail/Restore
+			 Status Point : (000086) D20CD COMM WD
+			 Normal State : Off
+			 Start Point : (000001) D20 C Combo Peripheral (Analog I/P)
+		 1 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : Comm. Fail/Restore
+			 Status Point : (000087) D20KR COMM WD
+			 Normal State : Off
+			 Start Point : (000002) D20 K Control Output Peripheral (32DO)
+		 2 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : Comm. Fail/Restore
+			 Status Point : (000088) D20SD COMM WD
+			 Normal State : Off
+			 Start Point : (000003) D20 S Digital Input Peripheral (64 DI)
+A030 - is disabled
+A083-0 - Calculator DTA
+	 A083DIEX : Digital Inputs Table
+		 Calc 1 - Event Types : Both
+		 Calc 2 - Event Types : COS
+		 Calc 3 - Event Types : COS
+		 Calc 4 - Event Types : COS
+		 Calc 5 - Event Types : COS
+		 Calc 6 - Event Types : COS
+		 Calc 7 - Event Types : COS
+		 Calc 8 - Event Types : COS
+		 Calc 9 - Event Types : COS
+		 Calc 10 - Event Types : COS
+		 Calc 11 - Event Types : COS
+		 Calc 12 - Event Types : COS
+		 Calc 13 - Event Types : COS
+		 Calc 14 - Event Types : COS
+		 Calc 15 - Event Types : COS
+		 Calc 16 - Event Types : COS
+		 Calc 17 - Event Types : COS
+		 Calc 18 - Event Types : COS
+		 Calc 19 - Event Types : COS
+		 Calc 20 - Event Types : COS
+B003 - D.20 Peripheral Link
+	 Report Deadband not in XML
+B013 - DNP V3.00 Data Link
+	 B013_CFG : Port Configuration Table
+		 0 :
+			 Port : COM1
+			 Reset Link on Rx NACK : Enabled
+			 DCD : Disabled
+			 RTS : Disabled
+			 CTS : Disabled
+			 DCD to Rx Enable Time : 10
+			 Baud Rate : 38.4k
+			 RTS Preamble : 12
+			 RTS Postamble : 10
+			 Max Frame Size : 249
+			 Transmit Retries : 1
+			 Transmit Buffers : 10
+			 Receive Buffers : 10
+			 Confirm Timeout : 100
+			 Response Timeout : 1000
+B014-1 - Wesmaint II+
+	 B014MCFG : Buffer Configuration Table
+		 SOE Buffer Size : 80
+		 SOE Location : NVRAM
+	 B014USER : User Configuration Table
+		 Record  0 :
+			 User Name : westronic
+			 Password : rd
+			 Control Password : control
+	 WWELCOME : Welcome Message Table
+		 Row 2 Message :  Allenhurst Substation               SAB3075.09
+		 Row 3 Message : Black & Veatch
+		 Row 14 Message : LOGIN:
+B015 - Bridgeman
+	 1 remote DNP devices
+	 Number Of Rx Buffers : 2
+	 Local Application Table [LAN Address(Hex), Data Link channel]
+		 10078 (x 275E ) 0 : COM1
+	 Remote Application Table [LAN Address(Hex), Data Link channel]
+		 10 (x A ) 0    -    Tx Delay to Application : 0
+B021 - DNP V3.00 DPA
+	 B021CFG : DPA Configuration Table
+		 0 :
+			 Data Link Confirm : Enabled
+			 Time Sync Enable State : OFF
+			 Offline sets Local IIN : TRUE
+			 Idle Report Period : 0
+	 B021MT01 : Binary Input Map Table
+		 An SOE value is not enabled. Please check the SGConfig.
+			 Error: Cannot find the file.
+	 D20 DNP Map WinPt Check.xlsx
+		 Status Points Check
+			 All < Status > WinPts match.
+		 Analog Points Check
+			 All < Analog > WinPts match.
+		 Control Points Check
+			 All < Control > WinPts match.
+B023 - is disabled

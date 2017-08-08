@@ -1,0 +1,441 @@
+C:/Users/clbishop/Documents/GitHub/FE-D20_Checker/Example D20 XML/D20MEII/MAYFIEAO D20ME
+526-2007 CCU - D20MEII
+A020 - is disabled
+A026-1 - Communication Watchdog
+	 A026_CFG : Communication Events Table
+		 0 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000195) WESDAC D20A1 Comm On/Off Line Indication
+			 Normal State : Off
+			 Start Point : (000001) Q-1-MF-NF-X MW
+		 1 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000196) WESDAC D20A2 Comm On/Off Line Indication
+			 Normal State : Off
+			 Start Point : (000033) R-3-MF-T AMP
+		 2 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : DI Point On/Off-line
+			 Status Point : (000197) WESDAC D20S1 Comm On/Off Line Indication
+			 Normal State : Off
+			 Start Point : (000001) Q-1-AT-MF-X
+		 3 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : DI Point On/Off-line
+			 Status Point : (000198) WESDAC D20S2 Comm On/Off Line Indication
+			 Normal State : Off
+			 Start Point : (000065) 138KV BKR B21 CRITICAL AL
+		 4 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : DO Point On/Off-line
+			 Status Point : (000199) WESDAC D20K Comm On/Off Line Indication
+			 Normal State : Off
+			 Start Point : (000001) Q-1-AT-MF-X
+		 5 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000200) 4-MF-T Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000124) RTAC3P5-SATEC 4-MF-T KV PH A
+		 6 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000201) Cap Bank #1 Bitronics COMM WD
+			 Normal State : Off
+			 Start Point : (000076) RTAC1-CAP #1 BITRONICS VOLTS A-B
+		 7 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000202) Cap Bank #2 Bitronics COMM WD
+			 Normal State : Off
+			 Start Point : (000079) RTAC1-CAP #2 BITRONICS VOLTS A-B
+		 8 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000203) Cap Bank #3 Bitronics COMM WD
+			 Normal State : Off
+			 Start Point : (000082) RTAC1-CAP #3 BITRONICS VOLTS A-B
+		 9 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000204) Cap Bank #4 Bitronics COMM WD
+			 Normal State : Off
+			 Start Point : (000085) RTAC1-CAP #4 BITRONICS VOLTS A-B
+		 10 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000205) Q-1-LC-MF-X Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000090) RTAC1-Q-1-LC-MF-X L1 Volts
+		 11 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000206) Q-2-LC-MF-X Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000094) RTAC1-Q-2-LC-MF-X L1 Volts
+		 12 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000207) Q-3-LC-MF-X Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000098) RTAC1-Q-3-LC-MF-X L1 Volts
+		 13 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000208) Q-4-LC-MF-X Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000102) RTAC1-Q-4-LC-MF-X L1 Volts
+		 14 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000209) Q-2-MF-NF-X Bitronics COMM WD
+			 Normal State : Off
+			 Start Point : (000170) RTAC3P17-BITRONIC Q-2-MF-NF-X KV PH A
+		 15 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000210) Mayfield-Northfield Q4 Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000154) RTAC3P4-SATEC MN Q4 KV PH A
+		 16 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000211) R-1-MF-C Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000134) RTAC3P17-SATEC R-1-MF-C KV PH A
+		 17 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000212) R-2-MF-C Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000138) RTAC3P17-SATEC R-2-MF-C KV PH A
+		 18 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000213) R-3-MF-C Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000142) RTAC3P17-SATEC R-3-MF-C KV PH A
+		 19 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000214) R-4-MF-C Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000146) RTAC3P17-SATEC R-4-MF-C KV PH A
+		 20 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : Device On/Off-line
+			 Status Point : (000215) SEL3530 RTAC1 COMM WD
+			 Normal State : Off
+			 Start Point : (000007) SEL3530 RTAC1 (addr 41)
+		 21 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000216) Q-3-MF-NF-X Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000108) RTAC3P4-SATEC Q-3-MF-NF KV PH A
+		 22 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000217) 1-MF-T Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000112) RTAC3P5-SATEC 1-MF-T KV PH A
+		 23 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000218) 2-MF-T Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000116) RTAC3P5-SATEC 2-MF-T KV PH A
+		 24 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000219) 3-MF-T Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000120) RTAC3P5-SATEC 3-MF-T KV PH A
+		 25 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000220) Eastlake-Mayfield Q-3 Meter COMM WD
+			 Normal State : Off
+			 Start Point : (000150) RTAC3P4-SATEC EASTLAKE-MAYFIELD Q3 KV A
+		 26 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000221) PR EL3 421 RTAC3 P09 COMM WD
+			 Normal State : Off
+			 Start Point : (000165) RTAC3-S421 PR EL3 P09 IB
+		 27 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000222) PR Q3 NF 421 RTAC3 P01 COMM WD
+			 Normal State : Off
+			 Start Point : (000163) RTAC3-S421 PR NF3 P01 IB
+		 28 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000223) Eastlake-Mayfield Q4 Satec COMM WD
+			 Normal State : Off
+			 Start Point : (000158) RTAC3P4-SATEC EM Q4 KV PH A
+		 29 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000224) PR EL4 421 RTAC3 P20 COMM WD
+			 Normal State : Off
+			 Start Point : (000167) RTAC3-S421 PR EL4 P20 IB
+		 30 :
+			 Operating Condition : OR
+			 Channel/Type Specifier : AI Point On/Off-line
+			 Status Point : (000225) PR NF4 421 RTAC3 P28 COMM WD
+			 Normal State : Off
+			 Start Point : (000169) RTAC3-S421 PR NF4 P28 IB
+A030 - is disabled
+A083-0 - Calculator DTA
+	 A083DIEX : Digital Inputs Table
+		 Calc 1 - Event Types : Both
+		 Calc 2 - Event Types : Both
+		 Calc 3 - Event Types : Both
+		 Calc 4 - Event Types : Both
+		 Calc 5 - Event Types : Both
+		 Calc 6 - Event Types : Both
+		 Calc 7 - Event Types : Both
+		 Calc 8 - Event Types : Both
+		 Calc 9 - Event Types : Both
+		 Calc 10 - Event Types : Both
+		 Calc 11 - Event Types : Both
+		 Calc 12 - Event Types : Both
+B003 - D.20 Peripheral Link
+	 Report Deadband not in XML
+B013 - DNP V3.00 Data Link
+	 B013_CFG : Port Configuration Table
+		 0 :
+			 Port : COM1
+			 Reset Link on Rx NACK : Disabled
+			 DCD : Disabled
+			 RTS : Disabled
+			 CTS : Disabled
+			 DCD to Rx Enable Time : 10
+			 Baud Rate : 9600
+			 RTS Preamble : 10
+			 RTS Postamble : 10
+			 Max Frame Size : 249
+			 Transmit Retries : 3
+			 Transmit Buffers : 10
+			 Receive Buffers : 10
+			 Confirm Timeout : 1500
+			 Response Timeout : 1500
+		 1 :
+			 Port : COM6
+			 Reset Link on Rx NACK : Disabled
+			 DCD : Disabled
+			 RTS : Disabled
+			 CTS : Disabled
+			 DCD to Rx Enable Time : 10
+			 Baud Rate : 9600
+			 RTS Preamble : 10
+			 RTS Postamble : 10
+			 Max Frame Size : 249
+			 Transmit Retries : 3
+			 Transmit Buffers : 10
+			 Receive Buffers : 10
+			 Confirm Timeout : 1500
+			 Response Timeout : 1500
+		 2 :
+			 Port : COM2
+			 Reset Link on Rx NACK : Disabled
+			 DCD : Disabled
+			 RTS : Disabled
+			 CTS : Disabled
+			 DCD to Rx Enable Time : 10
+			 Baud Rate : 38.4k
+			 RTS Preamble : 10
+			 RTS Postamble : 10
+			 Max Frame Size : 249
+			 Transmit Retries : 3
+			 Transmit Buffers : 10
+			 Receive Buffers : 10
+			 Confirm Timeout : 1500
+			 Response Timeout : 1500
+B014-1 - Wesmaint II+
+	 B014MCFG : Buffer Configuration Table
+		 SOE Buffer Size : 500
+		 SOE Location : NVRAM
+	 B014USER : User Configuration Table
+		 Record  0 :
+			 User Name : getronic
+			 Password : aredee
+			 Control Password : k0ntr0l
+	 WWELCOME : Welcome Message Table
+		 Row 2 Message : Mayfield Substation  SAB 3075/10
+		 Row 4 Message : Port 0  9600 Baud Westmaint
+		 Row 5 Message : Port 1  9600 Baud, SEL3530 RTAC1
+		 Row 6 Message : Port 2  38400 Baud, DNP DPA to WCC
+		 Row 7 Message : Port 3  Spare
+		 Row 8 Message : Port 4  BAD PORT DO NOT USE
+		 Row 9 Message : Port 5  Spare
+		 Row 10 Message : Port 6  9600 Baud, SEL3530 RTAC3
+		 Row 11 Message : Port 7  DO NOT USE
+		 Row 13 Message : NEW LOGIN:
+B015 - Bridgeman
+	 3 remote DNP devices
+	 Number Of Rx Buffers : 12
+	 Local Application Table [LAN Address(Hex), Data Link channel]
+		 4 (x 4 ) 0 : COM1
+		 40 (x 28 ) 1 : COM6
+		 1470 (x 5BE ) 2 : COM2
+	 Remote Application Table [LAN Address(Hex), Data Link channel]
+		 41 (x 29 ) 0    -    Tx Delay to Application : 250
+		 45 (x 2D ) 1    -    Tx Delay to Application : 250
+		 10 (x A ) 2    -    Tx Delay to Application : 0
+B021 - DNP V3.00 DPA
+	 B021CFG : DPA Configuration Table
+		 0 :
+			 Data Link Confirm : Disabled
+			 Time Sync Enable State : OFF
+			 Offline sets Local IIN : FALSE
+			 Idle Report Period : 0
+	 B021MT01 : Binary Input Map Table
+		 An SOE value is not enabled. Please check the SGConfig.
+	 D20 DNP Map WinPt Check
+		 Status Points Check
+			 DNP Point 0 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 1 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 2 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 3 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 8 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 9 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 10 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 11 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 12 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 13 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 14 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 15 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 16 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 17 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 18 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 19 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 20 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 21 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 22 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 23 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 24 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 25 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 26 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 27 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 28 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 29 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 30 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 31 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 32 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 33 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 34 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 35 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 36 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 37 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 38 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 39 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 40 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 41 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 42 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 43 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 44 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 45 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 46 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 47 < Status > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 48 : More SGConfig < Status > points than excel template < Status > points.
+				 Please match the number of excel points to the SGConfig.
+		 Analog Points Check
+			 DNP Point 2 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 3 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 4 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 5 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 6 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 7 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 8 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 9 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 10 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 11 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 13 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 14 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 15 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 16 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 17 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 18 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 20 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 22 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 23 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 24 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 25 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 26 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 27 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 29 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 30 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 31 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 32 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 33 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 42 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 43 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 44 < Analog > Point is undefined.
+			 DNP Point 45 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 46 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 47 < Analog > WinPt does not match the points list. Please refer to the SGConfig.
+			 DNP Point 48 < Analog > Point is undefined.
+			 DNP Point 49 : More SGConfig < Analog > points than excel template < Analog > points.
+				 Please match the number of excel points to the SGConfig.
+		 Control Points Check
+			 Error: Cannot read the file.
+B023 - DNP V3.00 DCA
+	 B023_PNT
+		 0 - Analog Input 16 : 38
+		 1 - Binary Input : 10
+		 2 - Binary Input : 13
+		 3 - Analog Input 16 : 63
+		 4 - Binary Output : 12
+	 B023_POL
+		 0 :
+			 Poll Data Type : Integrity Poll
+			 Qualifier : ALL Points
+			 Poll Interval (Days) : 0
+			 Poll Interval (Hours) : 0
+			 Poll Interval (Minutes) : 0
+			 Poll Interval (Seconds) : 5
+			 Poll Interval (Msec) : 0
+	 B023_DEV
+		 Application Address : 41
+			 Data Link CFM Required : Confirm Not Required
+			 Off-Line After Fail : Off-line after chan fail
+			 Time Sync Method : No Time Sync
+			 Failures For bad Channel : 3
+			 First Point Record : 0
+			 Number of Point Records : 2
+				 ('Analog Input 16', '38')
+				 ('Binary Input', '10')
+			 First Poll Record : 0
+			 Number of Poll Records : 1
+				 (0, 'Integrity Poll')
+			 Events for Time Sync : Disabled
+		 Application Address : 45
+			 Data Link CFM Required : Confirm Not Required
+			 Off-Line After Fail : Off-line after chan fail
+			 Time Sync Method : No Time Sync
+			 Failures For bad Channel : 3
+			 First Point Record : 2
+			 Number of Point Records : 3
+				 ('Binary Input', '13')
+				 ('Analog Input 16', '63')
+				 ('Binary Output', '12')
+			 First Poll Record : 0
+			 Number of Poll Records : 1
+				 (0, 'Integrity Poll')
+			 Events for Time Sync : Disabled
+	 B023_CFG
+		 DCA Address : 4
+			 Minimum Inter Poll Delay : 0
+			 Restart Delay : 10
+			 Devices in DCA:
+				 41
+		 DCA Address : 40
+			 Minimum Inter Poll Delay : 0
+			 Restart Delay : 10
+			 Devices in DCA:
+				 45

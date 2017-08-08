@@ -1,8 +1,9 @@
 import xml.etree.ElementTree as ET
 import xlrd
 import os
-import ntpath
 from tkinter.filedialog import askopenfilename
+import ntpath
+
 
 def set_comlist():
     # global list to keep track of application b013's com list
@@ -10,7 +11,6 @@ def set_comlist():
     b013_com_list = []
 
 def winpt_check(directory, app, column, table_num, type):
-    # xcel_filename - for the purpose of finding/opening the excel template file
     # directory - the path to get to the excel template file
     # app - the application currently in use
     # column - which column in the excel template you are wanting to check
@@ -92,17 +92,19 @@ def winpt_check(directory, app, column, table_num, type):
 
     # PyCharm presents an error if the excel file is open. You have to close the document before running the program
     except Exception:
-        print('\t\t\t', 'Error: Cannot read the file when it is open.')
+        print('\t\t\t', 'Error: Cannot read the file.')
 
-def d20mx_check(xml_filename, directory):
+def d20meII_check(xml_filename, directory):
     tree = ET.parse(os.path.join(directory, xml_filename))
     root = tree.getroot()
 
     # Check all of these applications
 
-    # Print the part number. For D20MX, the number should be 526-3001
-    print(root[0][0][1][0].get('Part_Number'), '-', root[0][0].get('Device_Type'))
+    # Print the part number. For D20MEII, the number should be 526-2007
+    print(root[0][0][1][0].get('Part_Number'), '-', root[0][0].get('Device_Type') + 'MEII')
     for app in root[0][0][1][0]:
+        if app.get('Application_Identifier') == 'A003':
+            a003_check(app)
         if app.get('Application_Identifier') == 'A020':
             a020_check(app)
         if app.get('Application_Identifier') == 'A026-1':
@@ -112,19 +114,71 @@ def d20mx_check(xml_filename, directory):
         if app.get('Application_Identifier') == 'A083-0':
             a083_check(app)
         if app.get('Application_Identifier') == 'B003':
-           b003_check(app)
+            b003_check(app)
         if app.get('Application_Identifier') == 'B013':
             b013_check(app)
-        if app.get('Application_Identifier') == 'B014-1N':
+        if app.get('Application_Identifier') == 'B014-1':
             b014_check(app)
         if app.get('Application_Identifier') == 'B015':
             b015_check(app)
-        if app.get('Application_Identifier') == 'B021N':
+        if app.get('Application_Identifier') == 'B021':
             b021_check(app)
         if app.get('Application_Identifier') == 'B023':
-           b023_check(app)
+            b023_check(app)
 
-# There is no A020 Application in the D20MX XML File
+# Application A003 is NOT in the D20MEII XML File
+def a003_check(app):
+    # Check SOE
+    # Check Offline Condition
+    # Check Contact BUR/BASE Time
+
+    # Check if the Application is Enabled
+    if app.get('Enabled') == 'True':
+        # Print the application identifier followed by the application name for clarity
+        print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
+
+        # Print the table identifier followed by the table name for clarity
+        print('\t', app[6].get('Table_Identifier'), ':', app[6].get('Table_Name'), 'Table')
+        # Tracking Variable
+        count = 0
+        # Loop through the specified table
+        for i, record in enumerate(app[6]):
+            if app[6][0][2].get('Field_Value') == 'No':
+                pass  # Do nothing
+            else:
+                count = count + 1  # Increment for tracking purposes
+
+        # Print Statement if an SOE Variable Differs
+        if count == 0:
+            print('\t\t', app[6][0][2].get('Field_Name'), ':', app[6][0][2].get('Field_Value'))
+        else:
+            print('An SOE value differs from the rest. Please check the SGConfig.')
+
+        # Print the table identifier followed by the table name for clarity
+        print('\t', app[1].get('Table_Identifier'), ':', app[1].get('Table_Name'), 'Table')
+        # Loop through the specified table
+        for i, record in enumerate(app[1]):
+            print('\t\t', record[16].get('Field_Name'), ':', record[16].get('Field_Value'))
+
+        print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')
+        # Tracking variable
+        count2 = 0
+        # Loop through the specified table
+        for i, record in enumerate(app[7]):
+            if app[7][0][1].get('Field_Value') == '500':
+                count2
+            else:
+                count2 = count2 + 1  # Increment for tracking purposes
+        # Print Statement if a Contact Dur/Base Time variable differs
+        if count2 == 0:
+            print('\t\t', app[7][0][1].get('Field_Name'), ':', app[7][0][1].get('Field_Value'))
+        else:
+            print('A Contact Dur/Base Time value differs from the rest. Please check the SGConfig.')
+
+    # If the application is disabled, print statement
+    else:
+        print(app.get('Application_Identifier'), '-', 'is disabled')
+
 def a020_check(app):
     # Check RE-INIT Interval
 
@@ -186,25 +240,17 @@ def a030_check(app):
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[2].get('Table_Identifier'), ':', app[2].get('Table_Name'), 'Table')
-        try:
-            app[2][0].get('Record_Number')
-            # Loop through the Status/ACC Freeze table
-            for i, record in enumerate(app[2]):
-                print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-                print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-        except IndexError:
-            print('\t\t', '<no entries>')
+        # Loop through the Status/ACC Freeze table
+        for i, record in enumerate(app[2]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
-        try:
-            app[3][0].get('Record_Number')
-            # Loop through the ACC Freeze/Controls table
-            for i, record in enumerate(app[3]):
-                print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
-                print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
-        except IndexError:
-            print('\t\t', '<no entries>')
+        # Loop through the ACC Freeze/Controls table
+        for i, record in enumerate(app[3]):
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))
 
     # If the application is disabled, print statement
     else:
@@ -222,17 +268,17 @@ def a083_check(app):
         print('\t', app[5].get('Table_Identifier'), ':', app[5].get('Table_Name'), 'Table')
         # Loop through the Digital Inputs table
         for record in app[5]:
-            print('\t\t Calc', record.get('Record_Number'), '-', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))
+            print('\t\t Calc', record.get('Record_Number'), '-', record[2].get('Field_Name'), ':',
+                  record[2].get('Field_Value'))
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
 def b003_check(app):
-
     # Check if Application is Enabled
     if app.get('Enabled') == 'True':
-        #The XML export does not contain the report deadband.
+        # The XML export does not contain the report deadband.
         print('B003 - D.20 Peripheral Link')
         print('\t', 'Report Deadband not in XML')
         return
@@ -268,7 +314,7 @@ def b013_check(app):
         for i, record in enumerate(app[0]):
             print('\t\t', i, ':')
             print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Port
-            print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # Reset Link on Rx NACK
+            print('\t\t\t', record[2].get('Field_Name'), ':', record[2].get('Field_Value'))  # Reset Link on RX NACK
             print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # DCD
             print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # RTS
             print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # CTS
@@ -310,20 +356,22 @@ def b014_check(app):
             print('\t\t', record[4][0][0][0].get('Field_Name'), ':', record[4][0][0][0].get('Field_Value'))
                                                                                            # SOE Location
 
-        print('\t', app[9].get('Table_Identifier'), ':', app[9].get('Table_Name'), 'Table')
+        # Print the table identifier followed by the table name for clarity
+        print('\t', app[4].get('Table_Identifier'), ':', app[4].get('Table_Name'), 'Table')
         # Loop through the User Configuration table
-        for i, record in enumerate(app[9]):
+        for i, record in enumerate(app[4]):
             record_num = int(record.get('Record_Number')) - 1
             print('\t\t', 'Record ', record_num, ':')
-            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # User Name
-            print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Password
-            print('\t\t\t', record[8].get('Field_Name'), ':', record[8].get('Field_Value'))  # Control Password
+            print('\t\t\t', record[5].get('Field_Name'), ':', record[5].get('Field_Value'))  # User Name
+            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Password
+            print('\t\t\t', record[7].get('Field_Name'), ':', record[7].get('Field_Value'))  # Control Password
 
-        print('\t', app[15].get('Table_Identifier'), ':', app[15].get('Table_Name'), 'Table')
+        # Print the table identifier followed by the table name for clarity
+        print('\t', app[7].get('Table_Identifier'), ':', app[7].get('Table_Name'), 'Table')
         # Loop through the Welcome Message table
-        for i, record in enumerate(app[15]):
-            print('\t\t', record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'),
-                  ':', record[3].get('Field_Value'))
+        for i, record in enumerate(app[7]):
+            print('\t\t', record[0].get('Field_Name'), record[0].get('Field_Value'), record[3].get('Field_Name'), ':',
+                  record[3].get('Field_Value'))
 
     # If the application is disabled, print statement
     else:
@@ -344,15 +392,13 @@ def b015_check(app):
         print('\t', num_dnp_dev, 'remote DNP devices')
         print('\t', app[0][0][1].get('Field_Name'), ':', app[0][0][1].get('Field_Value'))  # Number of Rx Buffers
 
-        # Print the table identifier followed by the table name for clarity
-        print('\t', 'Local Application Table [LAN Address(Hex), Data Link Channel]')
+        print('\t', 'Local Application Table [LAN Address(Hex), Data Link channel]')
         # Loop through the Local Application table
         for i, record in enumerate(app[3]):
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
                   record[2].get('Field_Value'), ':', b013_com_list[i])
 
-        # Print the table identifier followed by the table name for clarity
-        print('\t', 'Remote Application Table [LAN Address(Hex), Data Link Channel]')
+        print('\t', 'Remote Application Table [LAN Address(Hex), Data Link channel]')
         # Loop through the Remote Application table
         for record in app[5]:
             print('\t\t', record[0].get('Field_Value'), '(x', record[3].get('Field_Value'), ')',
@@ -383,21 +429,21 @@ def b021_check(app):
             print('\t\t\t', record[15].get('Field_Name'), ':', record[15].get('Field_Value'))  # Data Link Confirm
             print('\t\t\t', record[39].get('Field_Name'), ':', record[39].get('Field_Value'))  # Time Sync Enable State
             print('\t\t\t', record[25][0][0][3].get('Field_Name'), ':', record[25][0][0][3].get('Field_Value'))
-                                                                                               # Offline sets Local IIN
+                                                                                               # Offline Sets Local IIN
             print('\t\t\t', record[12][0][0][5].get('Field_Name'), ':', record[12][0][0][5].get('Field_Value'))
                                                                                                # Idle Report Period
 
         # Print the table identifier followed by the table name for clarity
         print('\t', app[3].get('Table_Identifier'), ':', app[3].get('Table_Name'), 'Table')
-        # Counter for tracking purposes
         counter = 0
         for i, record in enumerate(app[3]):
             # Loop through the Binary Input Map table
             if record[3].get('Field_Value') == 'Enabled':
                 pass
             else:
-                counter = counter + 1
-        # If all values are set to 'Enabled'
+                counter = counter + 1  # For tracking purposes
+
+        # If the values are all enabled, print statement
         if counter == 0:
             print('\t\t', app[3][0][3].get('Field_Name'), ':', app[3][0][3].get('Field_Value'))
         else:
@@ -425,7 +471,7 @@ def b021_check(app):
             # Determine which column the specified points are in
             for i, cell in enumerate(wsheet.row(1)):
                 if cell.value == 'DNP INDEX':
-                    dnp_index = i  # In case we want to use it later
+                    dnp_index = i
                 elif cell.value == 'STATUS':
                     status_index = i
                 elif cell.value == 'ANALOG':
@@ -436,19 +482,19 @@ def b021_check(app):
         # PyCharm presents an error if the excel file is open. You have to close the document
         # before running the program
         except Exception:
-            print('\t\t\t', 'Error: Cannot read the file.')
+            print('\t\t\t', 'Error: Cannot find the file.')
 
         # Call the WinPt check function for Status, Analog, and Control points respectively
-        winpt_check(wsheet, app, status_index, 3, 'Status')
-        winpt_check(wsheet, app, analog_index, 6, 'Analog')
-        winpt_check(wsheet, app, control_index, 4, 'Control')
+        winpt_check(directory, app, status_index, 3, 'Status')
+        winpt_check(directory, app, analog_index, 6, 'Analog')
+        winpt_check(directory, app, control_index, 4, 'Control')
 
     # If the application is disabled, print statement
     else:
         print(app.get('Application_Identifier'), '-', 'is disabled')
 
 def b023_check(app):
-    #<app>
+    # <app>
     #   <table "B023_PNT">
     #   <table "B023_POL">
     #   <table "B023_DEV">
@@ -458,14 +504,14 @@ def b023_check(app):
     if app.get('Enabled') == 'True':
         # Print the application identifier followed by the application name for clarity
         print(app.get('Application_Identifier'), '-', app.get('Application_Name'))
-
         # Print the table identifier followed by the table name for clarity
         print('\t', app[2].get('Table_Identifier'))
         b023_pnt_list = []
 
         # Loop through the Device Point Map table
         for i, record in enumerate(app[2]):
-            print('\t\t', i, '-', record[0].get('Field_Value'),':', record[1].get('Field_Value'))
+            # Analog Input
+            print('\t\t', i, '-', record[0].get('Field_Value'), ':', record[1].get('Field_Value'))
             b023_pnt_list.append((record[0].get('Field_Value'), record[1].get('Field_Value')))
 
         # Print the table identifier followed by the table name for clarity
@@ -473,9 +519,9 @@ def b023_check(app):
         b023_pol_list = []
         # Loop through the Device Poll table
         for i, record in enumerate(app[3]):
-            print('\t\t', 'Record',':', i) # Record Number
-            print('\t\t\t', record[0].get('Field_Name'),':', record[0].get('Field_Value'))  # Poll Data Type
-            print('\t\t\t', record[1].get('Field_Name'),':', record[1].get('Field_Value'))  # Qualifier
+            print('\t\t', i, ':')
+            print('\t\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Poll Data Type
+            print('\t\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # Qualifier
             if record[4].get('Field_Value') != 0:
                 print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # Poll Interval (Days)
             if record[5].get('Field_Value') != 0:
@@ -494,29 +540,34 @@ def b023_check(app):
         b023_dev_list = []
         # Loop through the Device Configuration table
         for i, record in enumerate(app[1]):
-            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))  # Application Address
+            # Application Address
+            print('\t\t', record[0].get('Field_Name'), ':', record[0].get('Field_Value'))
+            # Data Link CFM Rquired
             print('\t\t\t', record[3][0][0][7].get('Field_Name'), ':', record[3][0][0][7].get('Field_Value'))
-                                                                                           # Data Link CFM Required
+            # Off-Line After Fail
             print('\t\t\t', record[3][0][0][8].get('Field_Name'), ':', record[3][0][0][8].get('Field_Value'))
-                                                                                           # Off-Line After Fail
-            print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))  # Time Sync Method
-            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))  # Failures For bad Channel
+            # Time Sync Method
+            print('\t\t\t', record[4].get('Field_Name'), ':', record[4].get('Field_Value'))
+            # Failures For bad Channel
+            print('\t\t\t', record[6].get('Field_Name'), ':', record[6].get('Field_Value'))
+            # First Point Record
             print('\t\t\t', record[8][0][0][2].get('Field_Name'), ':', record[8][0][0][2].get('Field_Value'))
-                                                                                           # First Point Record
+            # Number of Point Records
             print('\t\t\t', record[8][0][0][3].get('Field_Name'), ':', record[8][0][0][3].get('Field_Value'))
-                                                                                           # Number of Point Records
-            for index in range(int(record[8][0][0][2].get('Field_Value')), int(record[8][0][0][2].get('Field_Value'))
-                    + int(record[8][0][0][3].get('Field_Value'))):
+            # Analog Input
+            for index in range(int(record[8][0][0][2].get('Field_Value')),
+                               int(record[8][0][0][2].get('Field_Value')) + int(record[8][0][0][3].get('Field_Value'))):
                 print('\t\t\t\t', b023_pnt_list[index])
+            # First Poll Record
             print('\t\t\t', record[8][0][0][4].get('Field_Name'), ':', record[8][0][0][4].get('Field_Value'))
-                                                                                           # First Poll Record
+            # Number of Poll Records
             print('\t\t\t', record[8][0][0][5].get('Field_Name'), ':', record[8][0][0][5].get('Field_Value'))
-                                                                                           # Number of Poll Records
-            for index in range(int(record[8][0][0][4].get('Field_Value')), int(record[8][0][0][4].get('Field_Value'))
-                    + int(record[8][0][0][5].get('Field_Value'))):
+            # Integrity Poll
+            for index in range(int(record[8][0][0][4].get('Field_Value')),
+                               int(record[8][0][0][4].get('Field_Value')) + int(record[8][0][0][5].get('Field_Value'))):
                 print('\t\t\t\t', b023_pol_list[index])
+            # Events for Time Sync
             print('\t\t\t', record[9][0][0][5].get('Field_Name'), ':', record[9][0][0][5].get('Field_Value'))
-                                                                                           # Events for Time Sync
             # Append to the b023 dev list
             b023_dev_list.append(record[0].get('Field_Value'))
 
@@ -524,14 +575,15 @@ def b023_check(app):
         print('\t', app[0].get('Table_Identifier'))
         # Loop through the DCA Configuration table
         for i, record in enumerate(app[0]):
-            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # DCA Address
-            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Minimum Inter Poll Delay
+            print('\t\t', record[1].get('Field_Name'), ':', record[1].get('Field_Value'))  # Application Address
+            print('\t\t\t', record[3].get('Field_Name'), ':', record[3].get('Field_Value'))  # Min Inter Poll Delay
             print('\t\t\t', record[2][0][0][0].get('Field_Name'), ':', record[2][0][0][0].get('Field_Value'))
                                                                                            # Restart Delay
-            print('\t\t\t', 'Devices in DCA:')
-            for index in range(int(record[10].get('Field_Value')), int(record[10].get('Field_Value'))
-                    + int(record[11].get('Field_Value'))):
-                print('\t\t\t\t', b023_dev_list[index]) # Indicates the number of devices in the DCA
+            print('\t\t\t', 'Devices in DCA:') # Devices in DCA
+            for index in range(int(record[10].get('Field_Value')),
+                               int(record[10].get('Field_Value')) + int(record[11].get('Field_Value'))):
+                # Print the b023 dev list to indicate the number of devices in DCA
+                print('\t\t\t\t', b023_dev_list[index])
 
     # If the application is disabled, print statement
     else:
