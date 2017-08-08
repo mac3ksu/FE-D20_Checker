@@ -11,6 +11,7 @@ import xml.etree.ElementTree as et
 if __name__ == '__main__':
     file_dir = Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
     filename = askopenfilename(title='Select XML to check')  # show an "Open" dialog box and return the path to the selected file
+
     tree = et.parse(os.path.join(file_dir, filename))
     root = tree.getroot()
 
